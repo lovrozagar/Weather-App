@@ -4,16 +4,6 @@ const weather = (() => {
   const appid = '&APPID=adf651a35951c9ecad77235fa8d0065d' // FREE KEY
   const metric = '&units=metric'
 
-  // async function getLocationCoordinates(location) {
-  //   const response = await fetch(
-  //     `https://api.openweathermap.org/data/2.5/weather?q=${location}${appid}${metric}`,
-  //     { mode: 'cors' }
-  //   )
-  //   const responseJson = await response.json()
-  //   const { lat, lon } = responseJson.coord
-  //   return { lat, lon }
-  // }
-
   async function getWeather(location) {
     try {
       let place
@@ -45,11 +35,29 @@ const weather = (() => {
       }
     } catch (err) {
       alert(err)
-      return err
+      return false
     }
   }
 
-  return { getWeather }
+  async function getWeatherEvery3H(lat, lon) {
+    try {
+      let place
+      if (lat && lon)
+        place = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}${appid}${metric}`
+      else
+        place = `https://api.openweathermap.org/data/2.5/weather?q=Zagreb${appid}${metric}`
+
+      const response = await fetch(place, { mode: 'cors' })
+      const responseJson = await response.json()
+      console.log(responseJson)
+      return {}
+    } catch (err) {
+      alert(err)
+      return false
+    }
+  }
+
+  return { getWeather, getWeatherEvery3H }
 })()
 
 export default weather

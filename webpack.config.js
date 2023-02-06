@@ -46,8 +46,13 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|mp4)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /\.woff2?$/i,
+        type: 'asset/resource',
+        dependency: { not: ['url'] },
       },
     ],
   },

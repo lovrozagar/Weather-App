@@ -10,6 +10,39 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <div id="content" class="content"></div>
+    <div class="video-container">
+      <video id="background-video" class="background-video" autoplay loop muted>
+        <source src="clear.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div id="content" class="content">
+      <section id="current-info" class="current-info">
+        <h1 id="location"></h1>
+        <h2 id="temperature" class="temperature"></h2>
+        <p id="description"></p>
+        <div class="temp-min-max">
+          <p id="temperature-min"></p>
+          <p id="temperature-max"></p>
+        </div>
+      </section>
+      <section id="search" class="search">
+        <form id="location-form" class="location-form" action="#">
+          <input
+            id="location-input"
+            class="location-input"
+            type="text"
+            name="location"
+          />
+          <span></span>
+          <button
+            id="form-submit-button"
+            class="form-submit-button"
+            type="button"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </section>
+    </div>
   </body>
 </html>
