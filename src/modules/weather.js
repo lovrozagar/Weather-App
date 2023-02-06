@@ -1,0 +1,55 @@
+// TODO: handle errors
+
+const weather = (() => {
+  const appid = '&APPID=adf651a35951c9ecad77235fa8d0065d' // FREE KEY
+  const metric = '&units=metric'
+
+  // async function getLocationCoordinates(location) {
+  //   const response = await fetch(
+  //     `https://api.openweathermap.org/data/2.5/weather?q=${location}${appid}${metric}`,
+  //     { mode: 'cors' }
+  //   )
+  //   const responseJson = await response.json()
+  //   const { lat, lon } = responseJson.coord
+  //   return { lat, lon }
+  // }
+
+  async function getWeather(location) {
+    try {
+      let place
+      if (location)
+        place = `https://api.openweathermap.org/data/2.5/weather?q=${location}${appid}${metric}`
+      else
+        place = `https://api.openweathermap.org/data/2.5/weather?q=Zagreb${appid}${metric}`
+
+      const response = await fetch(place, { mode: 'cors' })
+      const responseJson = await response.json()
+      console.log(responseJson)
+      const { name } = responseJson
+      const {
+        temp: temperature,
+        temp_min: temperatureMin,
+        temp_max: temperatureMax,
+      } = responseJson.main
+      const { main: description } = responseJson.weather[0]
+      const { lat, lon } = responseJson.coord
+      console.log(name)
+      return {
+        name,
+        temperature,
+        description,
+        temperatureMin,
+        temperatureMax,
+        lat,
+        lon,
+      }
+    } catch (err) {
+      alert(err)
+      return err
+    }
+  }
+
+  return { getWeather }
+})()
+
+export default weather
