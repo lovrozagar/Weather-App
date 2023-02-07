@@ -1,5 +1,3 @@
-// TODO: handle errors
-
 const weather = (() => {
   const appid = '&APPID=adf651a35951c9ecad77235fa8d0065d' // FREE KEY
   const metric = '&units=metric'
@@ -53,8 +51,7 @@ const weather = (() => {
 
       const response = await fetch(place, { mode: 'cors' })
       const responseJson = await response.json()
-      console.log(responseJson)
-      return {}
+      return responseJson
     } catch (err) {
       alert(err)
       return false

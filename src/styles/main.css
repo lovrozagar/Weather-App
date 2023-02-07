@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import './reset.css';
 @font-face {
   font-family: "helvetica_neue35_thin";
@@ -61,14 +62,24 @@ body {
   margin-bottom: 1rem;
 }
 .content .current-info .temperature {
+  position: relative;
   font-size: 7.5rem;
   font-weight: normal;
+}
+.content .current-info .temperature::after {
+  content: "°";
+  position: absolute;
+  font-size: 6rem;
+}
+.content .current-info .description {
+  font-size: 2rem;
 }
 
 .temp-min-max {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  font-size: 2rem;
 }
 
 .location-form {
@@ -108,4 +119,14 @@ body {
   height: 1.25rem;
   border: none;
   background-color: transparent;
+}
+
+.extra-info .weather-3-hours-container {
+  display: flex;
+  gap: 1rem;
+}
+.extra-info .weather-3-hours-container .item-3-h {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=main.css.map */

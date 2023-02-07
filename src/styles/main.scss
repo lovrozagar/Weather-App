@@ -70,8 +70,19 @@ body {
       margin-bottom: 1rem;
     }
     .temperature {
+      position: relative;
       font-size: 7.5rem;
       font-weight: normal;
+
+      &::after {
+        content: '\00b0';
+        position: absolute;
+        font-size: 6rem;
+      }
+    }
+
+    .description {
+      font-size: 2rem;
     }
   }
 }
@@ -80,6 +91,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  font-size: 2rem;
 }
 
 .location-form {
@@ -122,6 +134,18 @@ body {
       height: 1.25rem;
       border: none;
       background-color: transparent;
+    }
+  }
+}
+
+.extra-info {
+  .weather-3-hours-container {
+    display: flex;
+    gap: 1rem;
+    .item-3-h {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
 }
