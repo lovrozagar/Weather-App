@@ -6005,6 +6005,9 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+
+// TODO: render weather every 3H
+// TODO: celsius to farrenheit
 var dom = function () {
   function loadContent() {
     displayWeatherContent('Zagreb');
@@ -6028,7 +6031,7 @@ var dom = function () {
   }
   function _displayWeatherContent() {
     _displayWeatherContent = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(location) {
-      var weatherData, lat, lon;
+      var weatherData, lat, lon, weatherData3H;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -6036,12 +6039,17 @@ var dom = function () {
             return _weather__WEBPACK_IMPORTED_MODULE_0__["default"].getWeather(location);
           case 2:
             weatherData = _context.sent;
-            // GET COORDINATES OF LOCATION
+            // GET LOCATION COORDINATES
             lat = weatherData.lat, lon = weatherData.lon; // RENDER MAIN WEATHER DATA
             renderLocationInfoMain(weatherData);
-            // RENDER EVERY 3 HOURS WEATHER DATA
-            _weather__WEBPACK_IMPORTED_MODULE_0__["default"].getWeatherEvery3H(lat, lon);
-          case 6:
+            // GET EVERY 3 HOURS WEATHER DATA
+            _context.next = 7;
+            return _weather__WEBPACK_IMPORTED_MODULE_0__["default"].getWeatherEvery3H(lat, lon);
+          case 7:
+            weatherData3H = _context.sent;
+            // DISPLAY WEATHER DATA EVERY 3 HOURS
+            displayWeather3H(weatherData3H);
+          case 9:
           case "end":
             return _context.stop();
         }
@@ -6054,7 +6062,7 @@ var dom = function () {
   }
   function _renderLocationInfoMain() {
     _renderLocationInfoMain = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(weatherData) {
-      var locationMain, temperatureMain, descriptionMain, temperatureMinMain, temperatureMaxMain, name, temperature, description, temperatureMin, temperatureMax;
+      var locationMain, temperatureMain, descriptionMain, temperatureMinMain, temperatureMaxMain, name, temperature, description, temperatureMin, temperatureMax, currentTime, sunriseTime, sunsetTime;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
@@ -6069,13 +6077,13 @@ var dom = function () {
             }
             return _context2.abrupt("return");
           case 7:
-            name = weatherData.name, temperature = weatherData.temperature, description = weatherData.description, temperatureMin = weatherData.temperatureMin, temperatureMax = weatherData.temperatureMax;
+            name = weatherData.name, temperature = weatherData.temperature, description = weatherData.description, temperatureMin = weatherData.temperatureMin, temperatureMax = weatherData.temperatureMax, currentTime = weatherData.currentTime, sunriseTime = weatherData.sunriseTime, sunsetTime = weatherData.sunsetTime;
             locationMain.textContent = name;
-            temperatureMain.textContent = Math.round(temperature);
+            if (temperature >= 0) temperatureMain.textContent = "".concat(Math.round(temperature));else temperatureMain.textContent = "".concat(Math.round(temperature));
             descriptionMain.textContent = description;
-            displayWeatherBackground(description);
-            temperatureMinMain.textContent = temperatureMin;
-            temperatureMaxMain.textContent = temperatureMax;
+            if ((currentTime < sunriseTime || currentTime > sunsetTime) && (description === 'Clear' || description === 'Clouds')) setWeatherBackground('space');else setWeatherBackground(description);
+            temperatureMinMain.textContent = "H: ".concat(Math.round(temperatureMin), "\xB0");
+            temperatureMaxMain.textContent = "L: ".concat(Math.round(temperatureMax), "\xB0");
           case 14:
           case "end":
             return _context2.stop();
@@ -6084,9 +6092,57 @@ var dom = function () {
     }));
     return _renderLocationInfoMain.apply(this, arguments);
   }
-  function displayWeatherBackground(description) {
+  function setWeatherBackground(description) {
     var video = document.getElementById('background-video');
-    video.src = "".concat(description.toLowerCase(), ".mp4");
+    var fileName = video.src.substring(video.src.lastIndexOf('/') + 1);
+    var newFileName = "".concat(description.toLowerCase(), ".mp4");
+    console.log(fileName);
+    console.log(newFileName);
+    if (newFileName === fileName) return;
+    video.src = newFileName;
+  }
+  function displayWeather3H(weatherData) {
+    clear3HCards();
+    var now = getCardHour(weatherData, 0);
+    var i = 0;
+    console.log(now);
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      var dateTime = weatherData.list[i].dt_txt;
+      var time = dateTime.substring(dateTime.indexOf(' ') + 1);
+      var hour = time.substring(0, time.indexOf(':'));
+      var temp = weatherData.list[i].main.temp;
+      temp = Math.round(temp);
+      console.log(hour);
+      // BREAK IF NEXT DAY
+      if (i !== 0 && hour === now) {
+        break;
+      }
+      display3HCard(hour, temp);
+      i += 1;
+    }
+  }
+  function display3HCard(hour, temp) {
+    var hourEl = document.createElement('p');
+    hourEl.textContent = hour;
+    var tempEl = document.createElement('p');
+    tempEl.textContent = temp;
+    var card3H = document.createElement('div');
+    card3H.classList.add('item-3-h');
+    card3H.appendChild(hourEl);
+    card3H.appendChild(tempEl);
+    var cardContainer = document.getElementById('weather-3-hours-container');
+    cardContainer.appendChild(card3H);
+  }
+  function clear3HCards() {
+    var cardContainer = document.getElementById('weather-3-hours-container');
+    cardContainer.replaceChildren('');
+  }
+  function getCardHour(weatherData, listItem) {
+    var dateTime = weatherData.list[listItem].dt_txt;
+    var time = dateTime.substring(dateTime.indexOf(' ') + 1);
+    var hour = time.substring(0, time.indexOf(':'));
+    return hour;
   }
   return {
     loadContent: loadContent
@@ -6111,8 +6167,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-// TODO: handle errors
-
 var weather = function () {
   var appid = '&APPID=adf651a35951c9ecad77235fa8d0065d'; // FREE KEY
   var metric = '&units=metric';
@@ -6121,7 +6175,7 @@ var weather = function () {
   }
   function _getWeather() {
     _getWeather = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(location) {
-      var place, response, responseJson, name, _responseJson$main, temperature, temperatureMin, temperatureMax, description, _responseJson$coord, lat, lon;
+      var place, response, responseJson, name, currentTime, _responseJson$sys, sunriseTime, sunsetTime, _responseJson$main, temperature, temperatureMin, temperatureMax, description, _responseJson$coord, lat, lon;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -6138,7 +6192,8 @@ var weather = function () {
           case 7:
             responseJson = _context.sent;
             console.log(responseJson);
-            name = responseJson.name;
+            name = responseJson.name, currentTime = responseJson.dt;
+            _responseJson$sys = responseJson.sys, sunriseTime = _responseJson$sys.sunrise, sunsetTime = _responseJson$sys.sunset;
             _responseJson$main = responseJson.main, temperature = _responseJson$main.temp, temperatureMin = _responseJson$main.temp_min, temperatureMax = _responseJson$main.temp_max;
             description = responseJson.weather[0].main;
             _responseJson$coord = responseJson.coord, lat = _responseJson$coord.lat, lon = _responseJson$coord.lon;
@@ -6149,19 +6204,22 @@ var weather = function () {
               description: description,
               temperatureMin: temperatureMin,
               temperatureMax: temperatureMax,
+              currentTime: currentTime,
+              sunriseTime: sunriseTime,
+              sunsetTime: sunsetTime,
               lat: lat,
               lon: lon
             });
-          case 17:
-            _context.prev = 17;
+          case 18:
+            _context.prev = 18;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
             return _context.abrupt("return", false);
-          case 21:
+          case 22:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 17]]);
+      }, _callee, null, [[0, 18]]);
     }));
     return _getWeather.apply(this, arguments);
   }
@@ -6186,18 +6244,17 @@ var weather = function () {
             return response.json();
           case 7:
             responseJson = _context2.sent;
-            console.log(responseJson);
-            return _context2.abrupt("return", {});
-          case 12:
-            _context2.prev = 12;
+            return _context2.abrupt("return", responseJson);
+          case 11:
+            _context2.prev = 11;
             _context2.t0 = _context2["catch"](0);
             alert(_context2.t0);
             return _context2.abrupt("return", false);
-          case 16:
+          case 15:
           case "end":
             return _context2.stop();
         }
-      }, _callee2, null, [[0, 12]]);
+      }, _callee2, null, [[0, 11]]);
     }));
     return _getWeatherEvery3H.apply(this, arguments);
   }
@@ -6240,7 +6297,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_reset_css__WEBPAC
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_1___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"helvetica_neue35_thin\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n  font-weight: normal;\n  font-style: normal;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: \"helvetica_neue35_thin\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  min-width: 100%;\n  min-height: 100%;\n  z-index: -100;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n}\n\n.content {\n  padding-top: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n}\n.content .current-info {\n  padding: 1rem;\n}\n.content .current-info > * {\n  margin-bottom: 1rem;\n}\n.content .current-info .temperature {\n  font-size: 7.5rem;\n  font-weight: normal;\n}\n\n.temp-min-max {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n}\n.location-form .location-input {\n  font-size: 1rem;\n  line-height: 2rem;\n  width: 100%;\n  outline: none;\n  border: 1px solid rgba(201, 201, 201, 0.411);\n  background-color: transparent;\n  color: white;\n  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));\n  backdrop-filter: blur(3px);\n  -webkit-backdrop-filter: blur(3px);\n  border-radius: 5px;\n  border: 1px solid rgba(255, 255, 255, 0.18);\n  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n}\n.location-form .form-submit-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  height: 2rem;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .form-submit-button svg {\n  pointer-events: none;\n  position: relative;\n  z-index: -1;\n  height: 1.25rem;\n  border: none;\n  background-color: transparent;\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss"],"names":[],"mappings":"AAEA;EACE,oCAAA;EACA,oHAAA;EAEA,mBAAA;EACA,kBAAA;AADF;AAIA;;;EAGE,sBAAA;AAFF;;AAKA;EACE,YAAA;EACA,eAAA;EACA,gDAAA;EACA,YAAA;AAFF;;AAKA;EACE,iBAAA;EACA,kBAAA;AAFF;;AAKA;EACE,eAAA;EACA,SAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,aAAA;AAFF;;AAKA;EACE,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;EACA,WAAA;EACA,YAAA;EACA,iBAAA;EACA,uBAAA;AAFF;;AAKA;EACE,iBAAA;EACA,sBAAA;EACA,cAAA;EACA,eAAA;EACA,iBAAA;EACA,kBAAA;AAFF;AAIE;EACE,aAAA;AAFJ;AAaI;EACE,mBAAA;AAXN;AAaI;EACE,iBAAA;EACA,mBAAA;AAXN;;AAgBA;EACE,aAAA;EACA,8BAAA;EACA,SAAA;AAbF;;AAgBA;EACE,aAAA;EACA,kBAAA;AAbF;AAcE;EACE,eAAA;EACA,iBAAA;EACA,WAAA;EACA,aAAA;EACA,4CAAA;EACA,6BAAA;EACA,YAAA;EACA,qFAAA;EAKA,0BAAA;EACA,kCAAA;EACA,kBAAA;EACA,2CAAA;EACA,4CAAA;AAhBJ;AAkBE;EACE,kBAAA;EACA,aAAA;EACA,WAAA;EACA,UAAA;EACA,aAAA;EACA,mBAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,6BAAA;AAhBJ;AAiBI;EACE,oBAAA;EACA,kBAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,6BAAA;AAfN","sourcesContent":["@import './reset.css';\n\n@font-face {\n  font-family: 'helvetica_neue35_thin';\n  src: url('../assets/fonts/helveticaneue-thin-webfont.woff2') format('woff2'),\n    url('../assets/fonts/helveticaneue-thin-webfont.woff') format('woff');\n  font-weight: normal;\n  font-style: normal;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: 'helvetica_neue35_thin', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  min-width: 100%;\n  min-height: 100%;\n  z-index: -100;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n}\n\n.content {\n  padding-top: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n\n  .current-info {\n    padding: 1rem;\n    // background: linear-gradient(\n    //   135deg,\n    //   rgba(255, 255, 255, 0.1),\n    //   rgba(255, 255, 255, 0)\n    // );\n    // backdrop-filter: blur(10px);\n    // -webkit-backdrop-filter: blur(10px);\n    // border-radius: 20px;\n    // border: 1px solid rgba(255, 255, 255, 0.18);\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n    & > * {\n      margin-bottom: 1rem;\n    }\n    .temperature {\n      font-size: 7.5rem;\n      font-weight: normal;\n    }\n  }\n}\n\n.temp-min-max {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  .location-input {\n    font-size: 1rem;\n    line-height: 2rem;\n    width: 100%;\n    outline: none;\n    border: 1px solid rgba(201, 201, 201, 0.411);\n    background-color: transparent;\n    color: white;\n    background: linear-gradient(\n      135deg,\n      rgba(255, 255, 255, 0.1),\n      rgba(255, 255, 255, 0)\n    );\n    backdrop-filter: blur(3px);\n    -webkit-backdrop-filter: blur(3px);\n    border-radius: 5px;\n    border: 1px solid rgba(255, 255, 255, 0.18);\n    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n  }\n  .form-submit-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    padding: 0;\n    display: flex;\n    align-items: center;\n    height: 2rem;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      pointer-events: none;\n      position: relative;\n      z-index: -1;\n      height: 1.25rem;\n      border: none;\n      background-color: transparent;\n    }\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"helvetica_neue35_thin\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n  font-weight: normal;\n  font-style: normal;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: \"helvetica_neue35_thin\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  min-width: 100%;\n  min-height: 100%;\n  z-index: -100;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n}\n\n.content {\n  padding-top: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n}\n.content .current-info {\n  padding: 1rem;\n}\n.content .current-info > * {\n  margin-bottom: 1rem;\n}\n.content .current-info .temperature {\n  position: relative;\n  font-size: 7.5rem;\n  font-weight: normal;\n}\n.content .current-info .temperature::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 6rem;\n}\n.content .current-info .description {\n  font-size: 2rem;\n}\n\n.temp-min-max {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  font-size: 2rem;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n}\n.location-form .location-input {\n  font-size: 1rem;\n  line-height: 2rem;\n  width: 100%;\n  outline: none;\n  border: 1px solid rgba(201, 201, 201, 0.411);\n  background-color: transparent;\n  color: white;\n  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));\n  backdrop-filter: blur(3px);\n  -webkit-backdrop-filter: blur(3px);\n  border-radius: 5px;\n  border: 1px solid rgba(255, 255, 255, 0.18);\n}\n.location-form .form-submit-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  height: 2rem;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .form-submit-button svg {\n  pointer-events: none;\n  position: relative;\n  z-index: -1;\n  height: 1.25rem;\n  border: none;\n  background-color: transparent;\n}\n\n.extra-info .weather-3-hours-container {\n  display: flex;\n  gap: 1rem;\n}\n.extra-info .weather-3-hours-container .item-3-h {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss"],"names":[],"mappings":"AAAA,gBAAgB;AAEhB;EACE,oCAAA;EACA,oHAAA;EAEA,mBAAA;EACA,kBAAA;AAAF;AAGA;;;EAGE,sBAAA;AADF;;AAIA;EACE,YAAA;EACA,eAAA;EACA,gDAAA;EACA,YAAA;AADF;;AAIA;EACE,iBAAA;EACA,kBAAA;AADF;;AAIA;EACE,eAAA;EACA,SAAA;EACA,QAAA;EACA,eAAA;EACA,gBAAA;EACA,aAAA;AADF;;AAIA;EACE,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;EACA,WAAA;EACA,YAAA;EACA,iBAAA;EACA,uBAAA;AADF;;AAIA;EACE,iBAAA;EACA,sBAAA;EACA,cAAA;EACA,eAAA;EACA,iBAAA;EACA,kBAAA;AADF;AAGE;EACE,aAAA;AADJ;AAYI;EACE,mBAAA;AAVN;AAYI;EACE,kBAAA;EACA,iBAAA;EACA,mBAAA;AAVN;AAYM;EACE,YAAA;EACA,kBAAA;EACA,eAAA;AAVR;AAcI;EACE,eAAA;AAZN;;AAiBA;EACE,aAAA;EACA,8BAAA;EACA,SAAA;EACA,eAAA;AAdF;;AAiBA;EACE,aAAA;EACA,kBAAA;AAdF;AAeE;EACE,eAAA;EACA,iBAAA;EACA,WAAA;EACA,aAAA;EACA,4CAAA;EACA,6BAAA;EACA,YAAA;EACA,qFAAA;EAKA,0BAAA;EACA,kCAAA;EACA,kBAAA;EACA,2CAAA;AAjBJ;AAoBE;EACE,kBAAA;EACA,aAAA;EACA,WAAA;EACA,UAAA;EACA,aAAA;EACA,mBAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,6BAAA;AAlBJ;AAmBI;EACE,oBAAA;EACA,kBAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,6BAAA;AAjBN;;AAuBE;EACE,aAAA;EACA,SAAA;AApBJ;AAqBI;EACE,OAAA;EACA,aAAA;EACA,sBAAA;AAnBN","sourcesContent":["@import './reset.css';\n\n@font-face {\n  font-family: 'helvetica_neue35_thin';\n  src: url('../assets/fonts/helveticaneue-thin-webfont.woff2') format('woff2'),\n    url('../assets/fonts/helveticaneue-thin-webfont.woff') format('woff');\n  font-weight: normal;\n  font-style: normal;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: 'helvetica_neue35_thin', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  min-width: 100%;\n  min-height: 100%;\n  z-index: -100;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n}\n\n.content {\n  padding-top: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n\n  .current-info {\n    padding: 1rem;\n    // background: linear-gradient(\n    //   135deg,\n    //   rgba(255, 255, 255, 0.1),\n    //   rgba(255, 255, 255, 0)\n    // );\n    // backdrop-filter: blur(10px);\n    // -webkit-backdrop-filter: blur(10px);\n    // border-radius: 20px;\n    // border: 1px solid rgba(255, 255, 255, 0.18);\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n    & > * {\n      margin-bottom: 1rem;\n    }\n    .temperature {\n      position: relative;\n      font-size: 7.5rem;\n      font-weight: normal;\n\n      &::after {\n        content: '\\00b0';\n        position: absolute;\n        font-size: 6rem;\n      }\n    }\n\n    .description {\n      font-size: 2rem;\n    }\n  }\n}\n\n.temp-min-max {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  font-size: 2rem;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  .location-input {\n    font-size: 1rem;\n    line-height: 2rem;\n    width: 100%;\n    outline: none;\n    border: 1px solid rgba(201, 201, 201, 0.411);\n    background-color: transparent;\n    color: white;\n    background: linear-gradient(\n      135deg,\n      rgba(255, 255, 255, 0.1),\n      rgba(255, 255, 255, 0)\n    );\n    backdrop-filter: blur(3px);\n    -webkit-backdrop-filter: blur(3px);\n    border-radius: 5px;\n    border: 1px solid rgba(255, 255, 255, 0.18);\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n  }\n  .form-submit-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    padding: 0;\n    display: flex;\n    align-items: center;\n    height: 2rem;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      pointer-events: none;\n      position: relative;\n      z-index: -1;\n      height: 1.25rem;\n      border: none;\n      background-color: transparent;\n    }\n  }\n}\n\n.extra-info {\n  .weather-3-hours-container {\n    display: flex;\n    gap: 1rem;\n    .item-3-h {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n    }\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7048,4 +7105,4 @@ _modules_dom__WEBPACK_IMPORTED_MODULE_4__["default"].loadContent();
 
 /******/ })()
 ;
-//# sourceMappingURL=bundlefe3e8144005d884147f7.js.map
+//# sourceMappingURL=bundle4ee2cd7fb039d4bae31c.js.map
