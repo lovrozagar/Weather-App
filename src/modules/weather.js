@@ -15,7 +15,8 @@ const weather = (() => {
       const response = await fetch(place, { mode: 'cors' })
       const responseJson = await response.json()
       console.log(responseJson)
-      const { name } = responseJson
+      const { name, dt: currentTime } = responseJson
+      const { sunrise: sunriseTime, sunset: sunsetTime } = responseJson.sys
       const {
         temp: temperature,
         temp_min: temperatureMin,
@@ -30,6 +31,9 @@ const weather = (() => {
         description,
         temperatureMin,
         temperatureMax,
+        currentTime,
+        sunriseTime,
+        sunsetTime,
         lat,
         lon,
       }

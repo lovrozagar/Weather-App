@@ -23,7 +23,7 @@ const dom = (() => {
   async function displayWeatherContent(location) {
     // GET DATA MAIN DATA OBJ
     const weatherData = await weather.getWeather(location)
-    // GET COORDINATES OF LOCATION
+    // GET LOCATION COORDINATES
     const { lat, lon } = weatherData
     // RENDER MAIN WEATHER DATA
     renderLocationInfoMain(weatherData)
@@ -39,20 +39,41 @@ const dom = (() => {
     const temperatureMaxMain = document.getElementById('temperature-max')
 
     if (!weatherData) return
-    const { name, temperature, description, temperatureMin, temperatureMax } =
-      weatherData
+    const {
+      name,
+      temperature,
+      description,
+      temperatureMin,
+      temperatureMax,
+      currentTime,
+      sunriseTime,
+      sunsetTime,
+    } = weatherData
 
     locationMain.textContent = name
     temperatureMain.textContent = Math.round(temperature)
     descriptionMain.textContent = description
-    displayWeatherBackground(description)
+
+    console.log(sunriseTime, currentTime, sunsetTime)
+    if (
+      (currentTime < sunriseTime || currentTime > sunsetTime) &&
+      (description === 'Clear' || description === 'Clouds')
+    )
+      displayWeatherBackground('space')
+    else displayWeatherBackground(description)
+
     temperatureMinMain.textContent = temperatureMin
     temperatureMaxMain.textContent = temperatureMax
   }
 
   function displayWeatherBackground(description) {
     const video = document.getElementById('background-video')
-    video.src = `${description.toLowerCase()}.mp4`
+    const fileName = video.src.substring(video.src.lastIndexOf('/') + 1)
+    const newFileName = `${description.toLowerCase()}.mp4`
+    console.log(fileName)
+    console.log(newFileName)
+    if (newFileName === fileName) return
+    video.src = newFileName
   }
 
   return { loadContent }
