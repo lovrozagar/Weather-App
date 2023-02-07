@@ -8,17 +8,17 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
     <title>Document</title>
-  <script defer src="bundle971784cfa6db1e063e56.js"></script></head>
+  <script defer src="bundlefe3e8144005d884147f7.js"></script></head>
   <body>
     <div class="video-container">
-      <video class="background-video" autoplay loop muted>
-        <source src="moon.mp4" type="video/mp4" />
+      <video id="background-video" class="background-video" autoplay loop muted>
+        <source src="clear.mp4" type="video/mp4" />
       </video>
     </div>
     <div id="content" class="content">
-      <section id="current-info">
+      <section id="current-info" class="current-info">
         <h1 id="location"></h1>
-        <h2 id="temperature"></h2>
+        <h2 id="temperature" class="temperature"></h2>
         <p id="description"></p>
         <div class="temp-min-max">
           <p id="temperature-min"></p>
@@ -33,7 +33,7 @@
             type="text"
             name="location"
           />
-          <span c></span>
+          <span></span>
           <button
             id="form-submit-button"
             class="form-submit-button"
