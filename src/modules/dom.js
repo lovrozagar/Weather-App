@@ -65,19 +65,14 @@ const dom = (() => {
 
   // HOURLY CONTENT
   function displayHourlyContent(weatherData) {
-    const hourlyContainer = document.getElementById('hourly-container')
+    const hourlyContainer = document.getElementById('hours-container')
     clearContent(hourlyContainer)
 
     const hours = getNext24Hours(weatherData)
     const timezoneOffset = weatherData.timezone_offset
-    let hourIndex = 0
 
     hours.forEach((hour) => {
-      const seconds = hour.dt + timezoneOffset
-      const date = secondsToHour(seconds)
-      console.log(date)
-      displayHourItem()
-      hourIndex += 1
+      displayHourItem(hour, timezoneOffset, weatherData)
     })
   }
   function clearContent(el) {
@@ -86,13 +81,49 @@ const dom = (() => {
   function getNext24Hours(weatherData) {
     return weatherData.hourly.slice(0, 24)
   }
-  function displayHourItem() {}
-
   function secondsToHour(seconds) {
     let date = new Date(null)
     date.setSeconds(seconds)
     date = date.toString().slice(16, 18)
     return date
+  }
+  function loadHourItem(hour, mainDesc, temp) {
+    const hourEl = document.createElement('p')
+    hourEl.textContent = hour
+
+    const logoEl = document.createElement('img')
+    logoEl.src = mainDesc
+
+    const tempEl = document.createElement('p')
+    tempEl.textContent = temp
+
+    const hourItemEl = document.createElement('div')
+    hourItemEl.classList.add('hour-item')
+    hourItemEl.appendChild(hourEl)
+    hourItemEl.appendChild(logoEl)
+    hourItemEl.appendChild(tempEl)
+
+    const cardContainer = document.getElementById('hours-container')
+    cardContainer.appendChild(hourItemEl)
+  }
+  function displayHourItem(hour, timezoneOffset, weatherData) {
+    const seconds = hour.dt + timezoneOffset
+    const itemHour = secondsToHour(seconds)
+    // GET WEATHER LOGO SRC
+    let mainDesc = `${hour.weather[0].main.toLowerCase()}.svg`
+    const secondsNoOffset = hour.dt
+    const sunriseSeconds = weatherData.daily[1].sunrise
+    const sunsetSeconds = weatherData.current.sunset
+    // IF SUN NOT VISIBLE GET NIGHT LOGO SRC
+    if (
+      secondsNoOffset > sunsetSeconds &&
+      secondsNoOffset < sunriseSeconds &&
+      (mainDesc === 'clear.svg' || mainDesc === 'clouds.svg')
+    )
+      mainDesc = `night_${mainDesc}`
+    // GET HOURS ITEM TEMP
+    const itemTemp = Math.round(weatherData.current.temp)
+    loadHourItem(itemHour, mainDesc, itemTemp)
   }
 
   // BACKGROUND VIDEO
