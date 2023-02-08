@@ -1,64 +1,43 @@
 const weather = (() => {
-  const appid = '&APPID=adf651a35951c9ecad77235fa8d0065d' // FREE KEY
-  const metric = '&units=metric'
+  const appid = '20f7632ffc2c022654e4093c6947b4f4' // KEY
 
-  async function getWeather(location) {
-    try {
-      let place
-      if (location)
-        place = `https://api.openweathermap.org/data/2.5/weather?q=${location}${appid}${metric}`
-      else
-        place = `https://api.openweathermap.org/data/2.5/weather?q=Zagreb${appid}${metric}`
-
-      const response = await fetch(place, { mode: 'cors' })
-      const responseJson = await response.json()
-      console.log(responseJson)
-      const { name, dt: currentTime } = responseJson
-      const { sunrise: sunriseTime, sunset: sunsetTime } = responseJson.sys
-      const {
-        temp: temperature,
-        temp_min: temperatureMin,
-        temp_max: temperatureMax,
-      } = responseJson.main
-      const { main: description } = responseJson.weather[0]
-      const { lat, lon } = responseJson.coord
-      console.log(name)
-      return {
-        name,
-        temperature,
-        description,
-        temperatureMin,
-        temperatureMax,
-        currentTime,
-        sunriseTime,
-        sunsetTime,
-        lat,
-        lon,
-      }
-    } catch (err) {
-      alert(err)
-      return false
-    }
+  function getCityCoordinatesUrl(cityName) {
+    return `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${appid}`
   }
 
-  async function getWeatherEvery3H(lat, lon) {
-    try {
-      let place
-      if (lat && lon)
-        place = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}${appid}${metric}`
-      else
-        place = `https://api.openweathermap.org/data/2.5/weather?q=Zagreb${appid}${metric}`
-
-      const response = await fetch(place, { mode: 'cors' })
-      const responseJson = await response.json()
-      return responseJson
-    } catch (err) {
-      alert(err)
-      return false
-    }
+  function getLocationForecastUrl(coordinates, unit) {
+    return `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely,alerts&units=${unit}&appid=${appid}`
   }
 
-  return { getWeather, getWeatherEvery3H }
+  async function getCoordinates(cityName) {
+    // GET LOCATION COORDINATES TO FETCH FORECAST LATER
+    const coordinatesUrl = getCityCoordinatesUrl(cityName)
+    const coordinatesResponse = await fetch(coordinatesUrl, { mode: 'cors' })
+    const weatherData = await coordinatesResponse.json()
+    const { coord } = weatherData
+    // GET LOCATION NAME AS IT IS NOT IN THE FORECAST
+    coord.name = weatherData.name
+    return coord
+  }
+
+  async function getForecastData(coordinates, unit) {
+    // GET LOCATION FORECAST
+    const forecastUrl = getLocationForecastUrl(coordinates, unit)
+    const weatherResponse = await fetch(forecastUrl, { mode: 'cors' })
+    const weatherData = await weatherResponse.json()
+    // ADD LOCATION NAME TO WEATHER DATA
+    weatherData.name = coordinates.name
+    return weatherData
+  }
+
+  async function getWeatherData(cityName, unit = 'metric') {
+    // CALLS EVERYTHING NECESSARY TO GET WEATHER DATA, DOM MODULE SHOULD CALL THIS FUNCTION
+    const coords = await getCoordinates(cityName)
+    const forecastData = await getForecastData(coords, unit)
+    return forecastData
+  }
+
+  return { getWeatherData }
 })()
 
 export default weather

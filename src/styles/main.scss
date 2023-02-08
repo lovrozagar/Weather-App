@@ -139,13 +139,28 @@ body {
 }
 
 .extra-info {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   .weather-3-hours-container {
     display: flex;
     gap: 1rem;
+    overflow-y: hidden;
+    overflow-x: auto;
+    max-width: 800px;
     .item-3-h {
       flex: 1;
       display: flex;
       flex-direction: column;
+      font-size: 2rem;
     }
   }
 }

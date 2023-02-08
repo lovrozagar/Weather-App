@@ -18,6 +18,12 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, 'dist'),
     },
+    client: {
+      overlay: {
+        warnings: false,
+        errors: false,
+      },
+    },
     port: 3000,
     open: true,
     hot: true,
@@ -35,16 +41,16 @@ module.exports = {
           'sass-loader',
         ],
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env'],
+      //     },
+      //   },
+      // },
       {
         test: /\.(png|jpe?g|gif|svg|mp4)$/i,
         type: 'asset/resource',
