@@ -55,7 +55,7 @@ body {
   font-weight: bold;
   text-align: center;
 
-  .current-info {
+  .main-info {
     padding: 1rem;
     // background: linear-gradient(
     //   135deg,
@@ -139,7 +139,7 @@ body {
   }
 }
 
-.extra-info {
+.detailed-info {
   margin-top: 2rem;
   padding: 1rem;
   background: linear-gradient(
@@ -151,7 +151,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  .weather-3-hours-container {
+  .hourly-container {
     display: flex;
     gap: 1rem;
     overflow-y: hidden;

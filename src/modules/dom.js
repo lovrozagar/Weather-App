@@ -1,6 +1,6 @@
 import weather from './weather'
 
-// TODO: display hourly content
+// TODO: display hourly cont
 const dom = (() => {
   async function loadContent() {
     displayWeatherContent('Zagreb')
@@ -26,7 +26,7 @@ const dom = (() => {
     console.log(weatherData)
     displayBackgroundVideo(weatherData)
     displayMainContent(weatherData)
-    // displayHourlyContent(weatherData)
+    displayHourlyContent(weatherData)
   }
 
   // MAIN CONTENT
@@ -64,7 +64,36 @@ const dom = (() => {
   }
 
   // HOURLY CONTENT
-  // function displayHourlyContent(weatherData) {}
+  function displayHourlyContent(weatherData) {
+    const hourlyContainer = document.getElementById('hourly-container')
+    clearContent(hourlyContainer)
+
+    const hours = getNext24Hours(weatherData)
+    const timezoneOffset = weatherData.timezone_offset
+    let hourIndex = 0
+
+    hours.forEach((hour) => {
+      const seconds = hour.dt + timezoneOffset
+      const date = secondsToHour(seconds)
+      console.log(date)
+      displayHourItem()
+      hourIndex += 1
+    })
+  }
+  function clearContent(el) {
+    el.replaceChildren('')
+  }
+  function getNext24Hours(weatherData) {
+    return weatherData.hourly.slice(0, 24)
+  }
+  function displayHourItem() {}
+
+  function secondsToHour(seconds) {
+    let date = new Date(null)
+    date.setSeconds(seconds)
+    date = date.toString().slice(16, 18)
+    return date
+  }
 
   // BACKGROUND VIDEO
   function displayBackgroundVideo(weatherData) {

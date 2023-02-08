@@ -16,10 +16,9 @@
       </video>
     </div>
     <div id="content" class="content">
-      <section id="current-info" class="current-info">
+      <section id="main-info" class="main-info">
         <h1 id="location"></h1>
-        <h2 id="temperature" class="temperature">
-        </h2>
+        <h2 id="temperature" class="temperature"></h2>
         <p id="description" class="description"></p>
         <div class="temp-min-max">
           <p id="temperature-min"></p>
@@ -35,17 +34,13 @@
             name="location"
           />
           <span></span>
-          <button
-            id="search-button"
-            class="search-button"
-            type="button"
-          >
+          <button id="search-button" class="search-button" type="button">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </section>
-      <section id="extra-info" class="extra-info">
-        <div id="weather-3-hours-container" class="weather-3-hours-container"></div>
+      <section id="detailed-info" class="detailed-info">
+        <div id="hourly-container" class="hourly-container"></div>
       </section>
     </div>
   </body>
