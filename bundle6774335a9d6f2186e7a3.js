@@ -6018,7 +6018,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_reset_css__WEBPAC
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_1___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"helvetica_neue35_thin\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n  font-weight: normal;\n  font-style: normal;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: \"helvetica_neue35_thin\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: lightblue;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  min-width: 100%;\n  min-height: 100%;\n  z-index: -100;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n}\n\n.content {\n  padding-top: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n}\n.content .main-info {\n  padding: 1rem;\n}\n.content .main-info > * {\n  margin-bottom: 1rem;\n}\n.content .main-info .temperature {\n  position: relative;\n  font-size: 7.5rem;\n  font-weight: normal;\n}\n.content .main-info .temperature::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 6rem;\n}\n.content .main-info .description {\n  font-size: 2rem;\n}\n\n.temp-min-max {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  font-size: 2rem;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n}\n.location-form .location-input {\n  font-size: 1rem;\n  line-height: 2rem;\n  width: 100%;\n  outline: none;\n  border: 1px solid rgba(201, 201, 201, 0.411);\n  background-color: transparent;\n  color: white;\n  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));\n  backdrop-filter: blur(3px);\n  -webkit-backdrop-filter: blur(3px);\n  border-radius: 5px;\n  border: 1px solid rgba(255, 255, 255, 0.18);\n}\n.location-form .search-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  height: 2rem;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .search-button svg {\n  pointer-events: none;\n  position: relative;\n  z-index: -1;\n  height: 1.25rem;\n  border: none;\n  background-color: transparent;\n}\n\n.detailed-info {\n  margin-top: 2rem;\n  padding: 1rem;\n  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n.detailed-info .hours-container {\n  display: flex;\n  gap: 1rem;\n  overflow-y: hidden;\n  overflow-x: auto;\n  padding: 1rem;\n  max-width: 800px;\n}\n.detailed-info .hours-container .hour-item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  font-size: 2rem;\n}\n.detailed-info .days-container {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  overflow-y: hidden;\n  overflow-x: auto;\n  padding: 1rem;\n  max-width: 400px;\n}\n.detailed-info .days-container .day-item {\n  width: 100%;\n  flex: 1;\n  display: flex;\n  align-items: center;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item > :first-child {\n  width: 5rem;\n  text-align: start;\n}\n.detailed-info .days-container .day-item > :nth-child(4) {\n  margin: 0 1rem;\n  flex: 1;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n.meter {\n  display: inline-block;\n  width: 300px;\n  outline: none;\n  border: none;\n  height: 0.6rem;\n  border-radius: 1rem;\n}\n\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255);\n  background: linear-gradient(90deg, rgb(155, 221, 255) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%);\n}\n\n.hot {\n  background: rgb(255, 48, 48);\n  background: linear-gradient(90deg, rgb(255, 48, 48) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%, rgb(155, 221, 255) 100%);\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(90deg, rgb(0, 155, 249) 0%, rgb(119, 209, 255) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(86, 232, 169) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(94, 226, 185) 25%, rgb(52, 255, 0) 50%, rgb(223, 245, 0) 75%, rgb(255, 239, 0) 100%);\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(241, 228, 35) 50%, rgb(255, 48, 48) 100%);\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(203, 255, 38) 50%, rgb(255, 235, 0) 100%);\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%, rgb(255, 48, 48) 100%);\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss"],"names":[],"mappings":"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","sourcesContent":["@import './reset.css';\n\n@font-face {\n  font-family: 'helvetica_neue35_thin';\n  src: url('../assets/fonts/helveticaneue-thin-webfont.woff2') format('woff2'),\n    url('../assets/fonts/helveticaneue-thin-webfont.woff') format('woff');\n  font-weight: normal;\n  font-style: normal;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: 'helvetica_neue35_thin', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: lightblue;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  min-width: 100%;\n  min-height: 100%;\n  z-index: -100;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n}\n\n.content {\n  padding-top: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n\n  .main-info {\n    padding: 1rem;\n    // background: linear-gradient(\n    //   135deg,\n    //   rgba(255, 255, 255, 0.1),\n    //   rgba(255, 255, 255, 0)\n    // );\n    // backdrop-filter: blur(10px);\n    // -webkit-backdrop-filter: blur(10px);\n    // border-radius: 20px;\n    // border: 1px solid rgba(255, 255, 255, 0.18);\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n    & > * {\n      margin-bottom: 1rem;\n    }\n    .temperature {\n      position: relative;\n      font-size: 7.5rem;\n      font-weight: normal;\n\n      &::after {\n        content: '\\00b0';\n        position: absolute;\n        font-size: 6rem;\n      }\n    }\n\n    .description {\n      font-size: 2rem;\n    }\n  }\n}\n\n.temp-min-max {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  font-size: 2rem;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  .location-input {\n    font-size: 1rem;\n    line-height: 2rem;\n    width: 100%;\n    outline: none;\n    border: 1px solid rgba(201, 201, 201, 0.411);\n    background-color: transparent;\n    color: white;\n    background: linear-gradient(\n      135deg,\n      rgba(255, 255, 255, 0.1),\n      rgba(255, 255, 255, 0)\n    );\n    backdrop-filter: blur(3px);\n    -webkit-backdrop-filter: blur(3px);\n    border-radius: 5px;\n    border: 1px solid rgba(255, 255, 255, 0.18);\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n  }\n  .search-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    padding: 0;\n    display: flex;\n    align-items: center;\n    height: 2rem;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      pointer-events: none;\n      position: relative;\n      z-index: -1;\n      height: 1.25rem;\n      border: none;\n      background-color: transparent;\n    }\n  }\n}\n\n.detailed-info {\n  margin-top: 2rem;\n  padding: 1rem;\n  background: linear-gradient(\n    135deg,\n    rgba(255, 255, 255, 0.1),\n    rgba(255, 255, 255, 0)\n  );\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n  .hours-container {\n    display: flex;\n    gap: 1rem;\n    overflow-y: hidden;\n    overflow-x: auto;\n    padding: 1rem;\n    max-width: 800px;\n    .hour-item {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n      font-size: 2rem;\n    }\n  }\n  .days-container {\n    display: flex;\n    flex-direction: column;\n    gap: 1rem;\n    overflow-y: hidden;\n    overflow-x: auto;\n    padding: 1rem;\n    max-width: 400px;\n    .day-item {\n      width: 100%;\n      flex: 1;\n      display: flex;\n      align-items: center;\n      font-size: 1.25rem;\n      & > :first-child {\n        width: 5rem;\n        text-align: start;\n      }\n      & > :nth-child(4) {\n        margin: 0 1rem;\n        flex: 1;\n      }\n    }\n  }\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n.meter {\n  display: inline-block;\n  width: 300px;\n  outline: none;\n  border: none;\n  height: 0.6rem;\n  border-radius: 1rem;\n}\n\n// METER GRADIENTS FOR DAILY OSCILLATION\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgba(0, 151, 249, 1) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255, 1);\n  background: linear-gradient(90deg, rgba(155, 221, 255, 1) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0, 1);\n  background: linear-gradient(90deg, rgba(52, 255, 0, 1) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgba(241, 228, 35, 1) 0%);\n}\n\n.hot {\n  background: rgba(255, 48, 48, 1);\n  background: linear-gradient(90deg, rgba(255, 48, 48, 1) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 151, 249, 1) 0%,\n    rgba(155, 221, 255, 1) 100%\n  );\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 155, 249, 1) 0%,\n    rgba(119, 209, 255, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(86, 232, 169, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(94, 226, 185, 1) 25%,\n    rgba(52, 255, 0, 1) 50%,\n    rgba(223, 245, 0, 1) 75%,\n    rgba(255, 239, 0, 1) 100%\n  );\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(241, 228, 35, 1) 50%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(203, 255, 38, 1) 50%,\n    rgba(255, 235, 0, 1) 100%\n  );\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(\n    90deg,\n    rgba(241, 228, 35, 1) 0%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"helvetica_neue35_thin\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n  font-weight: normal;\n  font-style: normal;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: \"helvetica_neue35_thin\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.content {\n  padding: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n}\n.content .main-info {\n  padding: 1rem;\n}\n.content .main-info > * {\n  margin-bottom: 1rem;\n}\n.content .main-info .temperature {\n  position: relative;\n  font-size: 7.5rem;\n  font-weight: normal;\n}\n.content .main-info .temperature::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 6rem;\n}\n.content .main-info .description {\n  font-size: 2rem;\n}\n.content .main-info .main-feels-like {\n  font-size: 2rem;\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n}\n.location-form .location-input {\n  width: 100%;\n  padding-left: 0.5rem;\n  outline: none;\n  font-size: 1rem;\n  line-height: 2rem;\n  background-color: transparent;\n  color: white;\n}\n.location-form .location-input:focus + .search-button > svg {\n  opacity: 75;\n}\n.location-form .location-input::placeholder {\n  color: rgba(255, 255, 255, 0.3);\n}\n.location-form .search-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  display: flex;\n  align-items: center;\n  height: 100%;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .search-button svg {\n  pointer-events: none;\n  position: relative;\n  z-index: -1;\n  height: 1.25rem;\n  border: none;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n  opacity: 0.25;\n}\n\n.detailed-info {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n}\n.detailed-info .hours-container {\n  grid-column: 1/3;\n  display: flex;\n  gap: 1rem;\n  overflow-y: hidden;\n  overflow-x: auto;\n  padding: 1rem;\n}\n.detailed-info .hours-container .hour-item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  font-size: 2rem;\n}\n.detailed-info .hours-container .hour-item .hour-hour,\n.detailed-info .hours-container .hour-item .hour-temp {\n  font-size: 2rem;\n}\n.detailed-info .hours-container .hour-item img {\n  height: 60px;\n  width: 60px;\n}\n.detailed-info .hours-container .hour-item .hour-temp {\n  position: relative;\n}\n.detailed-info .hours-container .hour-item .hour-temp::after {\n  content: \"°\";\n  position: absolute;\n}\n.detailed-info .days-container {\n  grid-column: 1/2;\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  padding: 1rem;\n}\n.detailed-info .days-container .day-item {\n  width: 100%;\n  flex: 1;\n  display: flex;\n  align-items: center;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item img {\n  height: 50px;\n  width: 50px;\n}\n.detailed-info .days-container .day-item .week-day {\n  width: 6ch;\n  text-align: start;\n}\n.detailed-info .days-container .day-item .day-temp-min,\n.detailed-info .days-container .day-item .day-temp-max {\n  position: relative;\n  width: 3ch;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item .day-temp-min::after,\n.detailed-info .days-container .day-item .day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item .meter {\n  flex: 1;\n  display: inline-block;\n  height: 0.5rem;\n  margin: 0 1rem;\n  border-radius: 1rem;\n  border: none;\n  outline: none;\n}\n.detailed-info .technical-container {\n  grid-column: 2/3;\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n  text-align: left;\n}\n.detailed-info .technical-container .technical-card {\n  padding: 1rem;\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n}\n.detailed-info .technical-container .technical-card .title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  font-size: 1.125rem;\n  opacity: 0.5;\n}\n.detailed-info .technical-container .technical-card .title-and-icon .icon {\n  position: relative;\n  top: -0.1rem;\n  align-self: flex-start;\n  margin-left: 0.5rem;\n  height: 1.375rem;\n  width: 1.375rem;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n}\n.detailed-info .technical-container .technical-card .title-and-icon .icon.humidity {\n  margin-left: 0.25rem;\n}\n.detailed-info .technical-container .technical-card .card-value {\n  font-size: 2.25rem;\n  font-weight: bold;\n}\n.detailed-info .technical-container .technical-card .card-text {\n  letter-spacing: 1px;\n  font-size: 1rem;\n}\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n}\n.main-feels-like::after,\n.hour-temp::after,\n.day-temp-min::after,\n.day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n}\n\n.location-input,\n.hours-container,\n.days-container,\n.technical-card {\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255);\n  background: linear-gradient(90deg, rgb(155, 221, 255) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%);\n}\n\n.hot {\n  background: rgb(255, 48, 48);\n  background: linear-gradient(90deg, rgb(255, 48, 48) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%, rgb(155, 221, 255) 100%);\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(90deg, rgb(0, 155, 249) 0%, rgb(119, 209, 255) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(86, 232, 169) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(94, 226, 185) 25%, rgb(52, 255, 0) 50%, rgb(223, 245, 0) 75%, rgb(255, 239, 0) 100%);\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(241, 228, 35) 50%, rgb(255, 48, 48) 100%);\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(203, 255, 38) 50%, rgb(255, 235, 0) 100%);\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%, rgb(255, 48, 48) 100%);\n}\n\n.loading-screen.active {\n  display: block;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.9);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.loading-screen > div {\n  height: 100px;\n  width: 100px;\n  border: 15px solid grey;\n  border-top-color: lightgray;\n  position: absolute;\n  inset: 0;\n  margin: auto;\n  border-radius: 50%;\n  animation: spin 1.5s infinite linear;\n}\n\n@keyframes spin {\n  100% {\n    transform: rotate(360deg);\n  }\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss"],"names":[],"mappings":"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","sourcesContent":["@import './reset.css';\n\n@font-face {\n  font-family: 'helvetica_neue35_thin';\n  src: url('../assets/fonts/helveticaneue-thin-webfont.woff2') format('woff2'),\n    url('../assets/fonts/helveticaneue-thin-webfont.woff') format('woff');\n  font-weight: normal;\n  font-style: normal;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: 'helvetica_neue35_thin', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.content {\n  padding: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n\n  .main-info {\n    padding: 1rem;\n    & > * {\n      margin-bottom: 1rem;\n    }\n    .temperature {\n      position: relative;\n      font-size: 7.5rem;\n      font-weight: normal;\n\n      &::after {\n        content: '\\00b0';\n        position: absolute;\n        font-size: 6rem;\n      }\n    }\n\n    .description {\n      font-size: 2rem;\n    }\n\n    .main-feels-like {\n      font-size: 2rem;\n    }\n  }\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  .location-input {\n    width: 100%;\n    padding-left: 0.5rem;\n    outline: none;\n    font-size: 1rem;\n    line-height: 2rem;\n    background-color: transparent;\n    color: white;\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n    &:focus + .search-button > svg {\n      opacity: 75;\n    }\n\n    &::placeholder {\n      color: rgba(255, 255, 255, 0.3);\n    }\n  }\n  .search-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    display: flex;\n    align-items: center;\n    height: 100%;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      pointer-events: none;\n      position: relative;\n      z-index: -1;\n      height: 1.25rem;\n      border: none;\n      filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n        brightness(106%) contrast(100%);\n      opacity: 0.25;\n    }\n  }\n}\n\n.detailed-info {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n  .hours-container {\n    grid-column: 1 / 3;\n    display: flex;\n    gap: 1rem;\n    overflow-y: hidden;\n    overflow-x: auto;\n    padding: 1rem;\n    .hour-item {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n      font-size: 2rem;\n      .hour-hour,\n      .hour-temp {\n        font-size: 2rem;\n      }\n      img {\n        height: 60px;\n        width: 60px;\n      }\n      .hour-temp {\n        position: relative;\n        &::after {\n          content: '\\00b0';\n          position: absolute;\n        }\n      }\n    }\n  }\n  .days-container {\n    grid-column: 1 / 2;\n    display: flex;\n    flex-direction: column;\n    gap: 1rem;\n    padding: 1rem;\n    .day-item {\n      width: 100%;\n      flex: 1;\n      display: flex;\n      align-items: center;\n      font-size: 1.25rem;\n      img {\n        height: 50px;\n        width: 50px;\n      }\n      .week-day {\n        width: 6ch;\n        text-align: start;\n      }\n      .day-temp-min,\n      .day-temp-max {\n        position: relative;\n        width: 3ch;\n        font-size: 1.25rem;\n        &::after {\n          content: '\\00b0';\n          position: absolute;\n          font-size: 1.25rem;\n        }\n      }\n      .meter {\n        flex: 1;\n        display: inline-block;\n        height: 0.5rem;\n        margin: 0 1rem;\n        border-radius: 1rem;\n        border: none;\n        outline: none;\n      }\n    }\n  }\n  .technical-container {\n    grid-column: 2 / 3;\n    display: flex;\n    flex-direction: column;\n    gap: 0.5rem;\n    text-align: left;\n\n    .technical-card {\n      padding: 1rem;\n      display: flex;\n      flex-direction: column;\n      gap: 0.25rem;\n      .title-and-icon {\n        display: flex;\n        justify-content: start;\n        align-items: center;\n        font-size: 1.125rem;\n        opacity: 0.5;\n        .icon {\n          position: relative;\n          top: -0.1rem;\n          align-self: flex-start;\n          margin-left: 0.5rem;\n          height: 1.375rem;\n          width: 1.375rem;\n          filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n            brightness(106%) contrast(100%);\n        }\n        .icon.humidity {\n          margin-left: 0.25rem;\n        }\n      }\n      .card-value {\n        font-size: 2.25rem;\n        font-weight: bold;\n      }\n      .card-text {\n        letter-spacing: 1px;\n        font-size: 1rem;\n      }\n    }\n  }\n}\n\n// .icon {\n//   height: 24px;\n//   width: 24px;\n//   filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%)\n//     contrast(100%);\n//   opacity: 0.25;\n// }\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n  &::after {\n    content: '\\00b0';\n    position: absolute;\n  }\n}\n\n.location-input,\n.hours-container,\n.days-container,\n.technical-card {\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n// METER GRADIENTS FOR DAILY OSCILLATION\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgba(0, 151, 249, 1) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255, 1);\n  background: linear-gradient(90deg, rgba(155, 221, 255, 1) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0, 1);\n  background: linear-gradient(90deg, rgba(52, 255, 0, 1) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgba(241, 228, 35, 1) 0%);\n}\n\n.hot {\n  background: rgba(255, 48, 48, 1);\n  background: linear-gradient(90deg, rgba(255, 48, 48, 1) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 151, 249, 1) 0%,\n    rgba(155, 221, 255, 1) 100%\n  );\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 155, 249, 1) 0%,\n    rgba(119, 209, 255, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(86, 232, 169, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(94, 226, 185, 1) 25%,\n    rgba(52, 255, 0, 1) 50%,\n    rgba(223, 245, 0, 1) 75%,\n    rgba(255, 239, 0, 1) 100%\n  );\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(241, 228, 35, 1) 50%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(203, 255, 38, 1) 50%,\n    rgba(255, 235, 0, 1) 100%\n  );\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(\n    90deg,\n    rgba(241, 228, 35, 1) 0%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.loading-screen.active {\n  display: block;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.9);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.loading-screen > div {\n  height: 100px;\n  width: 100px;\n  border: 15px solid grey;\n  border-top-color: lightgray;\n  position: absolute;\n  inset: 0;\n  margin: auto;\n  border-radius: 50%;\n  animation: spin 1.5s infinite linear;\n}\n@keyframes spin {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6590,10 +6590,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weather */ "./src/modules/weather.js");
 
 
-// TODO: display hourly cont
-// TODO: convert hour hour to number
+// TODO: dont load the same video
+// TODO: 3600 offset for +-12/11 zones
+// TODO: loading screen on form submit
 const dom = (() => {
   async function loadContent() {
+    const loadingScreen = document.getElementById('loading-screen')
+    loadingScreen.classList.add('active')
     displayWeatherContent('Zagreb')
     initLocationSearch()
   }
@@ -6619,6 +6622,7 @@ const dom = (() => {
     displayMainContent(weatherData)
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
+    displayTechnicalContent(weatherData)
   }
 
   // MAIN WEATHER CONTENT
@@ -6626,14 +6630,12 @@ const dom = (() => {
     const locationMain = document.getElementById('location')
     const temperatureMain = document.getElementById('temperature')
     const descriptionMain = document.getElementById('description')
-    const temperatureMinMain = document.getElementById('temperature-min')
-    const temperatureMaxMain = document.getElementById('temperature-max')
+    const feelsLikeMain = document.getElementById('main-feels-like')
 
     locationMain.textContent = getLocationNameMain(weatherData)
     temperatureMain.textContent = getTemperatureMain(weatherData)
     descriptionMain.textContent = getDescriptionMain(weatherData)
-    temperatureMinMain.textContent = getTemperatureMinMain(weatherData)
-    temperatureMaxMain.textContent = getTemperatureMaxMain(weatherData)
+    feelsLikeMain.textContent = getFeelsLikeMain(weatherData)
   }
 
   function getLocationNameMain(weatherData) {
@@ -6641,6 +6643,9 @@ const dom = (() => {
   }
   function getTemperatureMain(weatherData) {
     return Math.round(weatherData.current.temp)
+  }
+  function getFeelsLikeMain(weatherData) {
+    return `feels like: ${Math.round(weatherData.current.feels_like)}`
   }
   function getDescriptionMain(weatherData) {
     return weatherData.current.weather[0].description
@@ -6671,13 +6676,13 @@ const dom = (() => {
     const itemHour = secondsToHour(seconds)
     // GET WEATHER LOGO SRC
     let mainDesc = `${hour.weather[0].main.toLowerCase()}.svg`
-    const secondsNoOffset = hour.dt
+    const sunriseNoOffset = hour.dt + 3600
     const sunriseSeconds = weatherData.daily[1].sunrise
     const sunsetSeconds = weatherData.current.sunset
     // IF SUN NOT VISIBLE GET NIGHT LOGO SRC
     if (
-      secondsNoOffset > sunsetSeconds &&
-      secondsNoOffset < sunriseSeconds &&
+      sunriseNoOffset > sunsetSeconds &&
+      sunriseNoOffset <= sunriseSeconds &&
       (mainDesc === 'clear.svg' || mainDesc === 'clouds.svg')
     )
       mainDesc = `night_${mainDesc}`
@@ -6687,13 +6692,16 @@ const dom = (() => {
   }
   function loadHourItem(hour, mainDesc, temp) {
     const hourEl = document.createElement('p')
-    hourEl.textContent = hour
+    hourEl.textContent = +hour
+    hourEl.classList.add('hour-hour')
 
     const logoEl = document.createElement('img')
     logoEl.src = mainDesc
+    logoEl.classList.add('hour-logo')
 
     const tempEl = document.createElement('p')
     tempEl.textContent = temp
+    tempEl.classList.add('hour-temp')
 
     const hourItemEl = document.createElement('div')
     hourItemEl.classList.add('hour-item')
@@ -6716,6 +6724,14 @@ const dom = (() => {
     date = date.toString().slice(16, 18)
     return date
   }
+  function secondsToHourAndMinutes(seconds) {
+    const date = new Date(null)
+    date.setSeconds(seconds)
+    const hour = +date.toString().slice(16, 18)
+    const doubleColon = date.toString().slice(18, 19)
+    const minutes = +date.toString().slice(19, 21)
+    return `${hour}${doubleColon}${minutes}`
+  }
 
   // DAILY FORECAST CONTENT
   function displayDailyContent(weatherData) {
@@ -6735,22 +6751,25 @@ const dom = (() => {
   function loadDayItem(day, seconds, dayIndex) {
     const weekDayEl = document.createElement('p')
     weekDayEl.textContent = secondsToWeekDay(seconds, dayIndex)
+    weekDayEl.classList.add('week-day')
 
     const logoEl = document.createElement('img')
     logoEl.src = `${day.weather[0].main.toLowerCase()}.svg`
-
-    const dayItem = document.createElement('div')
+    logoEl.classList.add('day-item-logo')
 
     const tempMinEl = document.createElement('p')
     tempMinEl.textContent = Math.round(day.temp.min)
+    tempMinEl.classList.add('day-temp-min')
 
     const tempMaxEl = document.createElement('p')
     tempMaxEl.textContent = Math.round(day.temp.max)
+    tempMaxEl.classList.add('day-temp-max')
 
     const meterEl = document.createElement('div')
     meterEl.classList.add('meter')
     styleMeter(meterEl, +tempMinEl.textContent, +tempMaxEl.textContent)
 
+    const dayItem = document.createElement('div')
     dayItem.classList.add('day-item')
     dayItem.appendChild(weekDayEl)
     dayItem.appendChild(logoEl)
@@ -6852,12 +6871,189 @@ const dom = (() => {
     }
   }
 
+  // TECHNICAL CONTENT
+  function displayTechnicalContent(weatherData) {
+    const technicalContainer = document.getElementById('technical-container')
+    clearContent(technicalContainer)
+    // UVI
+    const UVIndex = weatherData.current.uvi
+    displayUVIndex(UVIndex, technicalContainer)
+    // HUMIDITY
+    const humidity = `${weatherData.current.humidity}%`
+    displayHumidity(humidity, technicalContainer)
+    // CHANCE OF RAIN
+    const chanceOfRain = `${weatherData.daily[0].pop * 100}%`
+    displayChanceOfRain(chanceOfRain, technicalContainer)
+    // SUNRISE
+    const sunriseSeconds =
+      weatherData.current.sunrise + weatherData.timezone_offset - 3600
+    const sunrise = secondsToHourAndMinutes(sunriseSeconds)
+    console.log(sunrise)
+    displaySunrise(sunrise, technicalContainer)
+    // SUNSET
+    const sunsetSeconds =
+      weatherData.current.sunset + weatherData.timezone_offset - 3600
+    const sunset = secondsToHourAndMinutes(sunsetSeconds)
+    displaySunset(sunset, technicalContainer)
+  }
+
+  function displayUVIndex(UVIndex, container) {
+    const title = document.createElement('p')
+    title.textContent = 'UV index'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'uvSun.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = UVIndex
+    indexEl.classList.add('card-value')
+
+    const messageEl = document.createElement('p')
+    messageEl.textContent = UVIndexMessage(UVIndex)
+    messageEl.classList.add('card-text')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+    card.appendChild(messageEl)
+
+    container.appendChild(card)
+  }
+
+  function displayHumidity(humidity, container) {
+    const title = document.createElement('p')
+    title.textContent = 'humidity'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon', 'humidity')
+    icon.src = 'humidity.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = humidity
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function displayChanceOfRain(chanceOfRain, container) {
+    const title = document.createElement('p')
+    title.textContent = 'chance of rain'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'chanceOfRain.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = chanceOfRain
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function displaySunrise(sunrise, container) {
+    const title = document.createElement('p')
+    title.textContent = 'sunrise'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'sunrise.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = sunrise
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function displaySunset(sunset, container) {
+    const title = document.createElement('p')
+    title.textContent = 'sunset'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'sunset.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = sunset
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function UVIndexMessage(index) {
+    if (index <= 0) return 'Very low, damage possibility is negligible'
+    if (index <= 4) return 'Mild, sun protection recommended.'
+    if (index <= 7) return 'High, sun protection highly recommended'
+    if (index > 7) return 'Very high, sun protection is a must'
+    return 'Very low'
+  }
+
   // BACKGROUND VIDEO
   function displayBackgroundVideo(weatherData) {
+    const loadingScreen = document.getElementById('loading-screen')
     const video = document.getElementById('background-video')
+
     let state = getWeatherState(weatherData).toLowerCase()
     if (state === 'haze') state = 'fog'
     video.src = `${state}.mp4`
+
+    // SHOW LOADING SCREEN
+    loadingScreen.classList.add('active')
+    // HIDE LOADING SCREEN WHEN VIDEO CAN PLAY
+    video.addEventListener('canplay', hideLoadingScreen)
+  }
+
+  function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen')
+    loadingScreen.removeEventListener('canplay', hideLoadingScreen)
+    loadingScreen.classList.remove('active')
   }
 
   return { loadContent }
@@ -6986,6 +7182,17 @@ module.exports = __webpack_require__.p + "helveticaneue-thin-webfont.woff2";
 
 /***/ }),
 
+/***/ "./src/assets/images/chanceOfRain.svg":
+/*!********************************************!*\
+  !*** ./src/assets/images/chanceOfRain.svg ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "chanceOfRain.svg";
+
+/***/ }),
+
 /***/ "./src/assets/images/clear.svg":
 /*!*************************************!*\
   !*** ./src/assets/images/clear.svg ***!
@@ -7005,6 +7212,17 @@ module.exports = __webpack_require__.p + "clear.svg";
 
 "use strict";
 module.exports = __webpack_require__.p + "clouds.svg";
+
+/***/ }),
+
+/***/ "./src/assets/images/humidity.svg":
+/*!****************************************!*\
+  !*** ./src/assets/images/humidity.svg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "humidity.svg";
 
 /***/ }),
 
@@ -7052,6 +7270,28 @@ module.exports = __webpack_require__.p + "snow.svg";
 
 /***/ }),
 
+/***/ "./src/assets/images/sunrise.svg":
+/*!***************************************!*\
+  !*** ./src/assets/images/sunrise.svg ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "sunrise.svg";
+
+/***/ }),
+
+/***/ "./src/assets/images/sunset.svg":
+/*!**************************************!*\
+  !*** ./src/assets/images/sunset.svg ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "sunset.svg";
+
+/***/ }),
+
 /***/ "./src/assets/images/thunder.svg":
 /*!***************************************!*\
   !*** ./src/assets/images/thunder.svg ***!
@@ -7060,6 +7300,17 @@ module.exports = __webpack_require__.p + "snow.svg";
 
 "use strict";
 module.exports = __webpack_require__.p + "thunder.svg";
+
+/***/ }),
+
+/***/ "./src/assets/images/uvSun.svg":
+/*!*************************************!*\
+  !*** ./src/assets/images/uvSun.svg ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "uvSun.svg";
 
 /***/ }),
 
@@ -7273,6 +7524,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_images_rain_svg__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./assets/images/rain.svg */ "./src/assets/images/rain.svg");
 /* harmony import */ var _assets_images_snow_svg__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/images/snow.svg */ "./src/assets/images/snow.svg");
 /* harmony import */ var _assets_images_thunder_svg__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./assets/images/thunder.svg */ "./src/assets/images/thunder.svg");
+/* harmony import */ var _assets_images_uvSun_svg__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./assets/images/uvSun.svg */ "./src/assets/images/uvSun.svg");
+/* harmony import */ var _assets_images_sunrise_svg__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./assets/images/sunrise.svg */ "./src/assets/images/sunrise.svg");
+/* harmony import */ var _assets_images_sunset_svg__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./assets/images/sunset.svg */ "./src/assets/images/sunset.svg");
+/* harmony import */ var _assets_images_humidity_svg__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./assets/images/humidity.svg */ "./src/assets/images/humidity.svg");
+/* harmony import */ var _assets_images_chanceOfRain_svg__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./assets/images/chanceOfRain.svg */ "./src/assets/images/chanceOfRain.svg");
+
+
+
+
+
 
 
 
@@ -7302,4 +7563,4 @@ _modules_dom__WEBPACK_IMPORTED_MODULE_4__["default"].loadContent()
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle79886b201b8d8f583a8e.js.map
+//# sourceMappingURL=bundle6774335a9d6f2186e7a3.js.map
