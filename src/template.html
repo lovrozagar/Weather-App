@@ -10,8 +10,18 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <div id="loading-screen" class="loading-screen">
+      <div></div>
+    </div>
     <div class="video-container">
-      <video id="background-video" class="background-video" autoplay loop muted>
+      <video
+        id="background-video"
+        class="background-video"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
         <source src="" type="video/mp4" />
       </video>
     </div>
@@ -32,8 +42,8 @@
             class="location-input"
             type="text"
             name="location"
+            placeholder="Search city or country"
           />
-          <span></span>
           <button id="search-button" class="search-button" type="button">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>

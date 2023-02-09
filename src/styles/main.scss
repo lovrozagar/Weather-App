@@ -24,16 +24,16 @@ html {
 body {
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: lightblue;
+  background-color: black;
 }
 
 .video-container {
   position: fixed;
   bottom: 0;
   right: 0;
+  z-index: -100;
   min-width: 100%;
   min-height: 100%;
-  z-index: -100;
 }
 
 .background-video {
@@ -45,10 +45,11 @@ body {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.8);
+  pointer-events: none;
 }
 
 .content {
-  padding-top: 2rem;
+  padding: 2rem;
   max-width: fit-content;
   margin: 0 auto;
   font-size: 3rem;
@@ -57,16 +58,6 @@ body {
 
   .main-info {
     padding: 1rem;
-    // background: linear-gradient(
-    //   135deg,
-    //   rgba(255, 255, 255, 0.1),
-    //   rgba(255, 255, 255, 0)
-    // );
-    // backdrop-filter: blur(10px);
-    // -webkit-backdrop-filter: blur(10px);
-    // border-radius: 20px;
-    // border: 1px solid rgba(255, 255, 255, 0.18);
-    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     & > * {
       margin-bottom: 1rem;
     }
@@ -85,6 +76,17 @@ body {
     .description {
       font-size: 2rem;
     }
+    .temp-min-max {
+      .temperature-min,
+      .temperature-max {
+        position: relative;
+        &::after {
+          content: '\00b0';
+          position: absolute;
+          font-size: 1.25rem;
+        }
+      }
+    }
   }
 }
 
@@ -99,32 +101,29 @@ body {
   display: flex;
   position: relative;
   .location-input {
+    width: 100%;
+    padding-left: 0.5rem;
+    outline: none;
     font-size: 1rem;
     line-height: 2rem;
-    width: 100%;
-    outline: none;
-    border: 1px solid rgba(201, 201, 201, 0.411);
     background-color: transparent;
     color: white;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0)
-    );
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
     // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    &:focus + .search-button > svg {
+      opacity: 75;
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
   }
   .search-button {
     position: absolute;
     right: 0.5rem;
     z-index: 10;
-    padding: 0;
     display: flex;
     align-items: center;
-    height: 2rem;
+    height: 100%;
     outline: none;
     border: none;
     background-color: transparent;
@@ -134,23 +133,14 @@ body {
       z-index: -1;
       height: 1.25rem;
       border: none;
-      background-color: transparent;
+      filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)
+        brightness(106%) contrast(100%);
+      opacity: 0.25;
     }
   }
 }
 
 .detailed-info {
-  margin-top: 2rem;
-  padding: 1rem;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0)
-  );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
   .hours-container {
     display: flex;
     gap: 1rem;
@@ -163,6 +153,22 @@ body {
       display: flex;
       flex-direction: column;
       font-size: 2rem;
+      .hour-hour,
+      .hour-temp {
+        font-size: 2rem;
+      }
+      img {
+        height: 60px;
+        width: 60px;
+      }
+      .hour-temp {
+        position: relative;
+        &::after {
+          content: '\00b0';
+          position: absolute;
+          font-size: 2rem;
+        }
+      }
     }
   }
   .days-container {
@@ -179,16 +185,51 @@ body {
       display: flex;
       align-items: center;
       font-size: 1.25rem;
-      & > :first-child {
-        width: 5rem;
+      img {
+        height: 50px;
+        width: 50px;
+      }
+      .week-day {
+        width: 6ch;
         text-align: start;
       }
-      & > :nth-child(4) {
-        margin: 0 1rem;
+      .day-temp-min,
+      .day-temp-max {
+        position: relative;
+        width: 3ch;
+        font-size: 1.25rem;
+        &::after {
+          content: '\00b0';
+          position: absolute;
+          font-size: 1.25rem;
+        }
+      }
+      .meter {
         flex: 1;
+        display: inline-block;
+        height: 0.5rem;
+        margin: 0 1rem;
+        border-radius: 1rem;
+        border: none;
+        outline: none;
       }
     }
   }
+}
+
+.location-input,
+.hours-container,
+.days-container {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hours-container,
+.days-container {
+  margin-top: 1rem;
+  padding: 1rem;
 }
 
 ::-webkit-scrollbar {
@@ -209,15 +250,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: ghostwhite;
-}
-
-.meter {
-  display: inline-block;
-  width: 300px;
-  outline: none;
-  border: none;
-  height: 0.6rem;
-  border-radius: 1rem;
 }
 
 // METER GRADIENTS FOR DAILY OSCILLATION
@@ -287,16 +319,6 @@ body {
   );
 }
 
-.warm-to-very-warm {
-  background: rgb(52, 255, 0);
-  background: linear-gradient(
-    90deg,
-    rgba(52, 255, 0, 1) 0%,
-    rgba(203, 255, 38, 1) 50%,
-    rgba(255, 235, 0, 1) 100%
-  );
-}
-
 .warm-to-hot {
   background: rgb(52, 255, 0);
   background: linear-gradient(
@@ -307,11 +329,51 @@ body {
   );
 }
 
-.very-worm-to-hot {
+.warm-to-very-warm {
+  background: rgb(52, 255, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(52, 255, 0, 1) 0%,
+    rgba(203, 255, 38, 1) 50%,
+    rgba(255, 235, 0, 1) 100%
+  );
+}
+
+.very-warm-to-hot {
   background: rgb(241, 228, 35);
   background: linear-gradient(
     90deg,
     rgba(241, 228, 35, 1) 0%,
     rgba(255, 48, 48, 1) 100%
   );
+}
+
+.loading-screen.active {
+  display: block;
+}
+
+.loading-screen {
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  display: none;
+}
+
+.loading-screen > div {
+  height: 100px;
+  width: 100px;
+  border: 15px solid grey;
+  border-top-color: lightgray;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 50%;
+  animation: spin 1.5s infinite linear;
+}
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
