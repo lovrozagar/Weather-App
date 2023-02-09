@@ -74,6 +74,20 @@ const dom = (() => {
   function displayHourlyContent(weatherData) {
     const hoursContainer = document.getElementById('hours-container')
     clearContent(hoursContainer)
+
+    // ADD TITLE AND ICON
+    const title = document.createElement('p')
+    title.textContent = 'weekly forecast'
+    const icon = document.createElement('img')
+    icon.classList.add('icon', 'forecast-hours')
+    icon.src = 'forecast.svg'
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon', 'hours')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+    hoursContainer.appendChild(titleAndIcon)
+
+    // ADD HOUR ITEMS
     const hours = getNext24Hours(weatherData)
     const timezoneOffset = weatherData.timezone_offset
 
@@ -148,6 +162,19 @@ const dom = (() => {
     const daysContainer = document.getElementById('days-container')
     clearContent(daysContainer)
 
+    // ADD TITLE AND ICON
+    const title = document.createElement('p')
+    title.textContent = 'weekly forecast'
+    const icon = document.createElement('img')
+    icon.classList.add('icon', 'forecast-days')
+    icon.src = 'forecast.svg'
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+    daysContainer.appendChild(titleAndIcon)
+
+    // ADD DAY ITEMS
     const timezoneOffset = weatherData.timezone_offset
     const days = weatherData.daily
     let dayIndex = 0
