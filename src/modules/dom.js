@@ -1,7 +1,8 @@
 import weather from './weather'
 
-// TODO: display hourly cont
-// TODO: convert hour hour to number
+// TODO: dont load the same video
+// TODO: 3600 offset for +-12/11 zones
+// TODO: loading screen on form submit
 const dom = (() => {
   async function loadContent() {
     const loadingScreen = document.getElementById('loading-screen')
@@ -31,6 +32,7 @@ const dom = (() => {
     displayMainContent(weatherData)
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
+    displayTechnicalContent(weatherData)
   }
 
   // MAIN WEATHER CONTENT
@@ -38,14 +40,12 @@ const dom = (() => {
     const locationMain = document.getElementById('location')
     const temperatureMain = document.getElementById('temperature')
     const descriptionMain = document.getElementById('description')
-    const temperatureMinMain = document.getElementById('temperature-min')
-    const temperatureMaxMain = document.getElementById('temperature-max')
+    const feelsLikeMain = document.getElementById('main-feels-like')
 
     locationMain.textContent = getLocationNameMain(weatherData)
     temperatureMain.textContent = getTemperatureMain(weatherData)
     descriptionMain.textContent = getDescriptionMain(weatherData)
-    temperatureMinMain.textContent = getTemperatureMinMain(weatherData)
-    temperatureMaxMain.textContent = getTemperatureMaxMain(weatherData)
+    feelsLikeMain.textContent = getFeelsLikeMain(weatherData)
   }
 
   function getLocationNameMain(weatherData) {
@@ -53,6 +53,9 @@ const dom = (() => {
   }
   function getTemperatureMain(weatherData) {
     return Math.round(weatherData.current.temp)
+  }
+  function getFeelsLikeMain(weatherData) {
+    return `feels like: ${Math.round(weatherData.current.feels_like)}`
   }
   function getDescriptionMain(weatherData) {
     return weatherData.current.weather[0].description
@@ -83,13 +86,13 @@ const dom = (() => {
     const itemHour = secondsToHour(seconds)
     // GET WEATHER LOGO SRC
     let mainDesc = `${hour.weather[0].main.toLowerCase()}.svg`
-    const secondsNoOffset = hour.dt
+    const sunriseNoOffset = hour.dt + 3600
     const sunriseSeconds = weatherData.daily[1].sunrise
     const sunsetSeconds = weatherData.current.sunset
     // IF SUN NOT VISIBLE GET NIGHT LOGO SRC
     if (
-      secondsNoOffset > sunsetSeconds &&
-      secondsNoOffset < sunriseSeconds &&
+      sunriseNoOffset > sunsetSeconds &&
+      sunriseNoOffset <= sunriseSeconds &&
       (mainDesc === 'clear.svg' || mainDesc === 'clouds.svg')
     )
       mainDesc = `night_${mainDesc}`
@@ -99,7 +102,7 @@ const dom = (() => {
   }
   function loadHourItem(hour, mainDesc, temp) {
     const hourEl = document.createElement('p')
-    hourEl.textContent = hour
+    hourEl.textContent = +hour
     hourEl.classList.add('hour-hour')
 
     const logoEl = document.createElement('img')
@@ -130,6 +133,14 @@ const dom = (() => {
     date.setSeconds(seconds)
     date = date.toString().slice(16, 18)
     return date
+  }
+  function secondsToHourAndMinutes(seconds) {
+    const date = new Date(null)
+    date.setSeconds(seconds)
+    const hour = +date.toString().slice(16, 18)
+    const doubleColon = date.toString().slice(18, 19)
+    const minutes = +date.toString().slice(19, 21)
+    return `${hour}${doubleColon}${minutes}`
   }
 
   // DAILY FORECAST CONTENT
@@ -268,6 +279,170 @@ const dom = (() => {
       default:
         meter.classList.add('hot')
     }
+  }
+
+  // TECHNICAL CONTENT
+  function displayTechnicalContent(weatherData) {
+    const technicalContainer = document.getElementById('technical-container')
+    clearContent(technicalContainer)
+    // UVI
+    const UVIndex = weatherData.current.uvi
+    displayUVIndex(UVIndex, technicalContainer)
+    // HUMIDITY
+    const humidity = `${weatherData.current.humidity}%`
+    displayHumidity(humidity, technicalContainer)
+    // CHANCE OF RAIN
+    const chanceOfRain = `${weatherData.daily[0].pop * 100}%`
+    displayChanceOfRain(chanceOfRain, technicalContainer)
+    // SUNRISE
+    const sunriseSeconds =
+      weatherData.current.sunrise + weatherData.timezone_offset - 3600
+    const sunrise = secondsToHourAndMinutes(sunriseSeconds)
+    console.log(sunrise)
+    displaySunrise(sunrise, technicalContainer)
+    // SUNSET
+    const sunsetSeconds =
+      weatherData.current.sunset + weatherData.timezone_offset - 3600
+    const sunset = secondsToHourAndMinutes(sunsetSeconds)
+    displaySunset(sunset, technicalContainer)
+  }
+
+  function displayUVIndex(UVIndex, container) {
+    const title = document.createElement('p')
+    title.textContent = 'UV index'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'uvSun.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = UVIndex
+    indexEl.classList.add('card-value')
+
+    const messageEl = document.createElement('p')
+    messageEl.textContent = UVIndexMessage(UVIndex)
+    messageEl.classList.add('card-text')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+    card.appendChild(messageEl)
+
+    container.appendChild(card)
+  }
+
+  function displayHumidity(humidity, container) {
+    const title = document.createElement('p')
+    title.textContent = 'humidity'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon', 'humidity')
+    icon.src = 'humidity.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = humidity
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function displayChanceOfRain(chanceOfRain, container) {
+    const title = document.createElement('p')
+    title.textContent = 'chance of rain'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'chanceOfRain.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = chanceOfRain
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function displaySunrise(sunrise, container) {
+    const title = document.createElement('p')
+    title.textContent = 'sunrise'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'sunrise.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = sunrise
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function displaySunset(sunset, container) {
+    const title = document.createElement('p')
+    title.textContent = 'sunset'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'sunset.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = sunset
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
+  function UVIndexMessage(index) {
+    if (index <= 0) return 'Very low, damage possibility is negligible'
+    if (index <= 4) return 'Mild, sun protection recommended.'
+    if (index <= 7) return 'High, sun protection highly recommended'
+    if (index > 7) return 'Very high, sun protection is a must'
+    return 'Very low'
   }
 
   // BACKGROUND VIDEO

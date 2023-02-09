@@ -8,10 +8,20 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
     <title>Document</title>
-  <script defer src="bundle79886b201b8d8f583a8e.js"></script></head>
+  <script defer src="bundle6774335a9d6f2186e7a3.js"></script></head>
   <body>
+    <div id="loading-screen" class="loading-screen">
+      <div></div>
+    </div>
     <div class="video-container">
-      <video id="background-video" class="background-video" autoplay loop muted>
+      <video
+        id="background-video"
+        class="background-video"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
         <source src="" type="video/mp4" />
       </video>
     </div>
@@ -20,10 +30,7 @@
         <h1 id="location"></h1>
         <h2 id="temperature" class="temperature"></h2>
         <p id="description" class="description"></p>
-        <div class="temp-min-max">
-          <p id="temperature-min"></p>
-          <p id="temperature-max"></p>
-        </div>
+        <p id="main-feels-like" class="main-feels-like"></p>
       </section>
       <section id="search" class="search">
         <form id="location-form" class="location-form" action="#">
@@ -32,8 +39,8 @@
             class="location-input"
             type="text"
             name="location"
+            placeholder="Search city or country"
           />
-          <span></span>
           <button id="search-button" class="search-button" type="button">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
@@ -42,6 +49,7 @@
       <section id="detailed-info" class="detailed-info">
         <div id="hours-container" class="hours-container"></div>
         <div id="days-container" class="days-container"></div>
+        <div id="technical-container" class="technical-container"></div>
       </section>
       <!-- <div class="meter very-cold-to-cold" type="text"></div> -->
     </div>

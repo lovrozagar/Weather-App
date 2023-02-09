@@ -20,5 +20,10 @@ import './assets/images/night_clouds.svg'
 import './assets/images/rain.svg'
 import './assets/images/snow.svg'
 import './assets/images/thunder.svg'
+import './assets/images/uvSun.svg'
+import './assets/images/sunrise.svg'
+import './assets/images/sunset.svg'
+import './assets/images/humidity.svg'
+import './assets/images/chanceOfRain.svg'
 
 dom.loadContent()
