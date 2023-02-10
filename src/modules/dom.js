@@ -577,10 +577,27 @@ const dom = (() => {
   function displayBackgroundVideo(weatherData) {
     const loadingScreen = document.getElementById('loading-screen')
     const video = document.getElementById('background-video')
+    const source = video.src.split('/').pop()
+    console.log(source)
 
     let state = getWeatherState(weatherData).toLowerCase()
     // HAZE AND FOG PLAY THE SAME VIDEO = FOG
     if (state === 'haze') state = 'fog'
+    // IF WEATHER IS CLEAR OR CLOUDS AND ITS NIGHT, PLAY SPACE VIDEO
+    const now = weatherData.current.dt
+    const { sunrise, sunset } = weatherData.current
+    if (
+      (state === 'clear' || state === 'clouds') &&
+      (now >= sunset || now < sunrise)
+    ) {
+      state = 'space'
+    }
+    // IF SAME VIDEO SHOULD BE LOADED RETURN
+    if (source === state) {
+      return
+    }
+
+    // LOAD VIDEO
     video.src = `${state}.mp4`
 
     // SHOW LOADING SCREEN
