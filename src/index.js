@@ -26,5 +26,7 @@ import './assets/images/sunset.svg'
 import './assets/images/humidity.svg'
 import './assets/images/chanceOfRain.svg'
 import './assets/images/forecast.svg'
+import './assets/images/wind.svg'
+import './assets/images/pressure.svg'
 
 dom.loadContent()

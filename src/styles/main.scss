@@ -151,14 +151,14 @@ body {
       display: flex;
       flex-direction: column;
       margin-top: 2.5rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
       .hour-hour,
       .hour-temp {
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
       img {
-        height: 60px;
-        width: 60px;
+        height: 55px;
+        width: 55px;
       }
       .hour-temp {
         position: relative;
@@ -203,7 +203,6 @@ body {
         &::after {
           content: '\00b0';
           position: absolute;
-          font-size: 1.25rem;
         }
       }
       .meter {
@@ -220,15 +219,17 @@ body {
   .technical-container {
     grid-column: 2 / 3;
     display: flex;
-    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
     gap: 0.5rem;
     text-align: left;
 
     .technical-card {
-      padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
+      width: 100%;
+      padding: 1rem;
       .card-value {
         font-size: 2.25rem;
         font-weight: bold;
@@ -236,7 +237,14 @@ body {
       .card-text {
         letter-spacing: 1px;
         font-size: 1rem;
+        opacity: 0.8;
       }
+    }
+    .technical-card:nth-child(3),
+    .technical-card:nth-child(4),
+    .technical-card:nth-child(5),
+    .technical-card:nth-child(6) {
+      width: calc(50% - 0.25rem);
     }
   }
 }

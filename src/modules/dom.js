@@ -1,8 +1,13 @@
 import weather from './weather'
 
+// TODO: video night if night
 // TODO: dont load the same video
 // TODO: 3600 offset for +-12/11 zones
 // TODO: loading screen on form submit
+// TODO: celsius to kelvin
+// TODO: google location
+// TODO: mobile optimization
+// TODO: form validation
 const dom = (() => {
   async function loadContent() {
     const loadingScreen = document.getElementById('loading-screen')
@@ -77,7 +82,7 @@ const dom = (() => {
 
     // ADD TITLE AND ICON
     const title = document.createElement('p')
-    title.textContent = 'weekly forecast'
+    title.textContent = 'hourly forecast'
     const icon = document.createElement('img')
     icon.classList.add('icon', 'forecast-hours')
     icon.src = 'forecast.svg'
@@ -315,6 +320,11 @@ const dom = (() => {
     // UVI
     const UVIndex = weatherData.current.uvi
     displayUVIndex(UVIndex, technicalContainer)
+    // WIND
+    // CONVERT FROM METERS PER SECOND TO KILOMETERS PER SECOND
+    const windSpeed = Math.round(weatherData.current.wind_speed * 3.6 * 10) / 10
+    const wind = `${windSpeed} km/h`
+    displayWind(wind, technicalContainer)
     // HUMIDITY
     const humidity = `${weatherData.current.humidity}%`
     displayHumidity(humidity, technicalContainer)
@@ -332,6 +342,9 @@ const dom = (() => {
       weatherData.current.sunset + weatherData.timezone_offset - 3600
     const sunset = secondsToHourAndMinutes(sunsetSeconds)
     displaySunset(sunset, technicalContainer)
+    // PRESSURE
+    const pressure = `${weatherData.current.pressure} hPa`
+    displayPressure(pressure, technicalContainer)
   }
 
   function displayUVIndex(UVIndex, container) {
@@ -353,6 +366,36 @@ const dom = (() => {
 
     const messageEl = document.createElement('p')
     messageEl.textContent = UVIndexMessage(UVIndex)
+    messageEl.classList.add('card-text')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+    card.appendChild(messageEl)
+
+    container.appendChild(card)
+  }
+
+  function displayWind(wind, container) {
+    const title = document.createElement('p')
+    title.textContent = 'wind'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'wind.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = wind
+    indexEl.classList.add('card-value')
+
+    const messageEl = document.createElement('p')
+    messageEl.textContent = windMessage(wind)
     messageEl.classList.add('card-text')
 
     const card = document.createElement('div')
@@ -464,12 +507,70 @@ const dom = (() => {
     container.appendChild(card)
   }
 
+  function displayPressure(pressure, container) {
+    const title = document.createElement('p')
+    title.textContent = 'pressure'
+
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = 'pressure.svg'
+
+    const titleAndIcon = document.createElement('div')
+    titleAndIcon.classList.add('title-and-icon')
+    titleAndIcon.appendChild(title)
+    titleAndIcon.appendChild(icon)
+
+    const indexEl = document.createElement('p')
+    indexEl.textContent = pressure
+    indexEl.classList.add('card-value')
+
+    const card = document.createElement('div')
+    card.classList.add('technical-card')
+    card.appendChild(titleAndIcon)
+    card.appendChild(indexEl)
+
+    container.appendChild(card)
+  }
+
   function UVIndexMessage(index) {
-    if (index <= 0) return 'Very low, damage possibility is negligible'
+    if (index <= 0.99) return 'Very low, damage possibility is negligible'
     if (index <= 4) return 'Mild, sun protection recommended.'
     if (index <= 7) return 'High, sun protection highly recommended'
     if (index > 7) return 'Very high, sun protection is a must'
     return 'Very low'
+  }
+
+  function windMessage(wind) {
+    let windNumber = wind.substring(0, wind.indexOf(' '))
+    // IF NOT MPH TRANSFORM TO MPH, CHART USES MPH
+    const unit = wind.split(' ').pop()
+    if (unit === 'km/h') windNumber = +windNumber / 1.6
+    console.log(unit)
+    console.log(windNumber)
+
+    if (windNumber < 1) return 'Calm, Smoke rises vertically'
+    if (windNumber < 4)
+      return 'Light air, smoke drifts with air, weather vanes inactive'
+    if (windNumber < 8)
+      return 'Light breeze, weather vanes active, wind felt on face, leaves rustle'
+    if (windNumber < 13)
+      return 'Gentle breeze, leaves & small twigs move, light flags extend'
+    if (windNumber < 19)
+      return 'Moderate breeze, dust & loose paper blows about'
+    if (windNumber < 25)
+      return 'Fresh breeze, small trees sway, waves break on inland waters'
+    if (windNumber < 32)
+      return 'Strong breeze, large branches sway, umbrellas difficult to use'
+    if (windNumber < 39)
+      return 'Moderate gale, whole trees sway, difficult to walk against wind'
+    if (windNumber < 47)
+      return 'Fresh gale, twigs broken off trees, walking against wind very difficult'
+    if (windNumber < 55)
+      return 'Strong gale, slight damage to buildings, shingles blown off roof'
+    if (windNumber < 64)
+      return 'Whole gale, trees uprooted, considerable damage to buildings'
+    if (windNumber < 73) return 'Storm, widespread damage, very rare occurrence'
+    return 'Hurricane, violent destruction'
   }
 
   // BACKGROUND VIDEO
@@ -478,6 +579,7 @@ const dom = (() => {
     const video = document.getElementById('background-video')
 
     let state = getWeatherState(weatherData).toLowerCase()
+    // HAZE AND FOG PLAY THE SAME VIDEO = FOG
     if (state === 'haze') state = 'fog'
     video.src = `${state}.mp4`
 
