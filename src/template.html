@@ -11,7 +11,12 @@
   </head>
   <body>
     <div id="loading-screen" class="loading-screen">
-      <div></div>
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
     <div class="video-container">
       <video
@@ -32,20 +37,29 @@
         <p id="description" class="description"></p>
         <p id="main-feels-like" class="main-feels-like"></p>
       </section>
-      <section id="search" class="search">
-        <form id="location-form" class="location-form" action="#">
-          <input
-            id="location-input"
-            class="location-input"
-            type="text"
-            name="location"
-            placeholder="Search city or country"
-          />
-          <button id="search-button" class="search-button" type="button">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-      </section>
+      <div class="search-container">
+        <section id="search" class="search">
+          <form id="location-form" class="location-form" action="#">
+            <input
+              id="location-input"
+              class="location-input"
+              type="text"
+              name="location"
+              placeholder="Search city or country"
+            />
+            <button id="search-button" class="search-button" type="button">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </section>
+        <section id="autocomplete" class="autocomplete">
+          <a id="suggestion-1" data-suggestion class="suggestion"></a>
+          <a id="suggestion-2" data-suggestion class="suggestion"></a>
+          <a id="suggestion-3" data-suggestion class="suggestion"></a>
+          <a id="suggestion-4" data-suggestion class="suggestion"></a>
+          <a id="suggestion-5" data-suggestion class="suggestion"></a>
+        </section>
+      </div>
       <section id="detailed-info" class="detailed-info">
         <div id="hours-container" class="hours-container"></div>
         <div id="days-container" class="days-container"></div>

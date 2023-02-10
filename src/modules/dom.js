@@ -1,35 +1,112 @@
 import weather from './weather'
 
-// TODO: video night if night
-// TODO: dont load the same video
-// TODO: 3600 offset for +-12/11 zones
-// TODO: loading screen on form submit
+// TODO: change of rain round
+// TODO: pressure message
+// TODO: add visibility
 // TODO: celsius to kelvin
 // TODO: google location
 // TODO: mobile optimization
 // TODO: form validation
+// TODO: 3600 offset for +-12/11 zones
+// TODO: when searching location recommendations appear
+// TODO: add FAVORITES
+// TODO: add view
 const dom = (() => {
   async function loadContent() {
-    const loadingScreen = document.getElementById('loading-screen')
-    loadingScreen.classList.add('active')
+    showLoadingScreen()
     displayWeatherContent('Zagreb')
     initLocationSearch()
+    initSuggestions()
+    initLocationAutocomplete()
   }
 
+  // LOCATION SEARCH
   function initLocationSearch() {
     const locationInput = document.getElementById('location-input')
     const form = document.getElementById('location-form')
     form.addEventListener('submit', (e) => {
       e.preventDefault()
+      showLoadingScreen()
       displayWeatherContent(locationInput.value)
     })
     const searchButton = document.getElementById('search-button')
     searchButton.addEventListener('click', (e) => {
       e.preventDefault()
+      showLoadingScreen()
       displayWeatherContent(locationInput.value)
     })
   }
 
+  // LOCATION SEARCH AUTOCOMPLETE
+  function initLocationAutocomplete() {
+    const onFinishTyping = debounce(displaySuggestions, 750)
+    const locationInput = document.getElementById('location-input')
+    locationInput.addEventListener('keyup', () =>
+      onFinishTyping(locationInput.value)
+    )
+  }
+
+  function debounce(fn, d) {
+    let timer
+    return function (arg) {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        fn(arg)
+      }, d)
+    }
+  }
+
+  function getSuggestionsURL(location) {
+    return `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=5&sort=-population&namePrefix=${location}`
+  }
+
+  function getSuggestionsBody() {
+    return {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'feafa1d619mshe17ed83e5e7db1dp1a5622jsn3b2f188ddc6c',
+        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
+      },
+    }
+  }
+
+  async function displaySuggestions(location) {
+    const response = await fetch(
+      getSuggestionsURL(location),
+      getSuggestionsBody()
+    )
+    const suggestions = await response.json()
+    loadSuggestions(suggestions)
+  }
+
+  function loadSuggestions(suggestions) {
+    const suggestionItems = document.querySelectorAll('[data-suggestion]')
+
+    for (let i = 0; i < 5; i += 1) {
+      if (suggestions.data[i]) {
+        suggestionItems[i].classList.add('active')
+        suggestionItems[i].textContent = `${suggestions.data[i].name}, `
+        suggestionItems[i].textContent += `${suggestions.data[i].country}`
+      } else {
+        suggestionItems[i].classList.remove('active')
+      }
+    }
+  }
+
+  function initSuggestions() {
+    const suggestionItems = document.querySelectorAll('[data-suggestion]')
+    suggestionItems.forEach((item) => {
+      item.addEventListener('click', searchBySuggestion)
+    })
+  }
+
+  function searchBySuggestion() {
+    const locationInput = document.getElementById('location-input')
+    locationInput.textContent = this.textContent
+    displayWeatherContent(locationInput.textContent)
+  }
+
+  // DISPLAY ALL WEATHER CONTENT
   async function displayWeatherContent(cityName) {
     const weatherData = await weather.getWeatherData(cityName)
     console.log(weatherData)
@@ -121,7 +198,7 @@ const dom = (() => {
   }
   function loadHourItem(hour, mainDesc, temp) {
     const hourEl = document.createElement('p')
-    hourEl.textContent = +hour
+    hourEl.textContent = `${+hour}h`
     hourEl.classList.add('hour-hour')
 
     const logoEl = document.createElement('img')
@@ -329,7 +406,7 @@ const dom = (() => {
     const humidity = `${weatherData.current.humidity}%`
     displayHumidity(humidity, technicalContainer)
     // CHANCE OF RAIN
-    const chanceOfRain = `${weatherData.daily[0].pop * 100}%`
+    const chanceOfRain = `${Math.round(weatherData.daily[0].pop * 100)}%`
     displayChanceOfRain(chanceOfRain, technicalContainer)
     // SUNRISE
     const sunriseSeconds =
@@ -345,6 +422,8 @@ const dom = (() => {
     // PRESSURE
     const pressure = `${weatherData.current.pressure} hPa`
     displayPressure(pressure, technicalContainer)
+
+    metricToImperial()
   }
 
   function displayUVIndex(UVIndex, container) {
@@ -392,6 +471,7 @@ const dom = (() => {
 
     const indexEl = document.createElement('p')
     indexEl.textContent = wind
+    indexEl.id = 'wind'
     indexEl.classList.add('card-value')
 
     const messageEl = document.createElement('p')
@@ -534,9 +614,9 @@ const dom = (() => {
 
   function UVIndexMessage(index) {
     if (index <= 0.99) return 'Very low, damage possibility is negligible'
-    if (index <= 4) return 'Mild, sun protection recommended.'
-    if (index <= 7) return 'High, sun protection highly recommended'
-    if (index > 7) return 'Very high, sun protection is a must'
+    if (index <= 4) return 'Mild, sun protection may or may not be needed.'
+    if (index <= 7) return 'High, sun protection is recommended'
+    if (index > 7) return 'Very high, sun protection is highly recommended'
     return 'Very low'
   }
 
@@ -575,7 +655,6 @@ const dom = (() => {
 
   // BACKGROUND VIDEO
   function displayBackgroundVideo(weatherData) {
-    const loadingScreen = document.getElementById('loading-screen')
     const video = document.getElementById('background-video')
     const source = video.src.split('/').pop()
     console.log(source)
@@ -600,8 +679,6 @@ const dom = (() => {
     // LOAD VIDEO
     video.src = `${state}.mp4`
 
-    // SHOW LOADING SCREEN
-    loadingScreen.classList.add('active')
     // HIDE LOADING SCREEN WHEN VIDEO CAN PLAY
     video.addEventListener('canplay', hideLoadingScreen)
   }
@@ -610,6 +687,31 @@ const dom = (() => {
     const loadingScreen = document.getElementById('loading-screen')
     loadingScreen.removeEventListener('canplay', hideLoadingScreen)
     loadingScreen.classList.remove('active')
+  }
+
+  function showLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen')
+    loadingScreen.classList.add('active')
+  }
+
+  function metricToImperial() {
+    // DOUBLE CHECK IN CASE ONE VALUE IS SOMEHOW NOT IN WEATHER DATA
+    // const hour = document.querySelector(
+    //   '#hours-container > .hour-item:first-of-type > p'
+    // )
+    // const hourUnit = hour.textContent.includes('h')
+    const windSpeed = document.getElementById('wind')
+    const windString = windSpeed.textContent
+    const windValue = windString.substring(0, windString.indexOf(' '))
+    const windUnit = windString.split(' ').pop()
+    console.log(windValue)
+    console.log(windUnit)
+    // IF METRIC THEN CONVERT TO IMPERIAL
+    if (windUnit === 'km/h') {
+      windSpeed.textContent = Math.round((+windValue / 1.6) * 10) / 10
+      windSpeed.textContent = `${windSpeed.textContent} mph`
+    }
+    console.log(windSpeed.textContent)
   }
 
   return { loadContent }
