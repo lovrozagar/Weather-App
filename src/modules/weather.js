@@ -14,7 +14,6 @@ const weather = (() => {
     const coordinatesUrl = getCityCoordinatesUrl(cityName)
     const coordinatesResponse = await fetch(coordinatesUrl, { mode: 'cors' })
     const weatherData = await coordinatesResponse.json()
-    console.log(weatherData)
     const { coord: main } = weatherData
     // GET LOCATION NAME AS IT IS NOT IN THE FORECAST
     main.name = weatherData.name
@@ -23,7 +22,7 @@ const weather = (() => {
     return main
   }
 
-  async function getForecastData(main, unit) {
+  async function getForecastData(main, unit = 'metric') {
     // GET LOCATION FORECAST
     const forecastUrl = getLocationForecastUrl(main, unit)
     const weatherResponse = await fetch(forecastUrl, { mode: 'cors' })
@@ -42,7 +41,7 @@ const weather = (() => {
     return forecastData
   }
 
-  return { getWeatherData }
+  return { getWeatherData, getForecastData }
 })()
 
 export default weather

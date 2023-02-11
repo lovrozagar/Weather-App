@@ -10,13 +10,12 @@ import weather from './weather'
 // TODO: 3600 offset for +-12/11 zones
 // TODO: when searching location recommendations appear
 // TODO: add FAVORITES
-// TODO: add view
+// TODO: add VIEW
 const dom = (() => {
   function loadContent() {
     showLoadingScreen()
     displayWeatherContent('Zagreb')
     initLocationSearch()
-    initSuggestions()
     initLocationAutocomplete()
   }
 
@@ -73,7 +72,9 @@ const dom = (() => {
       getSuggestionsBody()
     )
     const suggestions = await response.json()
+    console.log(suggestions)
     loadSuggestions(suggestions)
+    initSuggestions(suggestions)
   }
 
   function loadSuggestions(suggestions) {
@@ -90,22 +91,31 @@ const dom = (() => {
     }
   }
 
-  function initSuggestions() {
+  function initSuggestions(suggestions) {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
     suggestionItems.forEach((item) => {
-      item.addEventListener('click', searchBySuggestion)
+      item.removeEventListener('click', displayWeatherContentBySuggestion)
+    })
+    suggestionItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const index = [...item.parentNode.children].indexOf(item)
+        console.log(index)
+        console.log(suggestions.data[index])
+        const { latitude: lat, longitude: lon } = suggestions.data[index]
+        displayWeatherContentBySuggestion({ lat, lon })
+      })
     })
   }
 
-  function searchBySuggestion() {
-    const locationInput = document.getElementById('location-input')
-    locationInput.value = this.textContent
-    const cityName = this.textContent.substring(
-      0,
-      this.textContent.indexOf(',')
-    )
-    displayWeatherContent(cityName)
-  }
+  // function displayWeatherContentBySuggestion() {
+  //   const locationInput = document.getElementById('location-input')
+  //   locationInput.value = this.textContent
+  //   const cityName = this.textContent.substring(
+  //     0,
+  //     this.textContent.indexOf(',')
+  //   )
+  //   displayWeatherContent(cityName)
+  // }
 
   function hideSuggestions() {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
@@ -123,7 +133,15 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
-    hideSuggestions()
+  }
+
+  async function displayWeatherContentBySuggestion(coords) {
+    const weatherData = await weather.getForecastData(coords)
+    displayBackgroundVideo(weatherData)
+    displayMainContent(weatherData)
+    displayHourlyContent(weatherData)
+    displayDailyContent(weatherData)
+    displayTechnicalContent(weatherData)
   }
 
   // MAIN WEATHER CONTENT
