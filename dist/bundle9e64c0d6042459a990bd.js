@@ -23804,6 +23804,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ "./src/modules/weather.js");
 
 
+// TODO: remove additional eventListener on suggestions
 // TODO: chance of rain round
 // TODO: pressure message
 // TODO: add visibility
@@ -23897,18 +23898,21 @@ const dom = (() => {
 
   function initSuggestions(suggestions) {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
+    // suggestionItems.forEach((item) => {})
     suggestionItems.forEach((item) => {
-      item.removeEventListener('click', displayWeatherContentBySuggestion)
+      item.removeEventListener('click', () => displayContent(item, suggestions))
+      item.addEventListener('click', () => displayContent(item, suggestions))
     })
-    suggestionItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        const index = [...item.parentNode.children].indexOf(item)
-        console.log(index)
-        console.log(suggestions.data[index])
-        const { latitude: lat, longitude: lon } = suggestions.data[index]
-        displayWeatherContentBySuggestion({ lat, lon })
-      })
-    })
+  }
+
+  function displayContent(item, suggestions) {
+    const index = [...item.parentNode.children].indexOf(item)
+    console.log(index)
+    console.log(suggestions.data[index])
+    const { latitude: lat, longitude: lon } = suggestions.data[index]
+    console.log(lat, lon)
+    showLoadingScreen()
+    displayWeatherContentBySuggestion({ lat, lon })
   }
 
   // function displayWeatherContentBySuggestion() {
@@ -23941,6 +23945,7 @@ const dom = (() => {
 
   async function displayWeatherContentBySuggestion(coords) {
     const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getForecastData(coords)
+    console.log(weatherData)
     displayBackgroundVideo(weatherData)
     displayMainContent(weatherData)
     displayHourlyContent(weatherData)
@@ -25102,4 +25107,4 @@ _modules_dom__WEBPACK_IMPORTED_MODULE_4__["default"].loadContent()
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle243051adae4b1a3bbfa9.js.map
+//# sourceMappingURL=bundle9e64c0d6042459a990bd.js.map

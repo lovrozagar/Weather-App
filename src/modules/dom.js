@@ -1,5 +1,6 @@
 import { debounce } from 'lodash'
 import weather from './weather'
+// TODO: remove additional eventListener on suggestions
 // TODO: chance of rain round
 // TODO: pressure message
 // TODO: add visibility
@@ -93,18 +94,21 @@ const dom = (() => {
 
   function initSuggestions(suggestions) {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
+    // suggestionItems.forEach((item) => {})
     suggestionItems.forEach((item) => {
-      item.removeEventListener('click', displayWeatherContentBySuggestion)
+      item.removeEventListener('click', () => displayContent(item, suggestions))
+      item.addEventListener('click', () => displayContent(item, suggestions))
     })
-    suggestionItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        const index = [...item.parentNode.children].indexOf(item)
-        console.log(index)
-        console.log(suggestions.data[index])
-        const { latitude: lat, longitude: lon } = suggestions.data[index]
-        displayWeatherContentBySuggestion({ lat, lon })
-      })
-    })
+  }
+
+  function displayContent(item, suggestions) {
+    const index = [...item.parentNode.children].indexOf(item)
+    console.log(index)
+    console.log(suggestions.data[index])
+    const { latitude: lat, longitude: lon } = suggestions.data[index]
+    console.log(lat, lon)
+    showLoadingScreen()
+    displayWeatherContentBySuggestion({ lat, lon })
   }
 
   // function displayWeatherContentBySuggestion() {
@@ -137,6 +141,7 @@ const dom = (() => {
 
   async function displayWeatherContentBySuggestion(coords) {
     const weatherData = await weather.getForecastData(coords)
+    console.log(weatherData)
     displayBackgroundVideo(weatherData)
     displayMainContent(weatherData)
     displayHourlyContent(weatherData)
