@@ -1,6 +1,6 @@
+import { debounce } from 'lodash'
 import weather from './weather'
-
-// TODO: change of rain round
+// TODO: chance of rain round
 // TODO: pressure message
 // TODO: add visibility
 // TODO: celsius to kelvin
@@ -12,7 +12,7 @@ import weather from './weather'
 // TODO: add FAVORITES
 // TODO: add view
 const dom = (() => {
-  async function loadContent() {
+  function loadContent() {
     showLoadingScreen()
     displayWeatherContent('Zagreb')
     initLocationSearch()
@@ -20,18 +20,25 @@ const dom = (() => {
     initLocationAutocomplete()
   }
 
+  // DEBOUNCE FUNCTION FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
+  const onFinishTyping = debounce(displaySuggestions, 750)
+
   // LOCATION SEARCH
+
   function initLocationSearch() {
     const locationInput = document.getElementById('location-input')
     const form = document.getElementById('location-form')
     form.addEventListener('submit', (e) => {
       e.preventDefault()
+      onFinishTyping.cancel()
       showLoadingScreen()
       displayWeatherContent(locationInput.value)
+      setTimeout(hideSuggestions, 900)
     })
     const searchButton = document.getElementById('search-button')
     searchButton.addEventListener('click', (e) => {
       e.preventDefault()
+      onFinishTyping.cancel()
       showLoadingScreen()
       displayWeatherContent(locationInput.value)
     })
@@ -39,21 +46,11 @@ const dom = (() => {
 
   // LOCATION SEARCH AUTOCOMPLETE
   function initLocationAutocomplete() {
-    const onFinishTyping = debounce(displaySuggestions, 750)
     const locationInput = document.getElementById('location-input')
-    locationInput.addEventListener('keyup', () =>
-      onFinishTyping(locationInput.value)
-    )
-  }
-
-  function debounce(fn, d) {
-    let timer
-    return function (arg) {
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        fn(arg)
-      }, d)
-    }
+    locationInput.addEventListener('input', () => {
+      if (locationInput.value === '') hideSuggestions()
+      else onFinishTyping(locationInput.value)
+    })
   }
 
   function getSuggestionsURL(location) {
@@ -102,8 +99,19 @@ const dom = (() => {
 
   function searchBySuggestion() {
     const locationInput = document.getElementById('location-input')
-    locationInput.textContent = this.textContent
-    displayWeatherContent(locationInput.textContent)
+    locationInput.value = this.textContent
+    const cityName = this.textContent.substring(
+      0,
+      this.textContent.indexOf(',')
+    )
+    displayWeatherContent(cityName)
+  }
+
+  function hideSuggestions() {
+    const suggestionItems = document.querySelectorAll('[data-suggestion]')
+    suggestionItems.forEach((item) => {
+      item.classList.remove('active')
+    })
   }
 
   // DISPLAY ALL WEATHER CONTENT
@@ -115,6 +123,7 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
+    hideSuggestions()
   }
 
   // MAIN WEATHER CONTENT
@@ -661,7 +670,7 @@ const dom = (() => {
 
     let state = getWeatherState(weatherData).toLowerCase()
     // HAZE AND FOG PLAY THE SAME VIDEO = FOG
-    if (state === 'haze') state = 'fog'
+    if (state === 'haze' || state === 'mist') state = 'fog'
     // IF WEATHER IS CLEAR OR CLOUDS AND ITS NIGHT, PLAY SPACE VIDEO
     const now = weatherData.current.dt
     const { sunrise, sunset } = weatherData.current

@@ -46,6 +46,7 @@
               type="text"
               name="location"
               placeholder="Search city or country"
+              value=""
             />
             <button id="search-button" class="search-button" type="button">
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -53,8 +54,18 @@
           </form>
         </section>
         <section id="autocomplete" class="autocomplete">
-          <a id="suggestion-1" data-suggestion class="suggestion"></a>
-          <a id="suggestion-2" data-suggestion class="suggestion"></a>
+          <a
+            id="suggestion-1"
+            data-suggestion
+            class="suggestion"
+            tabindex="1"
+          ></a>
+          <a
+            id="suggestion-2"
+            data-suggestion
+            class="suggestion"
+            tabindex="1"
+          ></a>
           <a id="suggestion-3" data-suggestion class="suggestion"></a>
           <a id="suggestion-4" data-suggestion class="suggestion"></a>
           <a id="suggestion-5" data-suggestion class="suggestion"></a>
