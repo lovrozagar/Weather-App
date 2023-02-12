@@ -1,7 +1,5 @@
 import { debounce } from 'lodash'
 import weather from './weather'
-// TODO: remove additional eventListener on suggestions
-// TODO: chance of rain round
 // TODO: pressure message
 // TODO: add visibility
 // TODO: celsius to kelvin
@@ -96,30 +94,20 @@ const dom = (() => {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
     // suggestionItems.forEach((item) => {})
     suggestionItems.forEach((item) => {
-      item.removeEventListener('click', () => displayContent(item, suggestions))
-      item.addEventListener('click', () => displayContent(item, suggestions))
+      item.suggestions = suggestions
+      item.removeEventListener('click', displayContent)
+      item.addEventListener('click', displayContent)
     })
   }
 
-  function displayContent(item, suggestions) {
-    const index = [...item.parentNode.children].indexOf(item)
-    console.log(index)
-    console.log(suggestions.data[index])
+  function displayContent(e) {
+    const { suggestions } = e.currentTarget
+    const index = [...this.parentNode.children].indexOf(this)
     const { latitude: lat, longitude: lon } = suggestions.data[index]
-    console.log(lat, lon)
+    const cityName = suggestions.data[index].city
     showLoadingScreen()
-    displayWeatherContentBySuggestion({ lat, lon })
+    displayWeatherContentBySuggestion({ lat, lon }, cityName)
   }
-
-  // function displayWeatherContentBySuggestion() {
-  //   const locationInput = document.getElementById('location-input')
-  //   locationInput.value = this.textContent
-  //   const cityName = this.textContent.substring(
-  //     0,
-  //     this.textContent.indexOf(',')
-  //   )
-  //   displayWeatherContent(cityName)
-  // }
 
   function hideSuggestions() {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
@@ -139,8 +127,9 @@ const dom = (() => {
     displayTechnicalContent(weatherData)
   }
 
-  async function displayWeatherContentBySuggestion(coords) {
+  async function displayWeatherContentBySuggestion(coords, cityName) {
     const weatherData = await weather.getForecastData(coords)
+    weatherData.name = cityName
     console.log(weatherData)
     displayBackgroundVideo(weatherData)
     displayMainContent(weatherData)
