@@ -6018,7 +6018,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_reset_css__WEBPAC
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_3___default()(___CSS_LOADER_URL_IMPORT_1___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"helvetica_neue35_thin\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n  font-weight: normal;\n  font-style: normal;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: \"helvetica_neue35_thin\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.content {\n  padding: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n}\n.content .main-info {\n  padding: 1rem;\n}\n.content .main-info > * {\n  margin-bottom: 1rem;\n}\n.content .main-info .temperature {\n  position: relative;\n  font-size: 7.5rem;\n  font-weight: normal;\n}\n.content .main-info .temperature::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 6rem;\n}\n.content .main-info .description {\n  font-size: 2rem;\n}\n.content .main-info .main-feels-like {\n  font-size: 2rem;\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n}\n.location-form .location-input {\n  width: 100%;\n  padding-left: 0.5rem;\n  outline: none;\n  line-height: 2rem;\n  background-color: transparent;\n  color: white;\n}\n.location-form .location-input:focus + .search-button > svg {\n  opacity: 75;\n}\n.location-form .location-input::placeholder {\n  color: rgba(255, 255, 255, 0.3);\n}\n.location-form .search-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  display: flex;\n  align-items: center;\n  height: 100%;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .search-button svg {\n  pointer-events: none;\n  position: relative;\n  z-index: -1;\n  height: 1.25rem;\n  border: none;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n  opacity: 0.25;\n}\n\n.error-message.active {\n  display: block;\n}\n\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 0.85rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n\n.autocomplete {\n  overflow: hidden;\n}\n.autocomplete .suggestion.active {\n  display: block;\n}\n.autocomplete .suggestion {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0 !important;\n  border-bottom: 1px solid rgba(211, 211, 211, 0.5);\n  text-align: left;\n  font-size: 1rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n.autocomplete .suggestion:hover, .autocomplete .suggestion:focus {\n  background-color: rgba(255, 255, 255, 0.2);\n}\n\n.detailed-info {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n}\n.detailed-info .hours-container {\n  position: relative;\n  grid-column: 1/3;\n  display: flex;\n  gap: 1rem;\n  overflow-y: hidden;\n  overflow-x: auto;\n  padding: 1rem;\n}\n.detailed-info .hours-container .hour-item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  margin-top: 2.5rem;\n  font-size: 1.5rem;\n}\n.detailed-info .hours-container .hour-item .hour-hour,\n.detailed-info .hours-container .hour-item .hour-temp {\n  font-size: 1.5rem;\n}\n.detailed-info .hours-container .hour-item img {\n  height: 55px;\n  width: 55px;\n}\n.detailed-info .hours-container .hour-item .hour-temp {\n  position: relative;\n}\n.detailed-info .hours-container .hour-item .hour-temp::after {\n  content: \"°\";\n  position: absolute;\n}\n.detailed-info .days-container {\n  grid-column: 1/2;\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n}\n.detailed-info .days-container .day-item:first-child {\n  margin-top: 0;\n}\n.detailed-info .days-container .day-item:nth-child(2) {\n  margin-top: 0.25rem;\n}\n.detailed-info .days-container .day-item {\n  width: 100%;\n  flex: 1;\n  display: flex;\n  align-items: center;\n  margin-top: 1rem;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item img {\n  height: 50px;\n  width: 50px;\n}\n.detailed-info .days-container .day-item .week-day {\n  width: 6ch;\n  text-align: start;\n}\n.detailed-info .days-container .day-item .day-temp-min,\n.detailed-info .days-container .day-item .day-temp-max {\n  position: relative;\n  width: 3ch;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item .day-temp-min::after,\n.detailed-info .days-container .day-item .day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n}\n.detailed-info .days-container .day-item .meter {\n  flex: 1;\n  display: inline-block;\n  height: 0.5rem;\n  margin: 0 1rem;\n  border-radius: 1rem;\n  border: none;\n  outline: none;\n}\n.detailed-info .technical-container {\n  grid-column: 2/3;\n  display: flex;\n  align-content: flex-start;\n  flex-wrap: wrap;\n  gap: 0.5rem;\n  text-align: left;\n}\n.detailed-info .technical-container .technical-card {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  width: 100%;\n  padding: 1rem;\n}\n.detailed-info .technical-container .technical-card .card-value {\n  font-size: 2.25rem;\n  font-weight: bold;\n}\n.detailed-info .technical-container .technical-card .card-text {\n  letter-spacing: 1px;\n  font-size: 1rem;\n  opacity: 0.8;\n}\n.detailed-info .technical-container .technical-card:nth-child(3),\n.detailed-info .technical-container .technical-card:nth-child(4),\n.detailed-info .technical-container .technical-card:nth-child(5),\n.detailed-info .technical-container .technical-card:nth-child(6) {\n  width: calc(50% - 0.25rem);\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  font-size: 1.125rem;\n  opacity: 0.5;\n}\n.title-and-icon .icon {\n  position: relative;\n  top: -0.1rem;\n  align-self: flex-start;\n  margin-left: 0.5rem;\n  height: 1.375rem;\n  width: 1.375rem;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n}\n.title-and-icon .icon.humidity {\n  margin-left: 0.25rem;\n}\n.title-and-icon .icon.forecast-hours,\n.title-and-icon .icon.forecast-days {\n  top: 0;\n  height: 1.75rem;\n  width: 1.75rem;\n  filter: none;\n}\n.title-and-icon .icon.forecast-days {\n  transform: scaleX(-1);\n}\n\n.title-and-icon.hours {\n  position: fixed;\n}\n\n#hours-container > .hour-item:first-of-type > p {\n  color: red;\n}\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n}\n.main-feels-like::after,\n.hour-temp::after,\n.day-temp-min::after,\n.day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n}\n\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255);\n  background: linear-gradient(90deg, rgb(155, 221, 255) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%);\n}\n\n.hot {\n  background: rgb(255, 48, 48);\n  background: linear-gradient(90deg, rgb(255, 48, 48) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%, rgb(155, 221, 255) 100%);\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(90deg, rgb(0, 155, 249) 0%, rgb(119, 209, 255) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(86, 232, 169) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(94, 226, 185) 25%, rgb(52, 255, 0) 50%, rgb(223, 245, 0) 75%, rgb(255, 239, 0) 100%);\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(241, 228, 35) 50%, rgb(255, 48, 48) 100%);\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(203, 255, 38) 50%, rgb(255, 235, 0) 100%);\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%, rgb(255, 48, 48) 100%);\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss"],"names":[],"mappings":"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","sourcesContent":["@import './reset.css';\n\n@font-face {\n  font-family: 'helvetica_neue35_thin';\n  src: url('../assets/fonts/helveticaneue-thin-webfont.woff2') format('woff2'),\n    url('../assets/fonts/helveticaneue-thin-webfont.woff') format('woff');\n  font-weight: normal;\n  font-style: normal;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: 'helvetica_neue35_thin', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.content {\n  padding: 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n\n  .main-info {\n    padding: 1rem;\n    & > * {\n      margin-bottom: 1rem;\n    }\n    .temperature {\n      position: relative;\n      font-size: 7.5rem;\n      font-weight: normal;\n\n      &::after {\n        content: '\\00b0';\n        position: absolute;\n        font-size: 6rem;\n      }\n    }\n\n    .description {\n      font-size: 2rem;\n    }\n\n    .main-feels-like {\n      font-size: 2rem;\n    }\n  }\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n\n  .location-input {\n    width: 100%;\n    padding-left: 0.5rem;\n    outline: none;\n    line-height: 2rem;\n    background-color: transparent;\n    color: white;\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n    &:focus + .search-button > svg {\n      opacity: 75;\n    }\n\n    &::placeholder {\n      color: rgba(255, 255, 255, 0.3);\n    }\n  }\n\n  .search-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    display: flex;\n    align-items: center;\n    height: 100%;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      pointer-events: none;\n      position: relative;\n      z-index: -1;\n      height: 1.25rem;\n      border: none;\n      filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n        brightness(106%) contrast(100%);\n      opacity: 0.25;\n    }\n  }\n}\n\n.error-message.active{\n  display: block;\n}\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 0.85rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n\n.autocomplete {\n  overflow: hidden;\n  .suggestion.active {\n    display: block;\n  }\n  .suggestion {\n    display: none;\n    padding: 0.5rem;\n    border-radius: 0 !important;\n    border-bottom: 1px solid rgba(211, 211, 211, 0.5);\n    text-align: left;\n    font-size: 1rem;\n    letter-spacing: 1px;\n    color: rgba(248, 248, 255, 0.705);\n    &:hover,\n    &:focus {\n      background-color: rgba(255, 255, 255, 0.2);\n    }\n  }\n}\n\n.detailed-info {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n  .hours-container {\n    position: relative;\n    grid-column: 1 / 3;\n    display: flex;\n    gap: 1rem;\n    overflow-y: hidden;\n    overflow-x: auto;\n    padding: 1rem;\n    .hour-item {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n      margin-top: 2.5rem;\n      font-size: 1.5rem;\n      .hour-hour,\n      .hour-temp {\n        font-size: 1.5rem;\n      }\n      img {\n        height: 55px;\n        width: 55px;\n      }\n      .hour-temp {\n        position: relative;\n        &::after {\n          content: '\\00b0';\n          position: absolute;\n        }\n      }\n    }\n  }\n  .days-container {\n    grid-column: 1 / 2;\n    display: flex;\n    flex-direction: column;\n    padding: 1rem;\n    .day-item:first-child {\n      margin-top: 0;\n    }\n    .day-item:nth-child(2) {\n      margin-top: 0.25rem;\n    }\n    .day-item {\n      width: 100%;\n      flex: 1;\n      display: flex;\n      align-items: center;\n      margin-top: 1rem;\n      font-size: 1.25rem;\n      img {\n        height: 50px;\n        width: 50px;\n      }\n      .week-day {\n        width: 6ch;\n        text-align: start;\n      }\n      .day-temp-min,\n      .day-temp-max {\n        position: relative;\n        width: 3ch;\n        font-size: 1.25rem;\n        &::after {\n          content: '\\00b0';\n          position: absolute;\n        }\n      }\n      .meter {\n        flex: 1;\n        display: inline-block;\n        height: 0.5rem;\n        margin: 0 1rem;\n        border-radius: 1rem;\n        border: none;\n        outline: none;\n      }\n    }\n  }\n  .technical-container {\n    grid-column: 2 / 3;\n    display: flex;\n    align-content: flex-start;\n    flex-wrap: wrap;\n    gap: 0.5rem;\n    text-align: left;\n\n    .technical-card {\n      display: flex;\n      flex-direction: column;\n      gap: 0.25rem;\n      width: 100%;\n      padding: 1rem;\n      .card-value {\n        font-size: 2.25rem;\n        font-weight: bold;\n      }\n      .card-text {\n        letter-spacing: 1px;\n        font-size: 1rem;\n        opacity: 0.8;\n      }\n    }\n    .technical-card:nth-child(3),\n    .technical-card:nth-child(4),\n    .technical-card:nth-child(5),\n    .technical-card:nth-child(6) {\n      width: calc(50% - 0.25rem);\n    }\n  }\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  font-size: 1.125rem;\n  opacity: 0.5;\n  .icon {\n    position: relative;\n    top: -0.1rem;\n    align-self: flex-start;\n    margin-left: 0.5rem;\n    height: 1.375rem;\n    width: 1.375rem;\n    filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n      brightness(106%) contrast(100%);\n  }\n  .icon.humidity {\n    margin-left: 0.25rem;\n  }\n  .icon.forecast-hours,\n  .icon.forecast-days {\n    top: 0;\n    height: 1.75rem;\n    width: 1.75rem;\n    filter: none;\n  }\n  .icon.forecast-days {\n    transform: scaleX(-1);\n  }\n}\n.title-and-icon.hours {\n  position: fixed;\n}\n\n#hours-container > .hour-item:first-of-type > p {\n  color: red;\n}\n\n// .icon {\n//   height: 24px;\n//   width: 24px;\n//   filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%)\n//     contrast(100%);\n//   opacity: 0.25;\n// }\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n  &::after {\n    content: '\\00b0';\n    position: absolute;\n  }\n}\n\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n// METER GRADIENTS FOR DAILY OSCILLATION\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgba(0, 151, 249, 1) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255, 1);\n  background: linear-gradient(90deg, rgba(155, 221, 255, 1) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0, 1);\n  background: linear-gradient(90deg, rgba(52, 255, 0, 1) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgba(241, 228, 35, 1) 0%);\n}\n\n.hot {\n  background: rgba(255, 48, 48, 1);\n  background: linear-gradient(90deg, rgba(255, 48, 48, 1) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 151, 249, 1) 0%,\n    rgba(155, 221, 255, 1) 100%\n  );\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 155, 249, 1) 0%,\n    rgba(119, 209, 255, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(86, 232, 169, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(94, 226, 185, 1) 25%,\n    rgba(52, 255, 0, 1) 50%,\n    rgba(223, 245, 0, 1) 75%,\n    rgba(255, 239, 0, 1) 100%\n  );\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(241, 228, 35, 1) 50%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(203, 255, 38, 1) 50%,\n    rgba(255, 235, 0, 1) 100%\n  );\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(\n    90deg,\n    rgba(241, 228, 35, 1) 0%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n// .loading-screen > div {\n//   height: 100px;\n//   width: 100px;\n//   border: 15px solid grey;\n//   border-top-color: lightgray;\n//   position: absolute;\n//   inset: 0;\n//   margin: auto;\n//   border-radius: 50%;\n//   animation: spin 1.5s infinite linear;\n// }\n// @keyframes spin {\n//   100% {\n//     transform: rotate(360deg);\n//   }\n// }\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n@font-face {\n  font-family: \"helvetica_neue35_thin\";\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n  font-weight: normal;\n  font-style: normal;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: \"helvetica_neue35_thin\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.content {\n  padding: 0 2rem 2rem 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n}\n.content .nav {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  margin-bottom: 1rem;\n  border-radius: 5px;\n  border: 1px solid #3b3b3b;\n  color: #3b3b3b;\n  font-size: 1rem;\n}\n.content .nav .units {\n  border-right: 1px solid #3b3b3b;\n}\n.content .nav .units,\n.content .nav .favorites {\n  padding: 0.25rem;\n}\n.content .nav .units-menu {\n  text-align: left;\n}\n.content .nav .favorites-menu {\n  text-align: right;\n}\n.content .nav .units-menu,\n.content .nav .favorites-menu {\n  grid-column: 1/3;\n  display: none;\n}\n.content .nav .units-menu > li,\n.content .nav .favorites-menu > li {\n  padding: 0.5rem;\n  border-top: 1px solid #3b3b3b;\n}\n.content .nav .units-menu.active,\n.content .nav .favorites-menu.active {\n  grid-column: 1/3;\n  display: block;\n}\n.content .main-info {\n  padding: 1rem;\n}\n.content .main-info > * {\n  margin-bottom: 1rem;\n}\n.content .main-info .temperature {\n  position: relative;\n  font-size: 7.5rem;\n  font-weight: normal;\n}\n.content .main-info .temperature::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 6rem;\n}\n.content .main-info .description {\n  font-size: 2rem;\n}\n.content .main-info .main-feels-like {\n  font-size: 2rem;\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n}\n.location-form .location-input {\n  width: 100%;\n  padding-left: 0.5rem;\n  outline: none;\n  line-height: 2rem;\n  background-color: transparent;\n  color: white;\n}\n.location-form .location-input:focus + .search-button > svg {\n  opacity: 75;\n}\n.location-form .location-input::placeholder {\n  color: rgba(255, 255, 255, 0.3);\n}\n.location-form .search-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  display: flex;\n  align-items: center;\n  height: 100%;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .search-button svg {\n  pointer-events: none;\n  position: relative;\n  z-index: -1;\n  height: 1.25rem;\n  border: none;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n  opacity: 0.25;\n}\n\n.error-message.active {\n  display: block;\n}\n\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 0.85rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n\n.autocomplete {\n  overflow: hidden;\n}\n.autocomplete .suggestion.active {\n  display: block;\n}\n.autocomplete .suggestion {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0 !important;\n  border-bottom: 1px solid rgba(211, 211, 211, 0.5);\n  text-align: left;\n  font-size: 1rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n.autocomplete .suggestion:hover, .autocomplete .suggestion:focus {\n  background-color: rgba(255, 255, 255, 0.2);\n}\n\n.detailed-info {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n}\n.detailed-info .hours-container {\n  position: relative;\n  grid-column: 1/3;\n  display: flex;\n  gap: 1rem;\n  overflow-y: hidden;\n  overflow-x: auto;\n  padding: 1rem;\n}\n.detailed-info .hours-container .hour-item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  min-width: fit-content;\n  margin-top: 2.5rem;\n}\n.detailed-info .hours-container .hour-item .hour-hour,\n.detailed-info .hours-container .hour-item .hour-temp {\n  font-size: 1.25rem;\n}\n.detailed-info .hours-container .hour-item img {\n  height: 50px;\n  width: 50px;\n}\n.detailed-info .hours-container .hour-item .hour-temp {\n  position: relative;\n}\n.detailed-info .hours-container .hour-item .hour-temp::after {\n  content: \"°\";\n  position: absolute;\n}\n.detailed-info .days-container {\n  grid-column: 1/2;\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n}\n.detailed-info .days-container .day-item:first-child {\n  margin-top: 0;\n}\n.detailed-info .days-container .day-item:nth-child(2) {\n  margin-top: 0.25rem;\n}\n.detailed-info .days-container .day-item {\n  width: 100%;\n  flex: 1;\n  display: flex;\n  align-items: center;\n  margin-top: 1rem;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item img {\n  height: 50px;\n  width: 50px;\n}\n.detailed-info .days-container .day-item .week-day {\n  width: 6ch;\n  text-align: start;\n}\n.detailed-info .days-container .day-item .day-temp-min,\n.detailed-info .days-container .day-item .day-temp-max {\n  position: relative;\n  width: 3ch;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item .day-temp-min::after,\n.detailed-info .days-container .day-item .day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n}\n.detailed-info .days-container .day-item .meter {\n  flex: 1;\n  display: inline-block;\n  height: 0.5rem;\n  margin: 0 1rem;\n  border-radius: 1rem;\n  border: none;\n  outline: none;\n}\n.detailed-info .technical-container {\n  grid-column: 2/3;\n  display: flex;\n  align-content: flex-start;\n  flex-wrap: wrap;\n  gap: 0.5rem;\n  text-align: left;\n}\n.detailed-info .technical-container .technical-card {\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  width: 100%;\n  padding: 1rem;\n}\n.detailed-info .technical-container .technical-card .card-value {\n  font-size: 2.25rem;\n  font-weight: bold;\n}\n.detailed-info .technical-container .technical-card .card-text {\n  letter-spacing: 1px;\n  font-size: 1rem;\n  opacity: 0.8;\n}\n.detailed-info .technical-container .technical-card:nth-child(3),\n.detailed-info .technical-container .technical-card:nth-child(4),\n.detailed-info .technical-container .technical-card:nth-child(5),\n.detailed-info .technical-container .technical-card:nth-child(6) {\n  width: calc(50% - 0.25rem);\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  font-size: 1.125rem;\n  opacity: 0.5;\n}\n.title-and-icon .icon {\n  position: relative;\n  top: -0.1rem;\n  align-self: flex-start;\n  margin-left: 0.5rem;\n  height: 1.375rem;\n  width: 1.375rem;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n}\n.title-and-icon .icon.humidity {\n  margin-left: 0.25rem;\n}\n.title-and-icon .icon.forecast-hours,\n.title-and-icon .icon.forecast-days {\n  top: 0;\n  height: 1.75rem;\n  width: 1.75rem;\n  filter: none;\n}\n.title-and-icon .icon.forecast-days {\n  transform: scaleX(-1);\n}\n\n.title-and-icon.hours {\n  position: fixed;\n}\n\n#hours-container > .hour-item:first-of-type > p {\n  color: red;\n}\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n}\n.main-feels-like::after,\n.hour-temp::after,\n.day-temp-min::after,\n.day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n}\n\n.nav,\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255);\n  background: linear-gradient(90deg, rgb(155, 221, 255) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%);\n}\n\n.hot {\n  background: rgb(255, 48, 48);\n  background: linear-gradient(90deg, rgb(255, 48, 48) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%, rgb(155, 221, 255) 100%);\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(90deg, rgb(0, 155, 249) 0%, rgb(119, 209, 255) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(86, 232, 169) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(94, 226, 185) 25%, rgb(52, 255, 0) 50%, rgb(223, 245, 0) 75%, rgb(255, 239, 0) 100%);\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(241, 228, 35) 50%, rgb(255, 48, 48) 100%);\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(203, 255, 38) 50%, rgb(255, 235, 0) 100%);\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%, rgb(255, 48, 48) 100%);\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@media screen and (max-width: 480px) {\n  html {\n    font-size: 14px;\n  }\n  .detailed-info .days-container,\n  .detailed-info .technical-container {\n    grid-column: 1/3;\n  }\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss"],"names":[],"mappings":"AAAA,gBAAgB;AAEhB;EACE,oCAAA;EACA,oHAAA;EAEA,mBAAA;EACA,kBAAA;AAAF;AAGA;;;EAGE,sBAAA;AADF;;AAIA;EACE,YAAA;EACA,eAAA;EACA,gDAAA;EACA,YAAA;AADF;;AAIA;EACE,iBAAA;EACA,kBAAA;EACA,uBAAA;AADF;;AAIA;EACE,eAAA;EACA,SAAA;EACA,QAAA;EACA,aAAA;EACA,eAAA;EACA,gBAAA;AADF;;AAIA;EACE,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;EACA,WAAA;EACA,YAAA;EACA,iBAAA;EACA,uBAAA;EACA,oBAAA;AADF;;AAIA;EACE,yBAAA;EACA,sBAAA;EACA,cAAA;EACA,eAAA;EACA,iBAAA;EACA,kBAAA;AADF;AAGE;EACE,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,kBAAA;EACA,yBAAA;EACA,cAAA;EACA,eAAA;AADJ;AAGI;EACE,+BAAA;AADN;AAII;;EAEE,gBAAA;AAFN;AAKI;EACE,gBAAA;AAHN;AAKI;EACE,iBAAA;AAHN;AAMI;;EAEE,gBAAA;EACA,aAAA;AAJN;AAMM;;EACE,eAAA;EACA,6BAAA;AAHR;AAOI;;EAEE,gBAAA;EACA,cAAA;AALN;AASE;EACE,aAAA;AAPJ;AAQI;EACE,mBAAA;AANN;AAQI;EACE,kBAAA;EACA,iBAAA;EACA,mBAAA;AANN;AAQM;EACE,YAAA;EACA,kBAAA;EACA,eAAA;AANR;AAUI;EACE,eAAA;AARN;AAWI;EACE,eAAA;AATN;;AAcA;EACE,aAAA;EACA,SAAA;EACA,uBAAA;AAXF;;AAcA;EACE,aAAA;EACA,kBAAA;EACA,eAAA;AAXF;AAaE;EACE,WAAA;EACA,oBAAA;EACA,aAAA;EACA,iBAAA;EACA,6BAAA;EACA,YAAA;AAXJ;AAaI;EACE,WAAA;AAXN;AAcI;EACE,+BAAA;AAZN;AAgBE;EACE,kBAAA;EACA,aAAA;EACA,WAAA;EACA,aAAA;EACA,mBAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,6BAAA;AAdJ;AAeI;EACE,oBAAA;EACA,kBAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,4FAAA;EAEA,aAAA;AAdN;;AAmBA;EACE,cAAA;AAhBF;;AAkBA;EACE,aAAA;EACA,eAAA;EACA,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,mBAAA;EACA,iCAAA;AAfF;;AAkBA;EACE,gBAAA;AAfF;AAgBE;EACE,cAAA;AAdJ;AAgBE;EACE,aAAA;EACA,eAAA;EACA,2BAAA;EACA,iDAAA;EACA,gBAAA;EACA,eAAA;EACA,mBAAA;EACA,iCAAA;AAdJ;AAeI;EAEE,0CAAA;AAdN;;AAmBA;EACE,aAAA;EACA,8BAAA;EACA,SAAA;EACA,gBAAA;EACA,gBAAA;AAhBF;AAiBE;EACE,kBAAA;EACA,gBAAA;EACA,aAAA;EACA,SAAA;EACA,kBAAA;EACA,gBAAA;EACA,aAAA;AAfJ;AAgBI;EACE,OAAA;EACA,aAAA;EACA,sBAAA;EACA,sBAAA;EACA,kBAAA;AAdN;AAeM;;EAEE,kBAAA;AAbR;AAeM;EACE,YAAA;EACA,WAAA;AAbR;AAeM;EACE,kBAAA;AAbR;AAcQ;EACE,YAAA;EACA,kBAAA;AAZV;AAiBE;EACE,gBAAA;EACA,aAAA;EACA,sBAAA;EACA,aAAA;AAfJ;AAgBI;EACE,aAAA;AAdN;AAgBI;EACE,mBAAA;AAdN;AAgBI;EACE,WAAA;EACA,OAAA;EACA,aAAA;EACA,mBAAA;EACA,gBAAA;EACA,kBAAA;AAdN;AAeM;EACE,YAAA;EACA,WAAA;AAbR;AAeM;EACE,UAAA;EACA,iBAAA;AAbR;AAeM;;EAEE,kBAAA;EACA,UAAA;EACA,kBAAA;AAbR;AAcQ;;EACE,YAAA;EACA,kBAAA;AAXV;AAcM;EACE,OAAA;EACA,qBAAA;EACA,cAAA;EACA,cAAA;EACA,mBAAA;EACA,YAAA;EACA,aAAA;AAZR;AAgBE;EACE,gBAAA;EACA,aAAA;EACA,yBAAA;EACA,eAAA;EACA,WAAA;EACA,gBAAA;AAdJ;AAgBI;EACE,aAAA;EACA,sBAAA;EACA,YAAA;EACA,WAAA;EACA,aAAA;AAdN;AAeM;EACE,kBAAA;EACA,iBAAA;AAbR;AAeM;EACE,mBAAA;EACA,eAAA;EACA,YAAA;AAbR;AAgBI;;;;EAIE,0BAAA;AAdN;;AAmBA;EACE,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,mBAAA;EACA,YAAA;AAhBF;AAiBE;EACE,kBAAA;EACA,YAAA;EACA,sBAAA;EACA,mBAAA;EACA,gBAAA;EACA,eAAA;EACA,4FAAA;AAfJ;AAkBE;EACE,oBAAA;AAhBJ;AAkBE;;EAEE,MAAA;EACA,eAAA;EACA,cAAA;EACA,YAAA;AAhBJ;AAkBE;EACE,qBAAA;AAhBJ;;AAmBA;EACE,eAAA;AAhBF;;AAmBA;EACE,UAAA;AAhBF;;AA2BA;;;;EAIE,kBAAA;AAxBF;AAyBE;;;;EACE,YAAA;EACA,kBAAA;AApBJ;;AAwBA;;;;;;EAME,gBAAA;EACA,2BAAA;EACA,mCAAA;EACA,mBAAA;EACA,2CAAA;AArBF;;AAwBA;;;EAGE,aAAA;AArBF;;AAwBA;EACE,aAAA;AArBF;;AAwBA;EACE,6BAAA;AArBF;;AAwBA;EACE,YAAA;EACA,0CAAA;EACA,mBAAA;EACA,6BAAA;EACA,4BAAA;AArBF;;AAwBA;EACE,4BAAA;AArBF;;AAyBA;EACE,4BAAA;EACA,uDAAA;AAtBF;;AAyBA;EACE,8BAAA;EACA,2DAAA;AAtBF;;AAyBA;EACE,2BAAA;EACA,wDAAA;AAtBF;;AAyBA;EACE,6BAAA;EACA,wDAAA;AAtBF;;AAyBA;EACE,4BAAA;EACA,yDAAA;AAtBF;;AAyBA;EACE,4BAAA;EACA,gFAAA;AAtBF;;AA6BA;EACE,4BAAA;EACA,qGAAA;AA1BF;;AAkCA;EACE,8BAAA;EACA,sGAAA;AA/BF;;AAuCA;EACE,8BAAA;EACA,kJAAA;AApCF;;AA8CA;EACE,2BAAA;EACA,oGAAA;AA3CF;;AAmDA;EACE,2BAAA;EACA,oGAAA;AAhDF;;AAwDA;EACE,6BAAA;EACA,+EAAA;AArDF;;AA4DA;EACE,aAAA;EACA,mBAAA;AAzDF;;AA4DA;EACE,qCAAA;EACA,aAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,aAAA;AAzDF;;AA6EA;EACE,qBAAA;EACA,kBAAA;EACA,WAAA;EACA,YAAA;AA1EF;;AA4EA;EACE,sBAAA;EACA,cAAA;EACA,kBAAA;EACA,WAAA;EACA,YAAA;EACA,WAAA;EACA,2BAAA;EACA,kBAAA;EACA,8DAAA;EACA,2DAAA;AAzEF;;AA2EA;EACE,uBAAA;AAxEF;;AA0EA;EACE,sBAAA;AAvEF;;AAyEA;EACE,uBAAA;AAtEF;;AAwEA;EACE;IACE,uBAAA;EArEF;EAuEA;IACE,yBAAA;EArEF;AACF;AAwEA;EACE;IACE,eAAA;EAtEF;EAyEE;;IAEE,gBAAA;EAvEJ;AACF","sourcesContent":["@import './reset.css';\n\n@font-face {\n  font-family: 'helvetica_neue35_thin';\n  src: url('../assets/fonts/helveticaneue-thin-webfont.woff2') format('woff2'),\n    url('../assets/fonts/helveticaneue-thin-webfont.woff') format('woff');\n  font-weight: normal;\n  font-style: normal;\n}\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  height: 100%;\n  font-size: 16px;\n  font-family: 'helvetica_neue35_thin', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n\n.background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.content {\n  padding: 0 2rem 2rem 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  font-weight: bold;\n  text-align: center;\n\n  .nav {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    margin-bottom: 1rem;\n    border-radius: 5px;\n    border: 1px solid #3b3b3b;\n    color: #3b3b3b;\n    font-size: 1rem;\n\n    .units {\n      border-right: 1px solid #3b3b3b;\n    }\n\n    .units,\n    .favorites {\n      padding: 0.25rem;\n    }\n\n    .units-menu {\n      text-align: left;\n    }\n    .favorites-menu {\n      text-align: right;\n    }\n\n    .units-menu,\n    .favorites-menu {\n      grid-column: 1/3;\n      display: none;\n\n      & > li {\n        padding: 0.5rem;\n        border-top: 1px solid #3b3b3b;\n      }\n    }\n\n    .units-menu.active,\n    .favorites-menu.active {\n      grid-column: 1/3;\n      display: block;\n    }\n  }\n\n  .main-info {\n    padding: 1rem;\n    & > * {\n      margin-bottom: 1rem;\n    }\n    .temperature {\n      position: relative;\n      font-size: 7.5rem;\n      font-weight: normal;\n\n      &::after {\n        content: '\\00b0';\n        position: absolute;\n        font-size: 6rem;\n      }\n    }\n\n    .description {\n      font-size: 2rem;\n    }\n\n    .main-feels-like {\n      font-size: 2rem;\n    }\n  }\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n\n  .location-input {\n    width: 100%;\n    padding-left: 0.5rem;\n    outline: none;\n    line-height: 2rem;\n    background-color: transparent;\n    color: white;\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n    &:focus + .search-button > svg {\n      opacity: 75;\n    }\n\n    &::placeholder {\n      color: rgba(255, 255, 255, 0.3);\n    }\n  }\n\n  .search-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    display: flex;\n    align-items: center;\n    height: 100%;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      pointer-events: none;\n      position: relative;\n      z-index: -1;\n      height: 1.25rem;\n      border: none;\n      filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n        brightness(106%) contrast(100%);\n      opacity: 0.25;\n    }\n  }\n}\n\n.error-message.active {\n  display: block;\n}\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 0.85rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n\n.autocomplete {\n  overflow: hidden;\n  .suggestion.active {\n    display: block;\n  }\n  .suggestion {\n    display: none;\n    padding: 0.5rem;\n    border-radius: 0 !important;\n    border-bottom: 1px solid rgba(211, 211, 211, 0.5);\n    text-align: left;\n    font-size: 1rem;\n    letter-spacing: 1px;\n    color: rgba(248, 248, 255, 0.705);\n    &:hover,\n    &:focus {\n      background-color: rgba(255, 255, 255, 0.2);\n    }\n  }\n}\n\n.detailed-info {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n  .hours-container {\n    position: relative;\n    grid-column: 1 / 3;\n    display: flex;\n    gap: 1rem;\n    overflow-y: hidden;\n    overflow-x: auto;\n    padding: 1rem;\n    .hour-item {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n      min-width: fit-content;\n      margin-top: 2.5rem;\n      .hour-hour,\n      .hour-temp {\n        font-size: 1.25rem;\n      }\n      img {\n        height: 50px;\n        width: 50px;\n      }\n      .hour-temp {\n        position: relative;\n        &::after {\n          content: '\\00b0';\n          position: absolute;\n        }\n      }\n    }\n  }\n  .days-container {\n    grid-column: 1 / 2;\n    display: flex;\n    flex-direction: column;\n    padding: 1rem;\n    .day-item:first-child {\n      margin-top: 0;\n    }\n    .day-item:nth-child(2) {\n      margin-top: 0.25rem;\n    }\n    .day-item {\n      width: 100%;\n      flex: 1;\n      display: flex;\n      align-items: center;\n      margin-top: 1rem;\n      font-size: 1.25rem;\n      img {\n        height: 50px;\n        width: 50px;\n      }\n      .week-day {\n        width: 6ch;\n        text-align: start;\n      }\n      .day-temp-min,\n      .day-temp-max {\n        position: relative;\n        width: 3ch;\n        font-size: 1.25rem;\n        &::after {\n          content: '\\00b0';\n          position: absolute;\n        }\n      }\n      .meter {\n        flex: 1;\n        display: inline-block;\n        height: 0.5rem;\n        margin: 0 1rem;\n        border-radius: 1rem;\n        border: none;\n        outline: none;\n      }\n    }\n  }\n  .technical-container {\n    grid-column: 2 / 3;\n    display: flex;\n    align-content: flex-start;\n    flex-wrap: wrap;\n    gap: 0.5rem;\n    text-align: left;\n\n    .technical-card {\n      display: flex;\n      flex-direction: column;\n      gap: 0.25rem;\n      width: 100%;\n      padding: 1rem;\n      .card-value {\n        font-size: 2.25rem;\n        font-weight: bold;\n      }\n      .card-text {\n        letter-spacing: 1px;\n        font-size: 1rem;\n        opacity: 0.8;\n      }\n    }\n    .technical-card:nth-child(3),\n    .technical-card:nth-child(4),\n    .technical-card:nth-child(5),\n    .technical-card:nth-child(6) {\n      width: calc(50% - 0.25rem);\n    }\n  }\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  font-size: 1.125rem;\n  opacity: 0.5;\n  .icon {\n    position: relative;\n    top: -0.1rem;\n    align-self: flex-start;\n    margin-left: 0.5rem;\n    height: 1.375rem;\n    width: 1.375rem;\n    filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n      brightness(106%) contrast(100%);\n  }\n  .icon.humidity {\n    margin-left: 0.25rem;\n  }\n  .icon.forecast-hours,\n  .icon.forecast-days {\n    top: 0;\n    height: 1.75rem;\n    width: 1.75rem;\n    filter: none;\n  }\n  .icon.forecast-days {\n    transform: scaleX(-1);\n  }\n}\n.title-and-icon.hours {\n  position: fixed;\n}\n\n#hours-container > .hour-item:first-of-type > p {\n  color: red;\n}\n\n// .icon {\n//   height: 24px;\n//   width: 24px;\n//   filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%)\n//     contrast(100%);\n//   opacity: 0.25;\n// }\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n  &::after {\n    content: '\\00b0';\n    position: absolute;\n  }\n}\n\n.nav,\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n// METER GRADIENTS FOR DAILY OSCILLATION\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgba(0, 151, 249, 1) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255, 1);\n  background: linear-gradient(90deg, rgba(155, 221, 255, 1) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0, 1);\n  background: linear-gradient(90deg, rgba(52, 255, 0, 1) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgba(241, 228, 35, 1) 0%);\n}\n\n.hot {\n  background: rgba(255, 48, 48, 1);\n  background: linear-gradient(90deg, rgba(255, 48, 48, 1) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 151, 249, 1) 0%,\n    rgba(155, 221, 255, 1) 100%\n  );\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 155, 249, 1) 0%,\n    rgba(119, 209, 255, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(86, 232, 169, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(94, 226, 185, 1) 25%,\n    rgba(52, 255, 0, 1) 50%,\n    rgba(223, 245, 0, 1) 75%,\n    rgba(255, 239, 0, 1) 100%\n  );\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(241, 228, 35, 1) 50%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(203, 255, 38, 1) 50%,\n    rgba(255, 235, 0, 1) 100%\n  );\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(\n    90deg,\n    rgba(241, 228, 35, 1) 0%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n// .loading-screen > div {\n//   height: 100px;\n//   width: 100px;\n//   border: 15px solid grey;\n//   border-top-color: lightgray;\n//   position: absolute;\n//   inset: 0;\n//   margin: auto;\n//   border-radius: 50%;\n//   animation: spin 1.5s infinite linear;\n// }\n// @keyframes spin {\n//   100% {\n//     transform: rotate(360deg);\n//   }\n// }\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n\n@media screen and (max-width: 480px) {\n  html {\n    font-size: 14px;\n  }\n  .detailed-info {\n    .days-container,\n    .technical-container {\n      grid-column: 1/3;\n    }\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23816,12 +23816,32 @@ __webpack_require__.r(__webpack_exports__);
 const dom = (() => {
   function loadContent() {
     showLoadingScreen()
-    displayWeatherContent('Zagreb')
+    displayWeatherContentSubmit('Zagreb')
     initLocationSearch()
     initLocationAutocomplete()
+    initNav()
   }
 
-  // DEBOUNCE FUNCTION FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
+  function initNav() {
+    const units = document.getElementById('units')
+    units.addEventListener('click', showUnitMenu)
+    initUnitOptions()
+  }
+
+  function initUnitOptions() {
+    const imperial = document.getElementById('imperial')
+    const metric = document.getElementById('metric')
+
+    imperial.addEventListener('click', displayImperialUnits)
+    metric.addEventListener('click', displayMetricUnits)
+  }
+
+  function showUnitMenu() {
+    const unitMenu = document.getElementById('units-menu')
+    unitMenu.classList.toggle('active')
+  }
+
+  // DEBOUNCE FUNCTIONs FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
   const onFinishTyping = (0,lodash__WEBPACK_IMPORTED_MODULE_0__.debounce)(displayAutocomplete, 750)
 
   // LOCATION SEARCH
@@ -23841,7 +23861,7 @@ const dom = (() => {
 
     const locationInput = document.getElementById('location-input')
     const searchedLocation = locationInput.value
-    displayWeatherContent(searchedLocation)
+    displayWeatherContentSubmit(searchedLocation)
   }
 
   // LOCATION SEARCH AUTOCOMPLETE
@@ -23861,25 +23881,11 @@ const dom = (() => {
     onFinishTyping(formattedSearch)
   }
 
-  // function getSuggestionsURL(location) {
-  //   return `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=5&sort=-population&namePrefix=${location}`
-  // }
-
-  // function getSuggestionsBody() {
-  //   return {
-  //     method: 'GET',
-  //     headers: {
-  //       'X-RapidAPI-Key': 'feafa1d619mshe17ed83e5e7db1dp1a5622jsn3b2f188ddc6c',
-  //       'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
-  //     },
-  //   }
-  // }
-
   async function displayAutocomplete(query) {
     const suggestions = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getAutocompleteData(query)
     console.log(suggestions)
     loadSuggestions(suggestions)
-    // initSuggestions(suggestions)
+    initSuggestions(suggestions)
   }
 
   function loadSuggestions(suggestions) {
@@ -23933,13 +23939,13 @@ const dom = (() => {
     // GET COORDINATES FROM SUGGESTION LOCATION
     const { suggestions } = e.currentTarget
     const index = [...this.parentNode.children].indexOf(this)
-    const [lat, lon] = suggestions[index].geometry.coordinates
-    // GET CITY AND COUNTRY FROM SUGGESTION LOCATION
-
+    const [lon, lat] = suggestions[index].geometry.coordinates
+    // GET ONLY MAIN LOCATION NAME
+    const { name } = suggestions[index].properties
     // DISPLAY CONTENT
     showLoadingScreen()
     displayInInput(this.textContent)
-    displayWeatherContentBySuggestion({ lat, lon }, this.textContent)
+    displayWeatherContentSuggestion({ lat, lon }, name)
   }
 
   function hideSuggestions() {
@@ -23970,22 +23976,43 @@ const dom = (() => {
     errorMessage.classList.remove('active')
   }
 
-  function showSearchErrorMessage(suggestionsLength = null, submit = false) {
+  function showSearchErrorMessage(errorString) {
     const errorMessage = document.getElementById('error-message')
-    if (submit) {
-      errorMessage.textContent = 'Please enter a valid city.'
+    if (errorString === 'invalid') {
+      errorMessage.textContent = 'Please enter a valid city or country.'
     }
-    if (!suggestionsLength) {
-      errorMessage.textContent = 'Please enter a valid city.'
+    if (errorString === 'missing') {
+      errorMessage.textContent = 'Please enter a city or country.'
     }
     errorMessage.classList.add('active')
   }
 
   // DISPLAY ALL WEATHER CONTENT
-  async function displayWeatherContent(cityName) {
+  async function displayWeatherContentSubmit(location) {
     hideSuggestions()
-    const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getWeatherData(cityName)
+    // await new Promise((resolve) => setTimeout(resolve, 950))
+    const closestLocation = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getAutocompleteData(location)
+    console.log(closestLocation)
+
+    if (!closestLocation.length || closestLocation === 'error') {
+      if (!closestLocation.length && location === '')
+        showSearchErrorMessage('missing')
+      else showSearchErrorMessage('invalid')
+
+      hideLoadingScreen()
+    } else {
+      hideSearchErrorMessage()
+    }
+
+    const [lon, lat] = closestLocation[0].geometry.coordinates
+    const coords = { lat, lon }
+    const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getForecastData(coords)
+    const { name, country_code: countryCode } = closestLocation[0].properties
+    weatherData.name = `${name}, ${countryCode}`
+    // MAKE COUNTRY OPTIONAL FOR NON RECOGNIZED STATES SUCH AS KOSOVO
+
     console.log(weatherData)
+
     if (weatherData === 'error') {
       const error = true
       showSearchErrorMessage(null, error)
@@ -23999,7 +24026,7 @@ const dom = (() => {
     displayTechnicalContent(weatherData)
   }
 
-  async function displayWeatherContentBySuggestion(coords, cityName) {
+  async function displayWeatherContentSuggestion(coords, cityName) {
     hideSuggestions()
     const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getForecastData(coords)
     weatherData.name = cityName
@@ -24035,12 +24062,6 @@ const dom = (() => {
   }
   function getDescriptionMain(weatherData) {
     return weatherData.current.weather[0].description
-  }
-  function getTemperatureMinMain(weatherData) {
-    return `L : ${Math.round(weatherData.minTemp)}`
-  }
-  function getTemperatureMaxMain(weatherData) {
-    return `H : ${Math.round(weatherData.maxTemp)}`
   }
   function getWeatherState(weatherData) {
     return weatherData.current.weather[0].main
@@ -24092,7 +24113,8 @@ const dom = (() => {
   }
   function loadHourItem(hour, mainDesc, temp) {
     const hourEl = document.createElement('p')
-    hourEl.textContent = `${+hour}h`
+    hourEl.textContent = `${+hour} h`
+    hourEl.dataset.hourlyHour = ''
     hourEl.classList.add('hour-hour')
 
     const logoEl = document.createElement('img')
@@ -24101,6 +24123,7 @@ const dom = (() => {
 
     const tempEl = document.createElement('p')
     tempEl.textContent = temp
+    tempEl.dataset.hourTemp = ''
     tempEl.classList.add('hour-temp')
 
     const hourItemEl = document.createElement('div')
@@ -24172,10 +24195,12 @@ const dom = (() => {
 
     const tempMinEl = document.createElement('p')
     tempMinEl.textContent = Math.round(day.temp.min)
+    tempMinEl.dataset.dayMinTemp = ''
     tempMinEl.classList.add('day-temp-min')
 
     const tempMaxEl = document.createElement('p')
     tempMaxEl.textContent = Math.round(day.temp.max)
+    tempMaxEl.dataset.dayMaxTemp = ''
     tempMaxEl.classList.add('day-temp-max')
 
     const meterEl = document.createElement('div')
@@ -24317,7 +24342,8 @@ const dom = (() => {
     const pressure = `${weatherData.current.pressure} hPa`
     displayPressure(pressure, technicalContainer)
 
-    metricToImperial()
+    unitSwitch(true)
+    unitSwitch(true)
   }
 
   function displayUVIndex(UVIndex, container) {
@@ -24365,7 +24391,7 @@ const dom = (() => {
 
     const indexEl = document.createElement('p')
     indexEl.textContent = wind
-    indexEl.id = 'wind'
+    indexEl.id = 'wind-value'
     indexEl.classList.add('card-value')
 
     const messageEl = document.createElement('p')
@@ -24445,7 +24471,8 @@ const dom = (() => {
     titleAndIcon.appendChild(icon)
 
     const indexEl = document.createElement('p')
-    indexEl.textContent = sunrise
+    indexEl.textContent = `${sunrise} h`
+    indexEl.id = 'sunrise-value'
     indexEl.classList.add('card-value')
 
     const card = document.createElement('div')
@@ -24470,7 +24497,8 @@ const dom = (() => {
     titleAndIcon.appendChild(icon)
 
     const indexEl = document.createElement('p')
-    indexEl.textContent = sunset
+    indexEl.textContent = `${sunset} h`
+    indexEl.id = 'sunset-value'
     indexEl.classList.add('card-value')
 
     const card = document.createElement('div')
@@ -24594,6 +24622,7 @@ const dom = (() => {
     video.addEventListener('canplay', hideLoadingScreen)
   }
 
+  // LOADING SCREEN
   function hideLoadingScreen() {
     const loadingScreen = document.getElementById('loading-screen')
     loadingScreen.removeEventListener('canplay', hideLoadingScreen)
@@ -24605,24 +24634,209 @@ const dom = (() => {
     loadingScreen.classList.add('active')
   }
 
-  function metricToImperial() {
-    // DOUBLE CHECK IN CASE ONE VALUE IS SOMEHOW NOT IN WEATHER DATA
-    // const hour = document.querySelector(
-    //   '#hours-container > .hour-item:first-of-type > p'
-    // )
-    // const hourUnit = hour.textContent.includes('h')
-    const windSpeed = document.getElementById('wind')
-    const windString = windSpeed.textContent
-    const windValue = windString.substring(0, windString.indexOf(' '))
-    const windUnit = windString.split(' ').pop()
-    console.log(windValue)
-    console.log(windUnit)
-    // IF METRIC THEN CONVERT TO IMPERIAL
-    if (windUnit === 'km/h') {
-      windSpeed.textContent = Math.round((+windValue / 1.6) * 10) / 10
-      windSpeed.textContent = `${windSpeed.textContent} mph`
+  // UNIT SWITCH
+
+  function unitSwitch(bool) {
+    // BOOL IS USED FOR NOT RUNNING THE FUNCTION ON LOAD
+    if (!bool) return
+
+    const wind = document.getElementById('wind-value')
+    // IF METRIC SWITCH TO IMPERIAL, IF NOT METRIC SWITCH TO METRIC
+    if (isMetric()) {
+      wind.textContent = windToImperial(wind)
+      allTimeToAmPm()
+      allTempToFahrenheit()
+    } else {
+      wind.textContent = windToMetric(wind)
+      allTimeToMilitary()
+      allTempToMetric()
     }
-    console.log(windSpeed.textContent)
+  }
+
+  function displayImperialUnits() {
+    // IF ALREADY IMPERIAL RETURN
+    if (!isMetric()) return
+
+    const wind = document.getElementById('wind-value')
+    wind.textContent = windToImperial(wind)
+
+    allTimeToAmPm()
+    allTempToFahrenheit()
+  }
+
+  function displayMetricUnits() {
+    // IF ALREADY IMPERIAL RETURN
+    if (isMetric()) return
+
+    const wind = document.getElementById('wind-value')
+    wind.textContent = windToMetric(wind)
+
+    allTimeToMilitary()
+    allTempToMetric()
+  }
+
+  function isMetric() {
+    // 2 TESTS INCLUDED IN CASE ONE PART OF WEATHER DATA IS MISSING
+    // HOUR UNIT TEST
+    const hours = document.getElementById('hours-container')
+    const hourTime = hours.children[1].children[0].textContent
+    const hourTimeUnit = hourTime.charAt(hourTime.length - 1)
+    console.log(hourTimeUnit)
+    // WIND UNIT TEST
+    const windSpeed = document.getElementById('wind-value')
+    const windString = windSpeed.textContent
+    const windUnit = windString.split(' ').pop()
+    // TEST
+    if (hourTimeUnit === 'h' || windUnit === 'km/h') return true
+    return false
+  }
+
+  // IMPERIAL
+
+  function windToImperial(windEl) {
+    const windText = windEl.textContent
+    const windValue = windText.substring(0, windText.indexOf(' '))
+    let windImperial = Math.round((+windValue / 1.6) * 10) / 10
+    windImperial = `${windImperial} mph`
+    return windImperial
+  }
+
+  function allTimeToAmPm() {
+    const sunrise = document.getElementById('sunrise-value')
+    const sunset = document.getElementById('sunset-value')
+    const hourlyHours = document.querySelectorAll('[data-hourly-hour]')
+
+    sunrise.textContent = fullTimeToAmPm(sunrise.textContent)
+    sunset.textContent = fullTimeToAmPm(sunset.textContent)
+    hourlyHours.forEach((hour) => {
+      hour.textContent = hourToAmPm(hour.textContent)
+    })
+  }
+
+  function fullTimeToAmPm(time) {
+    const timeForm = removeAlpha(time)
+    let hour = timeForm.substring(0, timeForm.indexOf(':'))
+    const minutes = timeForm.substring(timeForm.indexOf(':') + 1)
+    if (+hour - 12 >= 0) {
+      hour -= 12
+      return `${hour}:${minutes} pm`
+    }
+    return `${hour}:${minutes} am`
+  }
+
+  function hourToAmPm(time) {
+    let hour = removeAlpha(time)
+    if (+hour - 12 >= 0) {
+      hour -= 12
+      return `${hour} pm`
+    }
+    return `${hour} am`
+  }
+
+  function allTempToFahrenheit() {
+    const main = document.getElementById('temperature')
+    const hourlyHoursTemps = document.querySelectorAll('[data-hour-temp]')
+    const dailyMinTemps = document.querySelectorAll('[data-day-min-temp]')
+    const dailyMaxTemps = document.querySelectorAll('[data-day-max-temp]')
+
+    main.textContent = tempToFahrenheit(main.textContent)
+    hourlyHoursTemps.forEach((hour) => {
+      hour.textContent = tempToFahrenheit(hour.textContent)
+    })
+    dailyMinTemps.forEach((day) => {
+      day.textContent = tempToFahrenheit(day.textContent)
+    })
+    dailyMaxTemps.forEach((day) => {
+      day.textContent = tempToFahrenheit(day.textContent)
+    })
+  }
+
+  function tempToFahrenheit(value) {
+    return Math.round(+value * 1.8 + 32)
+  }
+
+  // METRIC
+
+  function windToMetric(windEl) {
+    const windText = windEl.textContent
+    const windValue = windText.substring(0, windText.indexOf(' '))
+    let windMetric = Math.round(+windValue * 1.6 * 10) / 10
+    windMetric = `${windMetric} km/h`
+    return windMetric
+  }
+
+  function allTimeToMilitary() {
+    const sunrise = document.getElementById('sunrise-value')
+    const sunset = document.getElementById('sunset-value')
+    const hourlyHours = document.querySelectorAll('[data-hourly-hour]')
+
+    sunrise.textContent = fullTimeToMilitary(sunrise.textContent)
+    sunset.textContent = fullTimeToMilitary(sunset.textContent)
+    hourlyHours.forEach((hour) => {
+      hour.textContent = hourToMilitary(hour.textContent)
+    })
+  }
+
+  function fullTimeToMilitary(time) {
+    const [hours, minutesAmPm] = time.split(':')
+    const minutes = minutesAmPm.slice(0, 2) // remove the "AM" or "PM" suffix from the minutes
+    const amPm = minutesAmPm.slice(-2)
+    // Convert the hours to an integer
+    let militaryHours = parseInt(hours, 10)
+    // If the time is in the afternoon (PM), add 12 to the hours
+    if (amPm === 'PM' && militaryHours !== 12) {
+      militaryHours += 12
+    }
+    // If the time is at midnight (12:00 AM), subtract 12 from the hours
+    if (amPm === 'AM' && militaryHours === 12) {
+      militaryHours = 0
+    }
+
+    return `${militaryHours}:${minutes} h`
+  }
+
+  function hourToMilitary(time) {
+    const [hours, amPm] = time.split(':')
+    // Convert the hours to an integer
+    let militaryHours = parseInt(hours, 10)
+    // If the time is in the afternoon (PM), add 12 to the hours
+    if (amPm === 'PM' && militaryHours !== 12) {
+      militaryHours += 12
+    }
+    // If the time is at midnight (12:00 AM), subtract 12 from the hours
+    if (amPm === 'AM' && militaryHours === 12) {
+      militaryHours = 0
+    }
+
+    return `${militaryHours} h`
+  }
+
+  function allTempToMetric() {
+    const main = document.getElementById('temperature')
+    const hourlyHoursTemps = document.querySelectorAll('[data-hour-temp]')
+    const dailyMinTemps = document.querySelectorAll('[data-day-min-temp]')
+    const dailyMaxTemps = document.querySelectorAll('[data-day-max-temp]')
+
+    main.textContent = tempToMetric(main.textContent)
+    hourlyHoursTemps.forEach((hour) => {
+      hour.textContent = tempToMetric(hour.textContent)
+    })
+    dailyMinTemps.forEach((day) => {
+      day.textContent = tempToMetric(day.textContent)
+    })
+    dailyMaxTemps.forEach((day) => {
+      day.textContent = tempToMetric(day.textContent)
+    })
+  }
+
+  function tempToMetric(temp) {
+    const tempInt = parseInt(temp, 10)
+    return Math.round(((tempInt - 32) * 0.5556 * 10) / 10).toString()
+  }
+
+  function removeAlpha(string) {
+    const regex = /[^0-9:]/g
+    return string.replace(regex, '')
   }
 
   return { loadContent }
@@ -24647,36 +24861,8 @@ __webpack_require__.r(__webpack_exports__);
 const weather = (() => {
   const appid = '20f7632ffc2c022654e4093c6947b4f4' // KEY
 
-  function getCityCoordinatesUrl(cityName) {
-    return `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${appid}&units=metric`
-  }
-
   function getLocationForecastUrl(main, unit) {
     return `https://api.openweathermap.org/data/2.5/onecall?lat=${main.lat}&lon=${main.lon}&exclude=minutely,alerts&units=${unit}&appid=${appid}`
-  }
-
-  async function getCoordinates(cityName) {
-    try {
-      // GET LOCATION COORDINATES TO FETCH FORECAST LATER
-      const coordinatesUrl = getCityCoordinatesUrl(cityName)
-      const coordinatesResponse = await fetch(coordinatesUrl, { mode: 'cors' })
-
-      // IF NOT OK THROW ERROR
-      if (!coordinatesResponse.ok) {
-        throw new Error('Bad response')
-      }
-
-      const weatherData = await coordinatesResponse.json()
-      const { coord: main } = weatherData
-
-      // GET LOCATION NAME AS IT IS NOT IN THE FORECAST
-      main.name = weatherData.name
-      main.minTemp = weatherData.main.temp_min
-      main.maxTemp = weatherData.main.temp_max
-      return main
-    } catch (err) {
-      return 'error'
-    }
   }
 
   async function getForecastData(main, unit = 'metric') {
@@ -24686,21 +24872,11 @@ const weather = (() => {
     const weatherData = await weatherResponse.json()
     // ADD LOCATION NAME TO WEATHER DATA
     weatherData.name = main.name
-    weatherData.minTemp = main.minTemp
-    weatherData.maxTemp = main.maxTemp
     return weatherData
   }
 
-  async function getWeatherData(cityName, unit = 'metric') {
-    // CALLS EVERYTHING NECESSARY TO GET WEATHER DATA, DOM MODULE SHOULD CALL THIS FUNCTION
-    const coords = await getCoordinates(cityName)
-    if (coords === 'error') return 'error'
-    const forecastData = await getForecastData(coords, unit)
-    return forecastData
-  }
-
   function getAutocompleteDataUrl(query) {
-    return `https://api.jawg.io/places/v1/autocomplete?lang=en?&access-token=wRzoCQ4SHP0kxAtvyM119DxZ0tHsBTB5Y3SC4Tt71eI262JZv0PznWGw5EndVkzA&layers=country,locality,region,neighbourhood&text=${query}`
+    return `https://api.jawg.io/places/v1/autocomplete?lang=en?&access-token=wRzoCQ4SHP0kxAtvyM119DxZ0tHsBTB5Y3SC4Tt71eI262JZv0PznWGw5EndVkzA&layers=country,locality,neighbourhood&text=${query}`
   }
 
   async function getAutocompleteData(query) {
@@ -24711,7 +24887,7 @@ const weather = (() => {
     return data.features
   }
 
-  return { getWeatherData, getForecastData, getAutocompleteData }
+  return { getForecastData, getAutocompleteData }
 })()
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (weather);
@@ -25206,4 +25382,4 @@ _modules_dom__WEBPACK_IMPORTED_MODULE_4__["default"].loadContent()
 
 /******/ })()
 ;
-//# sourceMappingURL=bundledbfebb599dc2391fe5a9.js.map
+//# sourceMappingURL=bundlef4d1b10f4643e1816b2b.js.map
