@@ -53,7 +53,19 @@ const weather = (() => {
     return forecastData
   }
 
-  return { getWeatherData, getForecastData }
+  function getAutocompleteDataUrl(query) {
+    return `https://api.jawg.io/places/v1/autocomplete?lang=en?&access-token=wRzoCQ4SHP0kxAtvyM119DxZ0tHsBTB5Y3SC4Tt71eI262JZv0PznWGw5EndVkzA&layers=country,locality,region,neighbourhood&text=${query}`
+  }
+
+  async function getAutocompleteData(query) {
+    const response = await fetch(getAutocompleteDataUrl(query), {
+      mode: 'cors',
+    })
+    const data = await response.json()
+    return data.features
+  }
+
+  return { getWeatherData, getForecastData, getAutocompleteData }
 })()
 
 export default weather

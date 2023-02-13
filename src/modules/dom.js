@@ -18,7 +18,7 @@ const dom = (() => {
   }
 
   // DEBOUNCE FUNCTION FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
-  const onFinishTyping = debounce(displaySuggestions, 750)
+  const onFinishTyping = debounce(displayAutocomplete, 750)
 
   // LOCATION SEARCH
   function initLocationSearch() {
@@ -57,26 +57,8 @@ const dom = (() => {
     onFinishTyping(formattedSearch)
   }
 
-  function getSuggestionsURL(location) {
-    return `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=5&sort=-population&namePrefix=${location}`
-  }
-
-  function getSuggestionsBody() {
-    return {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': 'feafa1d619mshe17ed83e5e7db1dp1a5622jsn3b2f188ddc6c',
-        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
-      },
-    }
-  }
-
-  async function displaySuggestions(location) {
-    const response = await fetch(
-      getSuggestionsURL(location),
-      getSuggestionsBody()
-    )
-    const suggestions = await response.json()
+  async function displayAutocomplete(query) {
+    const suggestions = await weather.getAutocompleteData(query)
     console.log(suggestions)
     loadSuggestions(suggestions)
     initSuggestions(suggestions)
@@ -86,19 +68,38 @@ const dom = (() => {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
 
     for (let i = 0; i < 5; i += 1) {
-      if (suggestions.data[i]) {
-        console.log('a')
-        suggestionItems[i].classList.add('active')
-        suggestionItems[i].textContent = `${suggestions.data[i].city}, `
-        suggestionItems[i].textContent += `${suggestions.data[i].country}`
-      } else {
-        suggestionItems[i].classList.remove('active')
+      // IF SUGGESTION OF i IS AVAILABLE, FILL ITS TEXT CONTENT AND DISPLAY IT'S ELEMENT
+      if (suggestions[i]) {
+        suggestionItems[i].textContent = getSuggestionText(
+          suggestions[i].properties
+        )
+        showSuggestion(suggestionItems[i])
+      }
+      // IF SUGGESTION OF i IS NOT AVAILABLE HIDE IT'S ELEMENT
+      else {
+        hideSuggestion(suggestionItems[i])
       }
     }
 
-    if (!suggestions.data.length) {
+    if (!suggestions.length) {
       showSearchErrorMessage()
     }
+  }
+
+  function getSuggestionText(suggestionObj) {
+    // SUGGESTION TEXT
+    const { name, country, region } = suggestionObj
+    if (name === country) return name
+    return `${name}, ${region}, ${country}`
+  }
+
+  function showSuggestion(el) {
+    // SHOW SUGGESTION ELEMENT
+    el.classList.add('active')
+  }
+
+  function hideSuggestion(el) {
+    el.classList.remove('active')
   }
 
   function initSuggestions(suggestions) {
@@ -114,13 +115,13 @@ const dom = (() => {
     // GET COORDINATES FROM SUGGESTION LOCATION
     const { suggestions } = e.currentTarget
     const index = [...this.parentNode.children].indexOf(this)
-    const { latitude: lat, longitude: lon } = suggestions.data[index]
-    // GET CITY AND COUNTRY FROM SUGGESTION LOCATION
-    const { city, country } = suggestions.data[index]
+    const [lat, lon] = suggestions[index].geometry.coordinates
+    // GET ONLY MAIN LOCATION NAME
+    const { name } = suggestions[index].properties
     // DISPLAY CONTENT
     showLoadingScreen()
-    displayInInput(city, country)
-    displayWeatherContentBySuggestion({ lat, lon }, city)
+    displayInInput(this.textContent)
+    displayWeatherContentBySuggestion({ lat, lon }, name)
   }
 
   function hideSuggestions() {
@@ -131,14 +132,14 @@ const dom = (() => {
     })
   }
 
-  function displayInInput(city, country) {
+  function displayInInput(location) {
     const locationInput = document.getElementById('location-input')
-    locationInput.value = `${city}, ${country}`
+    locationInput.value = location
   }
 
   // FORM VALIDATION
   function formatInput(value) {
-    const regex = /[^A-Za-z,]/g
+    const regex = /[^A-Za-z, -]/g
     let formattedValue = value.replace(regex, '')
     if (formattedValue.includes(',')) {
       formattedValue = formattedValue.substring(0, formattedValue.indexOf(','))
@@ -154,19 +155,22 @@ const dom = (() => {
   function showSearchErrorMessage(suggestionsLength = null, submit = false) {
     const errorMessage = document.getElementById('error-message')
     if (submit) {
-      errorMessage.textContent = 'Please enter a valid city.'
+      errorMessage.textContent = 'Please enter a valid city or country.'
     }
     if (!suggestionsLength) {
-      errorMessage.textContent = 'Please enter a valid city.'
+      errorMessage.textContent = 'Please enter a city or country.'
     }
     errorMessage.classList.add('active')
   }
 
   // DISPLAY ALL WEATHER CONTENT
-  async function displayWeatherContent(cityName) {
+  async function displayWeatherContent(location) {
     hideSuggestions()
-    const weatherData = await weather.getWeatherData(cityName)
-    console.log(weatherData)
+    const closestLocation = await weather.getAutocompleteData(location)
+    const [lat, lon] = closestLocation[0].geometry.coordinates
+    const coords = { lat, lon }
+    const weatherData = await weather.getForecastData(coords)
+    weatherData.name = closestLocation[0].properties.name
     if (weatherData === 'error') {
       const error = true
       showSearchErrorMessage(null, error)
