@@ -971,7 +971,7 @@ const dom = (() => {
     const dailyMinTemps = document.querySelectorAll('[data-day-min-temp]')
     const dailyMaxTemps = document.querySelectorAll('[data-day-max-temp]')
 
-    main.textContent = tempToFahrenheit(main.textContent)
+    main.textContent = tempToMetric(main.textContent)
     hourlyHoursTemps.forEach((hour) => {
       hour.textContent = tempToMetric(hour.textContent)
     })
