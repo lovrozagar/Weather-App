@@ -23804,18 +23804,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ "./src/modules/weather.js");
 
 
-// TODO: remove additional eventListener on suggestions
-// TODO: chance of rain round
-// TODO: pressure message
 // TODO: add visibility
 // TODO: celsius to kelvin
 // TODO: google location
 // TODO: mobile optimization
 // TODO: form validation
 // TODO: 3600 offset for +-12/11 zones
-// TODO: when searching location recommendations appear
 // TODO: add FAVORITES
 // TODO: add VIEW
+// TODO: clean code
 const dom = (() => {
   function loadContent() {
     showLoadingScreen()
@@ -23828,33 +23825,33 @@ const dom = (() => {
   const onFinishTyping = (0,lodash__WEBPACK_IMPORTED_MODULE_0__.debounce)(displaySuggestions, 750)
 
   // LOCATION SEARCH
-
   function initLocationSearch() {
-    const locationInput = document.getElementById('location-input')
     const form = document.getElementById('location-form')
-    form.addEventListener('submit', (e) => {
-      e.preventDefault()
-      onFinishTyping.cancel()
-      showLoadingScreen()
-      displayWeatherContent(locationInput.value)
-      setTimeout(hideSuggestions, 900)
-    })
     const searchButton = document.getElementById('search-button')
-    searchButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      onFinishTyping.cancel()
-      showLoadingScreen()
-      displayWeatherContent(locationInput.value)
-    })
+
+    form.addEventListener('submit', handleSearchSubmit)
+    searchButton.addEventListener('click', handleSearchSubmit)
+  }
+
+  function handleSearchSubmit(e) {
+    e.preventDefault()
+    onFinishTyping.cancel()
+    showLoadingScreen()
+
+    const locationInput = document.getElementById('location-input')
+    const searchedLocation = locationInput.value
+    displayWeatherContent(searchedLocation)
   }
 
   // LOCATION SEARCH AUTOCOMPLETE
   function initLocationAutocomplete() {
     const locationInput = document.getElementById('location-input')
-    locationInput.addEventListener('input', () => {
-      if (locationInput.value === '') hideSuggestions()
-      else onFinishTyping(locationInput.value)
-    })
+    locationInput.addEventListener('input', handleAutocomplete)
+  }
+
+  function handleAutocomplete(e) {
+    if (e.target.value === '') hideSuggestions()
+    onFinishTyping(e.target.value)
   }
 
   function getSuggestionsURL(location) {
@@ -23888,7 +23885,7 @@ const dom = (() => {
     for (let i = 0; i < 5; i += 1) {
       if (suggestions.data[i]) {
         suggestionItems[i].classList.add('active')
-        suggestionItems[i].textContent = `${suggestions.data[i].name}, `
+        suggestionItems[i].textContent = `${suggestions.data[i].city}, `
         suggestionItems[i].textContent += `${suggestions.data[i].country}`
       } else {
         suggestionItems[i].classList.remove('active')
@@ -23900,40 +23897,41 @@ const dom = (() => {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
     // suggestionItems.forEach((item) => {})
     suggestionItems.forEach((item) => {
-      item.removeEventListener('click', () => displayContent(item, suggestions))
-      item.addEventListener('click', () => displayContent(item, suggestions))
+      item.suggestions = suggestions
+      item.removeEventListener('click', displayContent)
+      item.addEventListener('click', displayContent)
     })
   }
 
-  function displayContent(item, suggestions) {
-    const index = [...item.parentNode.children].indexOf(item)
-    console.log(index)
-    console.log(suggestions.data[index])
+  function displayContent(e) {
+    // GET COORDINATES FROM SUGGESTION LOCATION
+    const { suggestions } = e.currentTarget
+    const index = [...this.parentNode.children].indexOf(this)
     const { latitude: lat, longitude: lon } = suggestions.data[index]
-    console.log(lat, lon)
+    // GET CITY AND COUNTRY FROM SUGGESTION LOCATION
+    const { city, country } = suggestions.data[index]
+    // DISPLAY CONTENT
     showLoadingScreen()
-    displayWeatherContentBySuggestion({ lat, lon })
+    displayInInput(city, country)
+    displayWeatherContentBySuggestion({ lat, lon }, city)
   }
-
-  // function displayWeatherContentBySuggestion() {
-  //   const locationInput = document.getElementById('location-input')
-  //   locationInput.value = this.textContent
-  //   const cityName = this.textContent.substring(
-  //     0,
-  //     this.textContent.indexOf(',')
-  //   )
-  //   displayWeatherContent(cityName)
-  // }
 
   function hideSuggestions() {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
+    onFinishTyping.cancel()
     suggestionItems.forEach((item) => {
       item.classList.remove('active')
     })
   }
 
+  function displayInInput(city, country) {
+    const locationInput = document.getElementById('location-input')
+    locationInput.value = `${city}, ${country}`
+  }
+
   // DISPLAY ALL WEATHER CONTENT
   async function displayWeatherContent(cityName) {
+    hideSuggestions()
     const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getWeatherData(cityName)
     console.log(weatherData)
     displayBackgroundVideo(weatherData)
@@ -23943,8 +23941,10 @@ const dom = (() => {
     displayTechnicalContent(weatherData)
   }
 
-  async function displayWeatherContentBySuggestion(coords) {
+  async function displayWeatherContentBySuggestion(coords, cityName) {
+    hideSuggestions()
     const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getForecastData(coords)
+    weatherData.name = cityName
     console.log(weatherData)
     displayBackgroundVideo(weatherData)
     displayMainContent(weatherData)
@@ -24440,10 +24440,15 @@ const dom = (() => {
     indexEl.textContent = pressure
     indexEl.classList.add('card-value')
 
+    const messageEl = document.createElement('p')
+    messageEl.textContent = pressureMessage(pressure)
+    messageEl.classList.add('card-text')
+
     const card = document.createElement('div')
     card.classList.add('technical-card')
     card.appendChild(titleAndIcon)
     card.appendChild(indexEl)
+    card.appendChild(messageEl)
 
     container.appendChild(card)
   }
@@ -24464,29 +24469,41 @@ const dom = (() => {
     console.log(unit)
     console.log(windNumber)
 
-    if (windNumber < 1) return 'Calm, Smoke rises vertically'
+    if (windNumber < 1) return 'Calm, Smoke rises vertically.'
     if (windNumber < 4)
-      return 'Light air, smoke drifts with air, weather vanes inactive'
+      return 'Light air, smoke drifts with air, weather vanes inactive.'
     if (windNumber < 8)
-      return 'Light breeze, weather vanes active, wind felt on face, leaves rustle'
+      return 'Light breeze, weather vanes active, wind felt on face, leaves rustle.'
     if (windNumber < 13)
-      return 'Gentle breeze, leaves & small twigs move, light flags extend'
+      return 'Gentle breeze, leaves & small twigs move, light flags extend.'
     if (windNumber < 19)
-      return 'Moderate breeze, dust & loose paper blows about'
+      return 'Moderate breeze, dust & loose paper blows about.'
     if (windNumber < 25)
-      return 'Fresh breeze, small trees sway, waves break on inland waters'
+      return 'Fresh breeze, small trees sway, waves break on inland waters.'
     if (windNumber < 32)
-      return 'Strong breeze, large branches sway, umbrellas difficult to use'
+      return 'Strong breeze, large branches sway, umbrellas difficult to use.'
     if (windNumber < 39)
-      return 'Moderate gale, whole trees sway, difficult to walk against wind'
+      return 'Moderate gale, whole trees sway, difficult to walk against wind.'
     if (windNumber < 47)
-      return 'Fresh gale, twigs broken off trees, walking against wind very difficult'
+      return 'Fresh gale, twigs broken off trees, walking against wind very difficult.'
     if (windNumber < 55)
-      return 'Strong gale, slight damage to buildings, shingles blown off roof'
+      return 'Strong gale, slight damage to buildings, shingles blown off roof.'
     if (windNumber < 64)
-      return 'Whole gale, trees uprooted, considerable damage to buildings'
-    if (windNumber < 73) return 'Storm, widespread damage, very rare occurrence'
-    return 'Hurricane, violent destruction'
+      return 'Whole gale, trees uprooted, considerable damage to buildings.'
+    if (windNumber < 73)
+      return 'Storm, widespread damage, very rare occurrence.'
+    return 'Hurricane, violent destruction.'
+  }
+
+  function pressureMessage(pressure) {
+    const pressureValue = pressure.substring(0, pressure.indexOf(' '))
+    if (+pressureValue > 1022) {
+      return `Atmospheric pressure is high.`
+    }
+    if (+pressureValue > 1009 && +pressure <= 1022) {
+      return `Atmospheric pressure is normal.`
+    }
+    return `Atmospheric pressure is low.`
   }
 
   // BACKGROUND VIDEO
@@ -24496,7 +24513,7 @@ const dom = (() => {
     console.log(source)
 
     let state = getWeatherState(weatherData).toLowerCase()
-    // HAZE AND FOG PLAY THE SAME VIDEO = FOG
+    // HAZE, MIST AND FOG PLAY THE SAME VIDEO = FOG
     if (state === 'haze' || state === 'mist') state = 'fog'
     // IF WEATHER IS CLEAR OR CLOUDS AND ITS NIGHT, PLAY SPACE VIDEO
     const now = weatherData.current.dt
@@ -25107,4 +25124,4 @@ _modules_dom__WEBPACK_IMPORTED_MODULE_4__["default"].loadContent()
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle9e64c0d6042459a990bd.js.map
+//# sourceMappingURL=bundleb2f6c4f91e1d7fca0184.js.map

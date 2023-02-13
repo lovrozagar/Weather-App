@@ -45,7 +45,7 @@
               class="location-input"
               type="text"
               name="location"
-              placeholder="Search city or country"
+              placeholder="Search a city"
               value=""
             />
             <button id="search-button" class="search-button" type="button">
@@ -53,19 +53,10 @@
             </button>
           </form>
         </section>
+        <div id="error-message" class="error-message"></div>
         <section id="autocomplete" class="autocomplete">
-          <a
-            id="suggestion-1"
-            data-suggestion
-            class="suggestion"
-            tabindex="1"
-          ></a>
-          <a
-            id="suggestion-2"
-            data-suggestion
-            class="suggestion"
-            tabindex="1"
-          ></a>
+          <a id="suggestion-1" data-suggestion class="suggestion"></a>
+          <a id="suggestion-2" data-suggestion class="suggestion"></a>
           <a id="suggestion-3" data-suggestion class="suggestion"></a>
           <a id="suggestion-4" data-suggestion class="suggestion"></a>
           <a id="suggestion-5" data-suggestion class="suggestion"></a>

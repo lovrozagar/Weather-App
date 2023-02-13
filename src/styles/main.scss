@@ -92,11 +92,12 @@ body {
 .location-form {
   display: flex;
   position: relative;
+  font-size: 1rem;
+
   .location-input {
     width: 100%;
     padding-left: 0.5rem;
     outline: none;
-    font-size: 1rem;
     line-height: 2rem;
     background-color: transparent;
     color: white;
@@ -109,6 +110,7 @@ body {
       color: rgba(255, 255, 255, 0.3);
     }
   }
+
   .search-button {
     position: absolute;
     right: 0.5rem;
@@ -130,6 +132,19 @@ body {
       opacity: 0.25;
     }
   }
+}
+
+.error-message.active{
+  display: block;
+}
+.error-message {
+  display: none;
+  padding: 0.5rem;
+  border-radius: 0;
+  text-align: left;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: rgba(248, 248, 255, 0.705);
 }
 
 .autocomplete {
