@@ -15,6 +15,26 @@ const dom = (() => {
     displayWeatherContentSubmit('Zagreb')
     initLocationSearch()
     initLocationAutocomplete()
+    initNav()
+  }
+
+  function initNav() {
+    const units = document.getElementById('units')
+    units.addEventListener('click', showUnitMenu)
+    initUnitOptions()
+  }
+
+  function initUnitOptions() {
+    const imperial = document.getElementById('imperial')
+    const metric = document.getElementById('metric')
+
+    imperial.addEventListener('click', displayImperialUnits)
+    metric.addEventListener('click', displayMetricUnits)
+  }
+
+  function showUnitMenu() {
+    const unitMenu = document.getElementById('units-menu')
+    unitMenu.classList.toggle('active')
   }
 
   // DEBOUNCE FUNCTIONs FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
@@ -827,6 +847,28 @@ const dom = (() => {
       allTimeToMilitary()
       allTempToMetric()
     }
+  }
+
+  function displayImperialUnits() {
+    // IF ALREADY IMPERIAL RETURN
+    if (!isMetric()) return
+
+    const wind = document.getElementById('wind-value')
+    wind.textContent = windToImperial(wind)
+
+    allTimeToAmPm()
+    allTempToFahrenheit()
+  }
+
+  function displayMetricUnits() {
+    // IF ALREADY IMPERIAL RETURN
+    if (isMetric()) return
+
+    const wind = document.getElementById('wind-value')
+    wind.textContent = windToMetric(wind)
+
+    allTimeToMilitary()
+    allTempToMetric()
   }
 
   function isMetric() {
