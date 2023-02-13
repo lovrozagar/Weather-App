@@ -17,7 +17,7 @@ const dom = (() => {
     initLocationAutocomplete()
   }
 
-  // DEBOUNCE FUNCTION FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
+  // DEBOUNCE FUNCTIONs FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
   const onFinishTyping = debounce(displayAutocomplete, 750)
 
   // LOCATION SEARCH
@@ -186,6 +186,7 @@ const dom = (() => {
 
   async function displayWeatherContentBySuggestion(coords, cityName) {
     hideSuggestions()
+    await timeoutAPIrequest()
     const weatherData = await weather.getForecastData(coords)
     weatherData.name = cityName
     console.log(weatherData)
@@ -194,6 +195,14 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
+  }
+
+  function timeoutAPIrequest() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve()
+      }, 750)
+    })
   }
 
   // MAIN WEATHER CONTENT
