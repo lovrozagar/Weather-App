@@ -1,4 +1,4 @@
-import { debounce } from 'lodash'
+import { debounce, remove } from 'lodash'
 import weather from './weather'
 // TODO: add visibility
 // TODO: celsius to kelvin
@@ -12,7 +12,7 @@ import weather from './weather'
 const dom = (() => {
   function loadContent() {
     showLoadingScreen()
-    displayWeatherContent('Zagreb')
+    displayWeatherContentSubmit('Zagreb')
     initLocationSearch()
     initLocationAutocomplete()
   }
@@ -37,7 +37,7 @@ const dom = (() => {
 
     const locationInput = document.getElementById('location-input')
     const searchedLocation = locationInput.value
-    displayWeatherContent(searchedLocation)
+    displayWeatherContentSubmit(searchedLocation)
   }
 
   // LOCATION SEARCH AUTOCOMPLETE
@@ -115,13 +115,13 @@ const dom = (() => {
     // GET COORDINATES FROM SUGGESTION LOCATION
     const { suggestions } = e.currentTarget
     const index = [...this.parentNode.children].indexOf(this)
-    const [lat, lon] = suggestions[index].geometry.coordinates
+    const [lon, lat] = suggestions[index].geometry.coordinates
     // GET ONLY MAIN LOCATION NAME
     const { name } = suggestions[index].properties
     // DISPLAY CONTENT
     showLoadingScreen()
     displayInInput(this.textContent)
-    displayWeatherContentBySuggestion({ lat, lon }, name)
+    displayWeatherContentSuggestion({ lat, lon }, name)
   }
 
   function hideSuggestions() {
@@ -152,25 +152,43 @@ const dom = (() => {
     errorMessage.classList.remove('active')
   }
 
-  function showSearchErrorMessage(suggestionsLength = null, submit = false) {
+  function showSearchErrorMessage(errorString) {
     const errorMessage = document.getElementById('error-message')
-    if (submit) {
+    if (errorString === 'invalid') {
       errorMessage.textContent = 'Please enter a valid city or country.'
     }
-    if (!suggestionsLength) {
+    if (errorString === 'missing') {
       errorMessage.textContent = 'Please enter a city or country.'
     }
     errorMessage.classList.add('active')
   }
 
   // DISPLAY ALL WEATHER CONTENT
-  async function displayWeatherContent(location) {
+  async function displayWeatherContentSubmit(location) {
     hideSuggestions()
+    // await new Promise((resolve) => setTimeout(resolve, 950))
     const closestLocation = await weather.getAutocompleteData(location)
-    const [lat, lon] = closestLocation[0].geometry.coordinates
+    console.log(closestLocation)
+
+    if (!closestLocation.length || closestLocation === 'error') {
+      if (!closestLocation.length && location === '')
+        showSearchErrorMessage('missing')
+      else showSearchErrorMessage('invalid')
+
+      hideLoadingScreen()
+    } else {
+      hideSearchErrorMessage()
+    }
+
+    const [lon, lat] = closestLocation[0].geometry.coordinates
     const coords = { lat, lon }
     const weatherData = await weather.getForecastData(coords)
-    weatherData.name = closestLocation[0].properties.name
+    const { name, country_code: countryCode } = closestLocation[0].properties
+    weatherData.name = `${name}, ${countryCode}`
+    // MAKE COUNTRY OPTIONAL FOR NON RECOGNIZED STATES SUCH AS KOSOVO
+
+    console.log(weatherData)
+
     if (weatherData === 'error') {
       const error = true
       showSearchErrorMessage(null, error)
@@ -184,9 +202,8 @@ const dom = (() => {
     displayTechnicalContent(weatherData)
   }
 
-  async function displayWeatherContentBySuggestion(coords, cityName) {
+  async function displayWeatherContentSuggestion(coords, cityName) {
     hideSuggestions()
-    await timeoutAPIrequest()
     const weatherData = await weather.getForecastData(coords)
     weatherData.name = cityName
     console.log(weatherData)
@@ -195,14 +212,6 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
-  }
-
-  function timeoutAPIrequest() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-      }, 750)
-    })
   }
 
   // MAIN WEATHER CONTENT
@@ -229,12 +238,6 @@ const dom = (() => {
   }
   function getDescriptionMain(weatherData) {
     return weatherData.current.weather[0].description
-  }
-  function getTemperatureMinMain(weatherData) {
-    return `L : ${Math.round(weatherData.minTemp)}`
-  }
-  function getTemperatureMaxMain(weatherData) {
-    return `H : ${Math.round(weatherData.maxTemp)}`
   }
   function getWeatherState(weatherData) {
     return weatherData.current.weather[0].main
@@ -286,7 +289,8 @@ const dom = (() => {
   }
   function loadHourItem(hour, mainDesc, temp) {
     const hourEl = document.createElement('p')
-    hourEl.textContent = `${+hour}h`
+    hourEl.textContent = `${+hour} h`
+    hourEl.dataset.hourlyHour = ''
     hourEl.classList.add('hour-hour')
 
     const logoEl = document.createElement('img')
@@ -295,6 +299,7 @@ const dom = (() => {
 
     const tempEl = document.createElement('p')
     tempEl.textContent = temp
+    tempEl.dataset.hourTemp = ''
     tempEl.classList.add('hour-temp')
 
     const hourItemEl = document.createElement('div')
@@ -366,10 +371,12 @@ const dom = (() => {
 
     const tempMinEl = document.createElement('p')
     tempMinEl.textContent = Math.round(day.temp.min)
+    tempMinEl.dataset.dayMinTemp = ''
     tempMinEl.classList.add('day-temp-min')
 
     const tempMaxEl = document.createElement('p')
     tempMaxEl.textContent = Math.round(day.temp.max)
+    tempMaxEl.dataset.dayMaxTemp = ''
     tempMaxEl.classList.add('day-temp-max')
 
     const meterEl = document.createElement('div')
@@ -511,7 +518,8 @@ const dom = (() => {
     const pressure = `${weatherData.current.pressure} hPa`
     displayPressure(pressure, technicalContainer)
 
-    metricToImperial()
+    unitSwitch(true)
+    unitSwitch(true)
   }
 
   function displayUVIndex(UVIndex, container) {
@@ -559,7 +567,7 @@ const dom = (() => {
 
     const indexEl = document.createElement('p')
     indexEl.textContent = wind
-    indexEl.id = 'wind'
+    indexEl.id = 'wind-value'
     indexEl.classList.add('card-value')
 
     const messageEl = document.createElement('p')
@@ -639,7 +647,8 @@ const dom = (() => {
     titleAndIcon.appendChild(icon)
 
     const indexEl = document.createElement('p')
-    indexEl.textContent = sunrise
+    indexEl.textContent = `${sunrise} h`
+    indexEl.id = 'sunrise-value'
     indexEl.classList.add('card-value')
 
     const card = document.createElement('div')
@@ -664,7 +673,8 @@ const dom = (() => {
     titleAndIcon.appendChild(icon)
 
     const indexEl = document.createElement('p')
-    indexEl.textContent = sunset
+    indexEl.textContent = `${sunset} h`
+    indexEl.id = 'sunset-value'
     indexEl.classList.add('card-value')
 
     const card = document.createElement('div')
@@ -788,6 +798,7 @@ const dom = (() => {
     video.addEventListener('canplay', hideLoadingScreen)
   }
 
+  // LOADING SCREEN
   function hideLoadingScreen() {
     const loadingScreen = document.getElementById('loading-screen')
     loadingScreen.removeEventListener('canplay', hideLoadingScreen)
@@ -799,24 +810,187 @@ const dom = (() => {
     loadingScreen.classList.add('active')
   }
 
-  function metricToImperial() {
-    // DOUBLE CHECK IN CASE ONE VALUE IS SOMEHOW NOT IN WEATHER DATA
-    // const hour = document.querySelector(
-    //   '#hours-container > .hour-item:first-of-type > p'
-    // )
-    // const hourUnit = hour.textContent.includes('h')
-    const windSpeed = document.getElementById('wind')
-    const windString = windSpeed.textContent
-    const windValue = windString.substring(0, windString.indexOf(' '))
-    const windUnit = windString.split(' ').pop()
-    console.log(windValue)
-    console.log(windUnit)
-    // IF METRIC THEN CONVERT TO IMPERIAL
-    if (windUnit === 'km/h') {
-      windSpeed.textContent = Math.round((+windValue / 1.6) * 10) / 10
-      windSpeed.textContent = `${windSpeed.textContent} mph`
+  // UNIT SWITCH
+
+  function unitSwitch(bool) {
+    // BOOL IS USED FOR NOT RUNNING THE FUNCTION ON LOAD
+    if (!bool) return
+
+    const wind = document.getElementById('wind-value')
+    // IF METRIC SWITCH TO IMPERIAL, IF NOT METRIC SWITCH TO METRIC
+    if (isMetric()) {
+      wind.textContent = windToImperial(wind)
+      allTimeToAmPm()
+      allTempToFahrenheit()
+    } else {
+      wind.textContent = windToMetric(wind)
+      allTimeToMilitary()
+      allTempToMetric()
     }
-    console.log(windSpeed.textContent)
+  }
+
+  function isMetric() {
+    // 2 TESTS INCLUDED IN CASE ONE PART OF WEATHER DATA IS MISSING
+    // HOUR UNIT TEST
+    const hours = document.getElementById('hours-container')
+    const hourTime = hours.children[1].children[0].textContent
+    const hourTimeUnit = hourTime.charAt(hourTime.length - 1)
+    console.log(hourTimeUnit)
+    // WIND UNIT TEST
+    const windSpeed = document.getElementById('wind-value')
+    const windString = windSpeed.textContent
+    const windUnit = windString.split(' ').pop()
+    // TEST
+    if (hourTimeUnit === 'h' || windUnit === 'km/h') return true
+    return false
+  }
+
+  // IMPERIAL
+
+  function windToImperial(windEl) {
+    const windText = windEl.textContent
+    const windValue = windText.substring(0, windText.indexOf(' '))
+    let windImperial = Math.round((+windValue / 1.6) * 10) / 10
+    windImperial = `${windImperial} mph`
+    return windImperial
+  }
+
+  function allTimeToAmPm() {
+    const sunrise = document.getElementById('sunrise-value')
+    const sunset = document.getElementById('sunset-value')
+    const hourlyHours = document.querySelectorAll('[data-hourly-hour]')
+
+    sunrise.textContent = fullTimeToAmPm(sunrise.textContent)
+    sunset.textContent = fullTimeToAmPm(sunset.textContent)
+    hourlyHours.forEach((hour) => {
+      hour.textContent = hourToAmPm(hour.textContent)
+    })
+  }
+
+  function fullTimeToAmPm(time) {
+    const timeForm = removeAlpha(time)
+    let hour = timeForm.substring(0, timeForm.indexOf(':'))
+    const minutes = timeForm.substring(timeForm.indexOf(':') + 1)
+    if (+hour - 12 >= 0) {
+      hour -= 12
+      return `${hour}:${minutes} pm`
+    }
+    return `${hour}:${minutes} am`
+  }
+
+  function hourToAmPm(time) {
+    let hour = removeAlpha(time)
+    if (+hour - 12 >= 0) {
+      hour -= 12
+      return `${hour} pm`
+    }
+    return `${hour} am`
+  }
+
+  function allTempToFahrenheit() {
+    const main = document.getElementById('temperature')
+    const hourlyHoursTemps = document.querySelectorAll('[data-hour-temp]')
+    const dailyMinTemps = document.querySelectorAll('[data-day-min-temp]')
+    const dailyMaxTemps = document.querySelectorAll('[data-day-max-temp]')
+
+    main.textContent = tempToFahrenheit(main.textContent)
+    hourlyHoursTemps.forEach((hour) => {
+      hour.textContent = tempToFahrenheit(hour.textContent)
+    })
+    dailyMinTemps.forEach((day) => {
+      day.textContent = tempToFahrenheit(day.textContent)
+    })
+    dailyMaxTemps.forEach((day) => {
+      day.textContent = tempToFahrenheit(day.textContent)
+    })
+  }
+
+  function tempToFahrenheit(value) {
+    return Math.round(+value * 1.8 + 32)
+  }
+
+  // METRIC
+
+  function windToMetric(windEl) {
+    const windText = windEl.textContent
+    const windValue = windText.substring(0, windText.indexOf(' '))
+    let windMetric = Math.round(+windValue * 1.6 * 10) / 10
+    windMetric = `${windMetric} km/h`
+    return windMetric
+  }
+
+  function allTimeToMilitary() {
+    const sunrise = document.getElementById('sunrise-value')
+    const sunset = document.getElementById('sunset-value')
+    const hourlyHours = document.querySelectorAll('[data-hourly-hour]')
+
+    sunrise.textContent = fullTimeToMilitary(sunrise.textContent)
+    sunset.textContent = fullTimeToMilitary(sunset.textContent)
+    hourlyHours.forEach((hour) => {
+      hour.textContent = hourToMilitary(hour.textContent)
+    })
+  }
+
+  function fullTimeToMilitary(time) {
+    const [hours, minutesAmPm] = time.split(':')
+    const minutes = minutesAmPm.slice(0, 2) // remove the "AM" or "PM" suffix from the minutes
+    const amPm = minutesAmPm.slice(-2)
+    // Convert the hours to an integer
+    let militaryHours = parseInt(hours, 10)
+    // If the time is in the afternoon (PM), add 12 to the hours
+    if (amPm === 'PM' && militaryHours !== 12) {
+      militaryHours += 12
+    }
+    // If the time is at midnight (12:00 AM), subtract 12 from the hours
+    if (amPm === 'AM' && militaryHours === 12) {
+      militaryHours = 0
+    }
+
+    return `${militaryHours}:${minutes} h`
+  }
+
+  function hourToMilitary(time) {
+    const [hours, amPm] = time.split(':')
+    // Convert the hours to an integer
+    let militaryHours = parseInt(hours, 10)
+    // If the time is in the afternoon (PM), add 12 to the hours
+    if (amPm === 'PM' && militaryHours !== 12) {
+      militaryHours += 12
+    }
+    // If the time is at midnight (12:00 AM), subtract 12 from the hours
+    if (amPm === 'AM' && militaryHours === 12) {
+      militaryHours = 0
+    }
+
+    return `${militaryHours} h`
+  }
+
+  function allTempToMetric() {
+    const main = document.getElementById('temperature')
+    const hourlyHoursTemps = document.querySelectorAll('[data-hour-temp]')
+    const dailyMinTemps = document.querySelectorAll('[data-day-min-temp]')
+    const dailyMaxTemps = document.querySelectorAll('[data-day-max-temp]')
+
+    main.textContent = tempToFahrenheit(main.textContent)
+    hourlyHoursTemps.forEach((hour) => {
+      hour.textContent = tempToMetric(hour.textContent)
+    })
+    dailyMinTemps.forEach((day) => {
+      day.textContent = tempToMetric(day.textContent)
+    })
+    dailyMaxTemps.forEach((day) => {
+      day.textContent = tempToMetric(day.textContent)
+    })
+  }
+
+  function tempToMetric(temp) {
+    const tempInt = parseInt(temp, 10)
+    return Math.round(((tempInt - 32) * 0.5556 * 10) / 10).toString()
+  }
+
+  function removeAlpha(string) {
+    const regex = /[^0-9:]/g
+    return string.replace(regex, '')
   }
 
   return { loadContent }
