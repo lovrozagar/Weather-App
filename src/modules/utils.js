@@ -1,3 +1,5 @@
+import storage from './storage'
+
 /* eslint-disable no-param-reassign */
 const utils = (() => {
   // FORM VALIDATION
@@ -11,6 +13,39 @@ const utils = (() => {
   }
 
   // DESCRIPTION MESSAGES
+
+  function getMessage(name, value) {
+    if (isDescriptive(name)) {
+      let message
+      switch (name) {
+        case 'UV index':
+          message = utils.UVIndexMessage(value)
+          break
+        case 'wind':
+          message = utils.windMessage(value)
+          break
+        case 'pressure':
+          message = utils.pressureMessage(value)
+          break
+        default:
+          message = false
+      }
+
+      return message
+    }
+    return false
+  }
+
+  function isDescriptive(name) {
+    if (
+      name === 'UV index' ||
+      name === 'wind' ||
+      name === 'pressure' ||
+      name === 'visibility'
+    )
+      return true
+    return false
+  }
 
   function UVIndexMessage(index) {
     if (index <= 0.99) return 'Very low, damage possibility is negligible'
@@ -65,23 +100,32 @@ const utils = (() => {
     return `Atmospheric pressure is low.`
   }
 
-  // UNITS
-
-  function isMetric() {
-    // 2 TESTS INCLUDED IN CASE ONE PART OF WEATHER DATA IS MISSING
-    // HOUR UNIT TEST
-    const hours = document.getElementById('hours-container')
-    const hourTime = hours.children[1].children[0].textContent
-    const hourTimeUnit = hourTime.charAt(hourTime.length - 1)
-    console.log(hourTimeUnit)
-    // WIND UNIT TEST
-    const windSpeed = document.getElementById('wind-value')
-    const windString = windSpeed.textContent
-    const windUnit = windString.split(' ').pop()
-    // TEST
-    if (hourTimeUnit === 'h' || windUnit === 'km/h') return true
-    return false
+  // TIME CALCULATIONS
+  function getNext24Hours(weatherData) {
+    return weatherData.hourly.slice(0, 24)
   }
+  function secondsToHour(seconds) {
+    let date = new Date(null)
+    date.setSeconds(seconds)
+    date = date.toString().slice(16, 18)
+    return date
+  }
+  function secondsToHourAndMinutes(seconds) {
+    const date = new Date(null)
+    date.setSeconds(seconds)
+
+    const hour = date.toString().slice(16, 18)
+    const doubleColon = date.toString().slice(18, 19)
+    const minutes = date.toString().slice(19, 21)
+
+    if (storage.getUnit() === 'imperial') {
+      return fullTimeToAmPm(`${hour}${doubleColon}${minutes}`)
+    }
+
+    return `${hour}${doubleColon}${minutes} h`
+  }
+
+  // UNITS
 
   // IMPERIAL
   function windToImperial(windEl) {
@@ -229,16 +273,19 @@ const utils = (() => {
 
   return {
     formatInput,
-    isMetric,
     windToImperial,
     allTimeToAmPm,
     allTempToFahrenheit,
     windToMetric,
     allTimeToMilitary,
     allTempToMetric,
+    getMessage,
     UVIndexMessage,
     windMessage,
     pressureMessage,
+    getNext24Hours,
+    secondsToHour,
+    secondsToHourAndMinutes,
   }
 })()
 

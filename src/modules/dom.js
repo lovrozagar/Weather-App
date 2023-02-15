@@ -1,6 +1,8 @@
 import { debounce } from 'lodash'
+import storage from './storage'
 import utils from './utils'
 import weather from './weather'
+// TODO: TIME PREFIX
 // TODO: add visibility
 // TODO: google location
 // TODO: mobile optimization
@@ -12,6 +14,7 @@ import weather from './weather'
 const dom = (() => {
   function loadContent() {
     showLoadingScreen()
+    storage.setDefaultUnitMetric()
     displayWeatherContentSubmit('Zagreb')
     initLocationSearch()
     initLocationAutocomplete()
@@ -39,7 +42,7 @@ const dom = (() => {
 
   function hideUnitMenu() {
     const unitMenu = document.getElementById('units-menu')
-    unitMenu.classList.toggle('active')
+    unitMenu.classList.remove('active')
   }
 
   // DEBOUNCE FUNCTIONs FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
@@ -83,8 +86,15 @@ const dom = (() => {
   }
 
   async function displayAutocomplete(query) {
+    hideSearchErrorMessage()
+
     const suggestions = await weather.getAutocompleteData(query)
     console.log(suggestions)
+
+    if (!suggestions.length) {
+      showSearchErrorMessage('invalid')
+      return
+    }
     loadSuggestions(suggestions)
     initSuggestions(suggestions)
   }
@@ -216,6 +226,7 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
+    displaySelectedUnits()
   }
 
   async function displayWeatherContentSuggestion(coords, cityName) {
@@ -228,6 +239,7 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
+    displaySelectedUnits()
   }
 
   // MAIN WEATHER CONTENT
@@ -239,8 +251,10 @@ const dom = (() => {
 
     locationMain.textContent = getLocationNameMain(weatherData)
     temperatureMain.textContent = getTemperatureMain(weatherData)
+    temperatureMain.classList.add('loaded') // USE SO THAT DEGREE UNICODE DOES NOT LOAD BEFORE
     descriptionMain.textContent = getDescriptionMain(weatherData)
     feelsLikeMain.textContent = getFeelsLikeMain(weatherData)
+    feelsLikeMain.classList.add('loaded') // USE SO THAT DEGREE UNICODE DOES NOT LOAD BEFORE
   }
 
   function getLocationNameMain(weatherData) {
@@ -281,7 +295,7 @@ const dom = (() => {
     detailedInfoSection.appendChild(titleAndIcon)
 
     // ADD HOUR ITEMS
-    const hours = getNext24Hours(weatherData)
+    const hours = utils.getNext24Hours(weatherData)
     const timezoneOffset = weatherData.timezone_offset
 
     hours.forEach((hour) => {
@@ -290,7 +304,7 @@ const dom = (() => {
   }
   function displayHourItem(hour, timezoneOffset, weatherData) {
     const seconds = hour.dt + timezoneOffset
-    const itemHour = secondsToHour(seconds)
+    const itemHour = utils.secondsToHour(seconds)
     // GET WEATHER LOGO SRC
     let mainDesc = `${hour.weather[0].main.toLowerCase()}.svg`
     const sunriseNoOffset = hour.dt + 3600
@@ -333,23 +347,6 @@ const dom = (() => {
   }
   function clearContent(el) {
     el.replaceChildren('')
-  }
-  function getNext24Hours(weatherData) {
-    return weatherData.hourly.slice(0, 24)
-  }
-  function secondsToHour(seconds) {
-    let date = new Date(null)
-    date.setSeconds(seconds)
-    date = date.toString().slice(16, 18)
-    return date
-  }
-  function secondsToHourAndMinutes(seconds) {
-    const date = new Date(null)
-    date.setSeconds(seconds)
-    const hour = +date.toString().slice(16, 18)
-    const doubleColon = date.toString().slice(18, 19)
-    const minutes = +date.toString().slice(19, 21)
-    return `${hour}${doubleColon}${minutes}`
   }
 
   // DAILY FORECAST CONTENT
@@ -507,45 +504,43 @@ const dom = (() => {
 
   // TECHNICAL CONTENT
   function displayTechnicalContent(weatherData) {
-    const technicalContainer = document.getElementById('technical-container')
-    clearContent(technicalContainer)
+    const container = document.getElementById('technical-container')
+    clearContent(container)
     // UVI
     const UVIndex = weatherData.current.uvi
-    displayUVIndex(UVIndex, technicalContainer)
+    displayTechnicalCard('UV index', UVIndex, container)
     // WIND
     // CONVERT FROM METERS PER SECOND TO KILOMETERS PER SECOND
     const windSpeed = Math.round(weatherData.current.wind_speed * 3.6 * 10) / 10
     const wind = `${windSpeed} km/h`
-    displayWind(wind, technicalContainer)
+    displayTechnicalCard('wind', wind, container)
     // HUMIDITY
     const humidity = `${weatherData.current.humidity}%`
-    displayHumidity(humidity, technicalContainer)
+    displayTechnicalCard('humidity', humidity, container)
     // CHANCE OF RAIN
     const chanceOfRain = `${Math.round(weatherData.daily[0].pop * 100)}%`
-    displayChanceOfRain(chanceOfRain, technicalContainer)
+    displayTechnicalCard('chance of rain', chanceOfRain, container)
     // SUNRISE
     const sunriseSeconds =
       weatherData.current.sunrise + weatherData.timezone_offset - 3600
-    const sunrise = secondsToHourAndMinutes(sunriseSeconds)
-    console.log(sunrise)
-    displaySunrise(sunrise, technicalContainer)
+    const sunrise = utils.secondsToHourAndMinutes(sunriseSeconds)
+    displayTechnicalCard('sunrise', sunrise, container)
     // SUNSET
     const sunsetSeconds =
       weatherData.current.sunset + weatherData.timezone_offset - 3600
-    const sunset = secondsToHourAndMinutes(sunsetSeconds)
-    displaySunset(sunset, technicalContainer)
+    const sunset = utils.secondsToHourAndMinutes(sunsetSeconds)
+    displayTechnicalCard('sunset', sunset, container)
     // PRESSURE
     const pressure = `${weatherData.current.pressure} hPa`
-    displayPressure(pressure, technicalContainer)
+    displayTechnicalCard('pressure', pressure, container)
   }
 
-  function displayUVIndex(UVIndex, container) {
+  function displayTechnicalCard(name, value, container) {
     const title = document.createElement('p')
-    title.textContent = 'UV index'
-
     const icon = document.createElement('img')
+    title.textContent = name
     icon.classList.add('icon')
-    icon.src = 'uvSun.svg'
+    icon.src = `${name}.svg`
 
     const titleAndIcon = document.createElement('div')
     titleAndIcon.classList.add('title-and-icon')
@@ -553,68 +548,8 @@ const dom = (() => {
     titleAndIcon.appendChild(icon)
 
     const indexEl = document.createElement('p')
-    indexEl.textContent = UVIndex
-    indexEl.classList.add('card-value')
-
-    const messageEl = document.createElement('p')
-    messageEl.textContent = utils.UVIndexMessage(UVIndex)
-    messageEl.classList.add('card-text')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-    card.appendChild(messageEl)
-
-    container.appendChild(card)
-  }
-
-  function displayWind(wind, container) {
-    const title = document.createElement('p')
-    title.textContent = 'wind'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'wind.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = wind
-    indexEl.id = 'wind-value'
-    indexEl.classList.add('card-value')
-
-    const messageEl = document.createElement('p')
-    messageEl.textContent = utils.windMessage(wind)
-    messageEl.classList.add('card-text')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-    card.appendChild(messageEl)
-
-    container.appendChild(card)
-  }
-
-  function displayHumidity(humidity, container) {
-    const title = document.createElement('p')
-    title.textContent = 'humidity'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon', 'humidity')
-    icon.src = 'humidity.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = humidity
+    indexEl.textContent = value
+    indexEl.id = `${name}-value`
     indexEl.classList.add('card-value')
 
     const card = document.createElement('div')
@@ -622,112 +557,13 @@ const dom = (() => {
     card.appendChild(titleAndIcon)
     card.appendChild(indexEl)
 
-    container.appendChild(card)
-  }
-
-  function displayChanceOfRain(chanceOfRain, container) {
-    const title = document.createElement('p')
-    title.textContent = 'chance of rain'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'chanceOfRain.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = chanceOfRain
-    indexEl.classList.add('card-value')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-
-    container.appendChild(card)
-  }
-
-  function displaySunrise(sunrise, container) {
-    const title = document.createElement('p')
-    title.textContent = 'sunrise'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'sunrise.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = `${sunrise} h`
-    indexEl.id = 'sunrise-value'
-    indexEl.classList.add('card-value')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-
-    container.appendChild(card)
-  }
-
-  function displaySunset(sunset, container) {
-    const title = document.createElement('p')
-    title.textContent = 'sunset'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'sunset.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = `${sunset} h`
-    indexEl.id = 'sunset-value'
-    indexEl.classList.add('card-value')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-
-    container.appendChild(card)
-  }
-
-  function displayPressure(pressure, container) {
-    const title = document.createElement('p')
-    title.textContent = 'pressure'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'pressure.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = pressure
-    indexEl.classList.add('card-value')
-
-    const messageEl = document.createElement('p')
-    messageEl.textContent = utils.pressureMessage(pressure)
-    messageEl.classList.add('card-text')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-    card.appendChild(messageEl)
+    const message = utils.getMessage(name, value)
+    if (message) {
+      const messageEl = document.createElement('p')
+      messageEl.textContent = message
+      messageEl.classList.add('card-text')
+      card.appendChild(messageEl)
+    }
 
     container.appendChild(card)
   }
@@ -780,28 +616,34 @@ const dom = (() => {
     loadingScreen.classList.add('active')
   }
 
+  function displaySelectedUnits() {
+    console.log(storage.getUnit())
+    if (storage.getUnit() === 'imperial') displayImperialUnits()
+    if (storage.getUnit() === 'metric') displayMetricUnits()
+  }
+
   function displayImperialUnits() {
     hideUnitMenu()
-    // IF ALREADY IMPERIAL RETURN
-    if (!utils.isMetric()) return
 
     const wind = document.getElementById('wind-value')
     wind.textContent = utils.windToImperial(wind)
 
     utils.allTimeToAmPm()
     utils.allTempToFahrenheit()
+
+    storage.setUnit('imperial')
   }
 
   function displayMetricUnits() {
     hideUnitMenu()
-    // IF ALREADY IMPERIAL RETURN
-    if (utils.isMetric()) return
 
     const wind = document.getElementById('wind-value')
     wind.textContent = utils.windToMetric(wind)
 
     utils.allTimeToMilitary()
     utils.allTempToMetric()
+
+    storage.setUnit('metric')
   }
 
   return { loadContent }

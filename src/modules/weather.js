@@ -12,6 +12,9 @@ const weather = (() => {
     const weatherData = await weatherResponse.json()
     // ADD LOCATION NAME TO WEATHER DATA
     weatherData.name = main.name
+    // ADD UNIT TYPE TO WEATHER DATA
+    weatherData.unit = unit
+
     return weatherData
   }
 
