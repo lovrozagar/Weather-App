@@ -1,7 +1,7 @@
-import { debounce, remove } from 'lodash'
+import { debounce } from 'lodash'
+import utils from './utils'
 import weather from './weather'
 // TODO: add visibility
-// TODO: celsius to kelvin
 // TODO: google location
 // TODO: mobile optimization
 // TODO: form validation ON SUBMIT
@@ -20,7 +20,7 @@ const dom = (() => {
 
   function initNav() {
     const units = document.getElementById('units')
-    units.addEventListener('click', showUnitMenu)
+    units.addEventListener('click', toggleUnitMenu)
     initUnitOptions()
   }
 
@@ -32,7 +32,12 @@ const dom = (() => {
     metric.addEventListener('click', displayMetricUnits)
   }
 
-  function showUnitMenu() {
+  function toggleUnitMenu() {
+    const unitMenu = document.getElementById('units-menu')
+    unitMenu.classList.toggle('active')
+  }
+
+  function hideUnitMenu() {
     const unitMenu = document.getElementById('units-menu')
     unitMenu.classList.toggle('active')
   }
@@ -72,7 +77,7 @@ const dom = (() => {
       hideSearchErrorMessage()
       return
     }
-    const formattedSearch = formatInput(e.target.value)
+    const formattedSearch = utils.formatInput(e.target.value)
     console.log(formattedSearch)
     onFinishTyping(formattedSearch)
   }
@@ -157,16 +162,7 @@ const dom = (() => {
     locationInput.value = location
   }
 
-  // FORM VALIDATION
-  function formatInput(value) {
-    const regex = /[^A-Za-z, -]/g
-    let formattedValue = value.replace(regex, '')
-    if (formattedValue.includes(',')) {
-      formattedValue = formattedValue.substring(0, formattedValue.indexOf(','))
-    }
-    return formattedValue
-  }
-
+  // SEARCH ERROR
   function hideSearchErrorMessage() {
     const errorMessage = document.getElementById('error-message')
     errorMessage.classList.remove('active')
@@ -266,19 +262,23 @@ const dom = (() => {
   // HOURLY FORECAST CONTENT
   function displayHourlyContent(weatherData) {
     const hoursContainer = document.getElementById('hours-container')
+    const detailedInfoSection = document.getElementById('detailed-info')
     clearContent(hoursContainer)
 
     // ADD TITLE AND ICON
     const title = document.createElement('p')
     title.textContent = 'hourly forecast'
     const icon = document.createElement('img')
+
     icon.classList.add('icon', 'forecast-hours')
     icon.src = 'forecast.svg'
+
     const titleAndIcon = document.createElement('div')
     titleAndIcon.classList.add('title-and-icon', 'hours')
+
     titleAndIcon.appendChild(title)
     titleAndIcon.appendChild(icon)
-    hoursContainer.appendChild(titleAndIcon)
+    detailedInfoSection.appendChild(titleAndIcon)
 
     // ADD HOUR ITEMS
     const hours = getNext24Hours(weatherData)
@@ -537,9 +537,6 @@ const dom = (() => {
     // PRESSURE
     const pressure = `${weatherData.current.pressure} hPa`
     displayPressure(pressure, technicalContainer)
-
-    unitSwitch(true)
-    unitSwitch(true)
   }
 
   function displayUVIndex(UVIndex, container) {
@@ -560,7 +557,7 @@ const dom = (() => {
     indexEl.classList.add('card-value')
 
     const messageEl = document.createElement('p')
-    messageEl.textContent = UVIndexMessage(UVIndex)
+    messageEl.textContent = utils.UVIndexMessage(UVIndex)
     messageEl.classList.add('card-text')
 
     const card = document.createElement('div')
@@ -591,7 +588,7 @@ const dom = (() => {
     indexEl.classList.add('card-value')
 
     const messageEl = document.createElement('p')
-    messageEl.textContent = windMessage(wind)
+    messageEl.textContent = utils.windMessage(wind)
     messageEl.classList.add('card-text')
 
     const card = document.createElement('div')
@@ -723,7 +720,7 @@ const dom = (() => {
     indexEl.classList.add('card-value')
 
     const messageEl = document.createElement('p')
-    messageEl.textContent = pressureMessage(pressure)
+    messageEl.textContent = utils.pressureMessage(pressure)
     messageEl.classList.add('card-text')
 
     const card = document.createElement('div')
@@ -733,59 +730,6 @@ const dom = (() => {
     card.appendChild(messageEl)
 
     container.appendChild(card)
-  }
-
-  function UVIndexMessage(index) {
-    if (index <= 0.99) return 'Very low, damage possibility is negligible'
-    if (index <= 4) return 'Mild, sun protection may or may not be needed.'
-    if (index <= 7) return 'High, sun protection is recommended'
-    if (index > 7) return 'Very high, sun protection is highly recommended'
-    return 'Very low'
-  }
-
-  function windMessage(wind) {
-    let windNumber = wind.substring(0, wind.indexOf(' '))
-    // IF NOT MPH TRANSFORM TO MPH, CHART USES MPH
-    const unit = wind.split(' ').pop()
-    if (unit === 'km/h') windNumber = +windNumber / 1.6
-    console.log(unit)
-    console.log(windNumber)
-
-    if (windNumber < 1) return 'Calm, Smoke rises vertically.'
-    if (windNumber < 4)
-      return 'Light air, smoke drifts with air, weather vanes inactive.'
-    if (windNumber < 8)
-      return 'Light breeze, weather vanes active, wind felt on face, leaves rustle.'
-    if (windNumber < 13)
-      return 'Gentle breeze, leaves & small twigs move, light flags extend.'
-    if (windNumber < 19)
-      return 'Moderate breeze, dust & loose paper blows about.'
-    if (windNumber < 25)
-      return 'Fresh breeze, small trees sway, waves break on inland waters.'
-    if (windNumber < 32)
-      return 'Strong breeze, large branches sway, umbrellas difficult to use.'
-    if (windNumber < 39)
-      return 'Moderate gale, whole trees sway, difficult to walk against wind.'
-    if (windNumber < 47)
-      return 'Fresh gale, twigs broken off trees, walking against wind very difficult.'
-    if (windNumber < 55)
-      return 'Strong gale, slight damage to buildings, shingles blown off roof.'
-    if (windNumber < 64)
-      return 'Whole gale, trees uprooted, considerable damage to buildings.'
-    if (windNumber < 73)
-      return 'Storm, widespread damage, very rare occurrence.'
-    return 'Hurricane, violent destruction.'
-  }
-
-  function pressureMessage(pressure) {
-    const pressureValue = pressure.substring(0, pressure.indexOf(' '))
-    if (+pressureValue > 1022) {
-      return `Atmospheric pressure is high.`
-    }
-    if (+pressureValue > 1009 && +pressure <= 1022) {
-      return `Atmospheric pressure is normal.`
-    }
-    return `Atmospheric pressure is low.`
   }
 
   // BACKGROUND VIDEO
@@ -818,11 +762,17 @@ const dom = (() => {
     video.addEventListener('canplay', hideLoadingScreen)
   }
 
+  function playVideo() {
+    const video = document.getElementById('background-video')
+    video.play()
+  }
+
   // LOADING SCREEN
   function hideLoadingScreen() {
     const loadingScreen = document.getElementById('loading-screen')
     loadingScreen.removeEventListener('canplay', hideLoadingScreen)
     loadingScreen.classList.remove('active')
+    playVideo()
   }
 
   function showLoadingScreen() {
@@ -830,209 +780,28 @@ const dom = (() => {
     loadingScreen.classList.add('active')
   }
 
-  // UNIT SWITCH
-
-  function unitSwitch(bool) {
-    // BOOL IS USED FOR NOT RUNNING THE FUNCTION ON LOAD
-    if (!bool) return
-
-    const wind = document.getElementById('wind-value')
-    // IF METRIC SWITCH TO IMPERIAL, IF NOT METRIC SWITCH TO METRIC
-    if (isMetric()) {
-      wind.textContent = windToImperial(wind)
-      allTimeToAmPm()
-      allTempToFahrenheit()
-    } else {
-      wind.textContent = windToMetric(wind)
-      allTimeToMilitary()
-      allTempToMetric()
-    }
-  }
-
   function displayImperialUnits() {
+    hideUnitMenu()
     // IF ALREADY IMPERIAL RETURN
-    if (!isMetric()) return
+    if (!utils.isMetric()) return
 
     const wind = document.getElementById('wind-value')
-    wind.textContent = windToImperial(wind)
+    wind.textContent = utils.windToImperial(wind)
 
-    allTimeToAmPm()
-    allTempToFahrenheit()
+    utils.allTimeToAmPm()
+    utils.allTempToFahrenheit()
   }
 
   function displayMetricUnits() {
+    hideUnitMenu()
     // IF ALREADY IMPERIAL RETURN
-    if (isMetric()) return
+    if (utils.isMetric()) return
 
     const wind = document.getElementById('wind-value')
-    wind.textContent = windToMetric(wind)
+    wind.textContent = utils.windToMetric(wind)
 
-    allTimeToMilitary()
-    allTempToMetric()
-  }
-
-  function isMetric() {
-    // 2 TESTS INCLUDED IN CASE ONE PART OF WEATHER DATA IS MISSING
-    // HOUR UNIT TEST
-    const hours = document.getElementById('hours-container')
-    const hourTime = hours.children[1].children[0].textContent
-    const hourTimeUnit = hourTime.charAt(hourTime.length - 1)
-    console.log(hourTimeUnit)
-    // WIND UNIT TEST
-    const windSpeed = document.getElementById('wind-value')
-    const windString = windSpeed.textContent
-    const windUnit = windString.split(' ').pop()
-    // TEST
-    if (hourTimeUnit === 'h' || windUnit === 'km/h') return true
-    return false
-  }
-
-  // IMPERIAL
-
-  function windToImperial(windEl) {
-    const windText = windEl.textContent
-    const windValue = windText.substring(0, windText.indexOf(' '))
-    let windImperial = Math.round((+windValue / 1.6) * 10) / 10
-    windImperial = `${windImperial} mph`
-    return windImperial
-  }
-
-  function allTimeToAmPm() {
-    const sunrise = document.getElementById('sunrise-value')
-    const sunset = document.getElementById('sunset-value')
-    const hourlyHours = document.querySelectorAll('[data-hourly-hour]')
-
-    sunrise.textContent = fullTimeToAmPm(sunrise.textContent)
-    sunset.textContent = fullTimeToAmPm(sunset.textContent)
-    hourlyHours.forEach((hour) => {
-      hour.textContent = hourToAmPm(hour.textContent)
-    })
-  }
-
-  function fullTimeToAmPm(time) {
-    const timeForm = removeAlpha(time)
-    let hour = timeForm.substring(0, timeForm.indexOf(':'))
-    const minutes = timeForm.substring(timeForm.indexOf(':') + 1)
-    if (+hour - 12 >= 0) {
-      hour -= 12
-      return `${hour}:${minutes} pm`
-    }
-    return `${hour}:${minutes} am`
-  }
-
-  function hourToAmPm(time) {
-    let hour = removeAlpha(time)
-    if (+hour - 12 >= 0) {
-      hour -= 12
-      return `${hour} pm`
-    }
-    return `${hour} am`
-  }
-
-  function allTempToFahrenheit() {
-    const main = document.getElementById('temperature')
-    const hourlyHoursTemps = document.querySelectorAll('[data-hour-temp]')
-    const dailyMinTemps = document.querySelectorAll('[data-day-min-temp]')
-    const dailyMaxTemps = document.querySelectorAll('[data-day-max-temp]')
-
-    main.textContent = tempToFahrenheit(main.textContent)
-    hourlyHoursTemps.forEach((hour) => {
-      hour.textContent = tempToFahrenheit(hour.textContent)
-    })
-    dailyMinTemps.forEach((day) => {
-      day.textContent = tempToFahrenheit(day.textContent)
-    })
-    dailyMaxTemps.forEach((day) => {
-      day.textContent = tempToFahrenheit(day.textContent)
-    })
-  }
-
-  function tempToFahrenheit(value) {
-    return Math.round(+value * 1.8 + 32)
-  }
-
-  // METRIC
-
-  function windToMetric(windEl) {
-    const windText = windEl.textContent
-    const windValue = windText.substring(0, windText.indexOf(' '))
-    let windMetric = Math.round(+windValue * 1.6 * 10) / 10
-    windMetric = `${windMetric} km/h`
-    return windMetric
-  }
-
-  function allTimeToMilitary() {
-    const sunrise = document.getElementById('sunrise-value')
-    const sunset = document.getElementById('sunset-value')
-    const hourlyHours = document.querySelectorAll('[data-hourly-hour]')
-
-    sunrise.textContent = fullTimeToMilitary(sunrise.textContent)
-    sunset.textContent = fullTimeToMilitary(sunset.textContent)
-    hourlyHours.forEach((hour) => {
-      hour.textContent = hourToMilitary(hour.textContent)
-    })
-  }
-
-  function fullTimeToMilitary(time) {
-    const [hours, minutesAmPm] = time.split(':')
-    const minutes = minutesAmPm.slice(0, 2) // remove the "AM" or "PM" suffix from the minutes
-    const amPm = minutesAmPm.slice(-2)
-    // Convert the hours to an integer
-    let militaryHours = parseInt(hours, 10)
-    // If the time is in the afternoon (PM), add 12 to the hours
-    if (amPm === 'PM' && militaryHours !== 12) {
-      militaryHours += 12
-    }
-    // If the time is at midnight (12:00 AM), subtract 12 from the hours
-    if (amPm === 'AM' && militaryHours === 12) {
-      militaryHours = 0
-    }
-
-    return `${militaryHours}:${minutes} h`
-  }
-
-  function hourToMilitary(time) {
-    const [hours, amPm] = time.split(':')
-    // Convert the hours to an integer
-    let militaryHours = parseInt(hours, 10)
-    // If the time is in the afternoon (PM), add 12 to the hours
-    if (amPm === 'PM' && militaryHours !== 12) {
-      militaryHours += 12
-    }
-    // If the time is at midnight (12:00 AM), subtract 12 from the hours
-    if (amPm === 'AM' && militaryHours === 12) {
-      militaryHours = 0
-    }
-
-    return `${militaryHours} h`
-  }
-
-  function allTempToMetric() {
-    const main = document.getElementById('temperature')
-    const hourlyHoursTemps = document.querySelectorAll('[data-hour-temp]')
-    const dailyMinTemps = document.querySelectorAll('[data-day-min-temp]')
-    const dailyMaxTemps = document.querySelectorAll('[data-day-max-temp]')
-
-    main.textContent = tempToMetric(main.textContent)
-    hourlyHoursTemps.forEach((hour) => {
-      hour.textContent = tempToMetric(hour.textContent)
-    })
-    dailyMinTemps.forEach((day) => {
-      day.textContent = tempToMetric(day.textContent)
-    })
-    dailyMaxTemps.forEach((day) => {
-      day.textContent = tempToMetric(day.textContent)
-    })
-  }
-
-  function tempToMetric(temp) {
-    const tempInt = parseInt(temp, 10)
-    return Math.round(((tempInt - 32) * 0.5556 * 10) / 10).toString()
-  }
-
-  function removeAlpha(string) {
-    const regex = /[^0-9:]/g
-    return string.replace(regex, '')
+    utils.allTimeToMilitary()
+    utils.allTempToMetric()
   }
 
   return { loadContent }
