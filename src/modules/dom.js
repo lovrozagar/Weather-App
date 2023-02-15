@@ -2,14 +2,7 @@ import { debounce } from 'lodash'
 import storage from './storage'
 import utils from './utils'
 import weather from './weather'
-// TODO: TIME PREFIX
-// TODO: add visibility
 // TODO: google location
-// TODO: mobile optimization
-// TODO: form validation ON SUBMIT
-// TODO: 3600 offset for +-12/11 zones
-// TODO: add FAVORITES
-// TODO: add VIEW
 // TODO: clean code
 const dom = (() => {
   function loadContent() {
@@ -226,7 +219,6 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
-    displaySelectedUnits()
   }
 
   async function displayWeatherContentSuggestion(coords, cityName) {
@@ -239,7 +231,6 @@ const dom = (() => {
     displayHourlyContent(weatherData)
     displayDailyContent(weatherData)
     displayTechnicalContent(weatherData)
-    displaySelectedUnits()
   }
 
   // MAIN WEATHER CONTENT
@@ -533,6 +524,11 @@ const dom = (() => {
     // PRESSURE
     const pressure = `${weatherData.current.pressure} hPa`
     displayTechnicalCard('pressure', pressure, container)
+    // VISIBILITY
+    const visibility = `${(weatherData.current.visibility / 1000).toFixed(
+      1
+    )} km`
+    displayTechnicalCard('visibility', visibility, container)
   }
 
   function displayTechnicalCard(name, value, container) {
@@ -631,6 +627,9 @@ const dom = (() => {
     utils.allTimeToAmPm()
     utils.allTempToFahrenheit()
 
+    const visibility = document.getElementById('visibility-value')
+    visibility.textContent = utils.visibilityToMi(visibility)
+
     storage.setUnit('imperial')
   }
 
@@ -642,6 +641,9 @@ const dom = (() => {
 
     utils.allTimeToMilitary()
     utils.allTempToMetric()
+
+    const visibility = document.getElementById('visibility-value')
+    visibility.textContent = utils.visibilityToKm(visibility)
 
     storage.setUnit('metric')
   }

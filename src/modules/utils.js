@@ -19,13 +19,16 @@ const utils = (() => {
       let message
       switch (name) {
         case 'UV index':
-          message = utils.UVIndexMessage(value)
+          message = UVIndexMessage(value)
           break
         case 'wind':
-          message = utils.windMessage(value)
+          message = windMessage(value)
           break
         case 'pressure':
-          message = utils.pressureMessage(value)
+          message = pressureMessage(value)
+          break
+        case 'visibility':
+          message = visibilityMessage(value)
           break
         default:
           message = false
@@ -59,7 +62,7 @@ const utils = (() => {
     let windNumber = wind.substring(0, wind.indexOf(' '))
     // IF NOT MPH TRANSFORM TO MPH, CHART USES MPH
     const unit = wind.split(' ').pop()
-    if (unit === 'km/h') windNumber = +windNumber / 1.6
+    if (unit === 'km/h') windNumber = +windNumber / 1.609
     console.log(unit)
     console.log(windNumber)
 
@@ -100,6 +103,22 @@ const utils = (() => {
     return `Atmospheric pressure is low.`
   }
 
+  function visibilityMessage(visibility) {
+    const visibilityInt = parseInt(removeAlpha(visibility), 10)
+    console.log(visibilityInt)
+    // DATA FOR KM
+    if (visibilityInt < 0.1) {
+      return 'Very low visibility, driving is not advised'
+    }
+    if (visibilityInt < 2.75) {
+      return 'Take caution when driving'
+    }
+    if (visibilityInt < 8) {
+      return 'Quite clear'
+    }
+    return 'Perfectly clear'
+  }
+
   // TIME CALCULATIONS
   function getNext24Hours(weatherData) {
     return weatherData.hourly.slice(0, 24)
@@ -131,7 +150,7 @@ const utils = (() => {
   function windToImperial(windEl) {
     const windText = windEl.textContent
     const windValue = windText.substring(0, windText.indexOf(' '))
-    let windImperial = Math.round((+windValue / 1.6) * 10) / 10
+    let windImperial = Math.round((+windValue / 1.60934) * 10) / 10
     windImperial = `${windImperial} mph`
     return windImperial
   }
@@ -190,11 +209,19 @@ const utils = (() => {
     return Math.round(+value * 1.8 + 32)
   }
 
+  function visibilityToMi(visibility) {
+    const visibilityString = removeAlpha(visibility.textContent)
+    const visibilityFloat = parseFloat(visibilityString, 10)
+    console.log(visibilityFloat)
+    const visibilityMi = Math.round((visibilityFloat / 1.60934) * 10) / 10
+    return `${visibilityMi} mi`
+  }
+
   // METRIC
   function windToMetric(windEl) {
     const windText = windEl.textContent
     const windValue = windText.substring(0, windText.indexOf(' '))
-    let windMetric = Math.round(+windValue * 1.6 * 10) / 10
+    let windMetric = Math.round(+windValue * 1.60934 * 10) / 10
     windMetric = `${windMetric} km/h`
     return windMetric
   }
@@ -266,8 +293,16 @@ const utils = (() => {
     return Math.round(((tempInt - 32) * 0.5556 * 10) / 10).toString()
   }
 
+  function visibilityToKm(visibility) {
+    const visibilityString = removeAlpha(visibility.textContent)
+    const visibilityFloat = parseFloat(visibilityString, 10)
+    console.log(visibilityFloat)
+    const visibilityKm = Math.round(visibilityFloat * 1.60934 * 10) / 10
+    return `${visibilityKm} km`
+  }
+
   function removeAlpha(string) {
-    const regex = /[^0-9:]/g
+    const regex = /[^0-9:]\./g
     return string.replace(regex, '')
   }
 
@@ -276,9 +311,11 @@ const utils = (() => {
     windToImperial,
     allTimeToAmPm,
     allTempToFahrenheit,
+    visibilityToMi,
     windToMetric,
     allTimeToMilitary,
     allTempToMetric,
+    visibilityToKm,
     getMessage,
     UVIndexMessage,
     windMessage,
