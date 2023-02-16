@@ -24,15 +24,8 @@ body {
   background-color: black;
 }
 
-html,
-body {
-  -webkit-font-smoothing: subpixel-antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  font-synthesis: none !important;
-}
-
 input {
-  font-family: 'Catamaran', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 // COMBINED
@@ -129,24 +122,25 @@ input {
     display: flex;
     align-items: center;
     width: 100%;
+    padding: 0 1rem;
     .author {
       display: flex;
       align-items: center;
       .git-logo {
         height: 1.5rem;
         width: 1.5rem;
-        margin: 0 0.25rem 0 1rem;
+        margin: 0 0.25rem 0 0;
       }
     }
     .units {
+      margin-right: 1rem;
       margin-left: auto;
     }
   }
 
   .units,
   .favorites {
-    margin-right: 1rem;
-    padding: 0.25rem;
+    padding: 0.25rem 0;
   }
   .units-menu,
   .favorites-menu {
@@ -202,6 +196,7 @@ input {
 
     .temperature {
       position: relative;
+      z-index: -10;
       font-size: 6rem;
       font-weight: 200;
     }
@@ -240,13 +235,26 @@ input {
     background-color: transparent;
     color: white;
 
-    &:focus + .search-button > svg {
-      opacity: 75;
+    &:focus + .location-loader + .search-button > svg {
+      opacity: 1;
     }
 
     &::placeholder {
       color: rgba(255, 255, 255, 0.3);
     }
+  }
+
+  .location-loader {
+    position: absolute;
+    right: 2rem;
+    display: none;
+    height: 2rem;
+    width: 2rem;
+    transform: scale(0.275);
+  }
+  .location-loader.active {
+    display: grid;
+    place-content: center;
   }
 
   .search-button {
@@ -263,10 +271,12 @@ input {
       position: relative;
       z-index: 20;
       height: 1.25rem;
+      width: 1.25rem;
       border: none;
-      filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)
-        brightness(106%) contrast(100%);
-      opacity: 0.25;
+      // LIGHTGREY
+      filter: invert(93%) sepia(63%) saturate(23%) hue-rotate(293deg)
+        brightness(104%) contrast(65%);
+      opacity: 0.5;
     }
   }
 }
@@ -584,11 +594,19 @@ input {
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid lightgray;
+  border: 8px solid $blue;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: lightgray transparent transparent transparent;
+  border-color: $blue transparent transparent transparent;
 }
+
+.lds-ring.search div {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-color: $lightgrey transparent transparent transparent;
+}
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
@@ -621,6 +639,11 @@ input {
     .options {
       display: flex;
       justify-content: space-evenly;
+      padding: 0 0.75rem;
+      .units {
+        margin-right: 0.75rem;
+        margin-left: auto;
+      }
 
       & > * {
         margin-left: 0;

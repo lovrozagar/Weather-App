@@ -1,5 +1,3 @@
-import storage from './storage'
-
 /* eslint-disable no-param-reassign */
 const utils = (() => {
   // FORM VALIDATION
@@ -136,10 +134,6 @@ const utils = (() => {
     const hour = date.toString().slice(16, 18)
     const doubleColon = date.toString().slice(18, 19)
     const minutes = date.toString().slice(19, 21)
-
-    if (storage.getUnit() === 'imperial') {
-      return fullTimeToAmPm(`${hour}${doubleColon}${minutes}`)
-    }
 
     return `${hour}${doubleColon}${minutes} h`
   }

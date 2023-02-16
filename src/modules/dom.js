@@ -1,7 +1,9 @@
+/* eslint-disable no-param-reassign */
 import { debounce } from 'lodash'
 import storage from './storage'
 import utils from './utils'
 import weather from './weather'
+// TODO: loading input autocomplete
 // TODO: google location
 // TODO: clean code
 const dom = (() => {
@@ -75,6 +77,7 @@ const dom = (() => {
     }
     const formattedSearch = utils.formatInput(e.target.value)
     console.log(formattedSearch)
+    showAutocompleteLoader()
     onFinishTyping(formattedSearch)
   }
 
@@ -83,6 +86,7 @@ const dom = (() => {
 
     const suggestions = await weather.getAutocompleteData(query)
     console.log(suggestions)
+    hideAutocompleteLoader()
 
     if (!suggestions.length) {
       showSearchErrorMessage('invalid')
@@ -155,6 +159,7 @@ const dom = (() => {
   function hideSuggestions() {
     const suggestionItems = document.querySelectorAll('[data-suggestion]')
     onFinishTyping.cancel()
+    hideAutocompleteLoader()
     suggestionItems.forEach((item) => {
       item.classList.remove('active')
     })
@@ -185,7 +190,7 @@ const dom = (() => {
   // DISPLAY ALL WEATHER CONTENT
   async function displayWeatherContentSubmit(location) {
     hideSuggestions()
-    // await new Promise((resolve) => setTimeout(resolve, 950))
+    await new Promise((resolve) => setTimeout(resolve, 950))
     const closestLocation = await weather.getAutocompleteData(location)
     console.log(closestLocation)
 
@@ -529,6 +534,8 @@ const dom = (() => {
       1
     )} km`
     displayTechnicalCard('visibility', visibility, container)
+    // DISPLAY IMPERIAL IF SET IN LOCAL STORAGE / METRIC IS MAIN
+    displayImperialIfSaved()
   }
 
   function displayTechnicalCard(name, value, container) {
@@ -612,14 +619,23 @@ const dom = (() => {
     loadingScreen.classList.add('active')
   }
 
-  function displaySelectedUnits() {
-    console.log(storage.getUnit())
-    if (storage.getUnit() === 'imperial') displayImperialUnits()
-    if (storage.getUnit() === 'metric') displayMetricUnits()
+  // AUTOCOMPLETE LOADER
+  function showAutocompleteLoader() {
+    const loader = document.getElementById('autocomplete-loader')
+    loader.classList.add('active')
   }
+
+  function hideAutocompleteLoader() {
+    const loader = document.getElementById('autocomplete-loader')
+    loader.classList.remove('active')
+  }
+
+  // UNITS
 
   function displayImperialUnits() {
     hideUnitMenu()
+    // IF SAVED AND SELECTED IN MENU AGAIN, RETURN
+    if (storage.getUnit() === 'imperial' && this !== undefined) return
 
     const wind = document.getElementById('wind-value')
     wind.textContent = utils.windToImperial(wind)
@@ -635,6 +651,8 @@ const dom = (() => {
 
   function displayMetricUnits() {
     hideUnitMenu()
+    // IF SAVED AND SELECTED IN MENU AGAIN, RETURN
+    if (storage.getUnit() === 'metric' && this !== undefined) return
 
     const wind = document.getElementById('wind-value')
     wind.textContent = utils.windToMetric(wind)
@@ -646,6 +664,12 @@ const dom = (() => {
     visibility.textContent = utils.visibilityToKm(visibility)
 
     storage.setUnit('metric')
+  }
+
+  function displayImperialIfSaved() {
+    if (storage.getUnit() === 'imperial') {
+      displayImperialUnits()
+    }
   }
 
   return { loadContent }
