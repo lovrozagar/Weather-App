@@ -3,9 +3,10 @@ import { debounce } from 'lodash'
 import storage from './storage'
 import utils from './utils'
 import weather from './weather'
-// TODO: IF SUGGESTION ALREADY DISPLAYED AND THEN LOCATION NOT FOUND SUGGESTINOSs STAY
+
 // TODO: google location
 // TODO: clean code
+
 const dom = (() => {
   function loadContent() {
     showLoadingScreen()
@@ -90,6 +91,7 @@ const dom = (() => {
 
     if (!suggestions.length) {
       showSearchErrorMessage('invalid')
+      hideSuggestions()
       return
     }
     loadSuggestions(suggestions)
