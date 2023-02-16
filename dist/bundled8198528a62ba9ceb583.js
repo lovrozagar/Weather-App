@@ -6010,11 +6010,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_reset_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
-___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap);"]);
-___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap);"]);
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n*,\n*::before,\n*::after {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nhtml {\n  min-height: 100%;\n  font-size: 16px;\n  font-family: \"Catamaran\", sans-serif;\n  font-family: \"Didact Gothic\", sans-serif;\n  font-family: \"Didact Gothic\", sans-serif;\n  font-family: \"Montserrat\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\nhtml,\nbody {\n  -webkit-font-smoothing: subpixel-antialiased !important;\n  -moz-osx-font-smoothing: grayscale !important;\n  font-synthesis: none !important;\n}\n\ninput {\n  font-family: \"Catamaran\", sans-serif;\n}\n\n.hour-temp::after,\n.day-temp-min::after,\n.day-temp-max::after {\n  content: \"°\";\n  height: 100%;\n  position: absolute;\n  top: 0;\n  font-size: 1.25rem;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n.video-container .background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.content {\n  padding: 0 2rem 2rem 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  text-align: center;\n}\n.content .nav {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  margin-bottom: 1rem;\n  border-radius: 5px;\n  border: 1px solid #3b3b3b;\n  color: #3b3b3b;\n  font-size: 1rem;\n}\n.content .nav .units {\n  border-right: 1px solid #3b3b3b;\n}\n.content .nav .units,\n.content .nav .favorites {\n  padding: 0.25rem;\n}\n.content .nav .units-menu {\n  text-align: left;\n}\n.content .nav .favorites-menu {\n  text-align: right;\n}\n.content .nav .units-menu,\n.content .nav .favorites-menu {\n  grid-column: 1/3;\n  display: none;\n}\n.content .nav .units-menu > li,\n.content .nav .favorites-menu > li {\n  padding: 0.5rem;\n  border-top: 1px solid #3b3b3b;\n}\n.content .nav .units-menu.active,\n.content .nav .favorites-menu.active {\n  grid-column: 1/3;\n  display: block;\n}\n.content .main-info {\n  padding: 1rem;\n}\n.content .main-info > * {\n  margin-bottom: 1rem;\n}\n.content .main-info .temperature {\n  position: relative;\n  font-size: 7.5rem;\n  font-weight: 200;\n}\n.content .main-info .temperature::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 6.5rem;\n}\n.content .main-info .description {\n  font-size: 2rem;\n}\n.content .main-info .main-feels-like {\n  font-size: 2rem;\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n}\n.location-form .location-input {\n  width: 100%;\n  padding-left: 0.5rem;\n  outline: none;\n  line-height: 2rem;\n  background-color: transparent;\n  color: white;\n}\n.location-form .location-input:focus + .search-button > svg {\n  opacity: 75;\n}\n.location-form .location-input::placeholder {\n  color: rgba(255, 255, 255, 0.3);\n}\n.location-form .search-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  display: flex;\n  align-items: center;\n  height: 100%;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .search-button svg {\n  pointer-events: none;\n  position: relative;\n  z-index: -1;\n  height: 1.25rem;\n  border: none;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n  opacity: 0.25;\n}\n\n.error-message.active {\n  display: block;\n}\n\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 0.85rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n\n.autocomplete {\n  overflow: hidden;\n}\n.autocomplete .suggestion.active {\n  display: block;\n}\n.autocomplete .suggestion {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0 !important;\n  border-bottom: 1px solid rgba(211, 211, 211, 0.5);\n  text-align: left;\n  font-size: 1rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n.autocomplete .suggestion:hover, .autocomplete .suggestion:focus {\n  background-color: rgba(255, 255, 255, 0.2);\n}\n\n.detailed-info {\n  position: relative;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n}\n.detailed-info .hours-container {\n  position: relative;\n  grid-column: 1/3;\n  display: flex;\n  gap: 1rem;\n  overflow-y: hidden;\n  overflow-x: auto;\n  padding: 3.6rem 1rem 1.25rem 1rem;\n}\n.detailed-info .hours-container .hour-item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  min-width: fit-content;\n}\n.detailed-info .hours-container .hour-item .hour-hour,\n.detailed-info .hours-container .hour-item .hour-temp {\n  font-size: 1.25rem;\n}\n.detailed-info .hours-container .hour-item img {\n  height: 50px;\n  width: 50px;\n}\n.detailed-info .hours-container .hour-item .hour-temp {\n  position: relative;\n}\n.detailed-info .hours-container .hour-item .hour-temp::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 1.5rem;\n}\n.detailed-info .days-container {\n  grid-column: 1/2;\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n}\n.detailed-info .days-container .day-item:first-child {\n  margin-top: 0;\n}\n.detailed-info .days-container .day-item:nth-child(2) {\n  margin-top: 0.25rem;\n}\n.detailed-info .days-container .day-item {\n  width: 100%;\n  flex: 1;\n  display: flex;\n  align-items: center;\n  margin-top: 1rem;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item img {\n  height: 50px;\n  width: 50px;\n}\n.detailed-info .days-container .day-item .week-day {\n  width: 6ch;\n  text-align: start;\n}\n.detailed-info .days-container .day-item .day-temp-min,\n.detailed-info .days-container .day-item .day-temp-max {\n  position: relative;\n  width: 3ch;\n  font-size: 1.25rem;\n}\n.detailed-info .days-container .day-item .meter {\n  flex: 1;\n  display: inline-block;\n  height: 0.5rem;\n  margin: 0 1rem;\n  border-radius: 1rem;\n  border: none;\n  outline: none;\n}\n.detailed-info .technical-container {\n  grid-column: 2/3;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 0.5rem;\n  text-align: left;\n}\n.detailed-info .technical-container .technical-card {\n  grid-column: 1/3;\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  width: 100%;\n  padding: 1rem;\n}\n.detailed-info .technical-container .technical-card .card-value {\n  font-size: 2rem;\n  font-weight: 500;\n}\n.detailed-info .technical-container .technical-card .card-text {\n  letter-spacing: 1px;\n  font-size: 1rem;\n  opacity: 0.8;\n}\n.detailed-info .technical-container .technical-card:nth-child(3),\n.detailed-info .technical-container .technical-card:nth-child(5) {\n  grid-column: 1/2;\n}\n.detailed-info .technical-container .technical-card:nth-child(4),\n.detailed-info .technical-container .technical-card:nth-child(6) {\n  grid-column: 2/3;\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  font-size: 1.125rem;\n  opacity: 0.5;\n}\n.title-and-icon .icon {\n  position: relative;\n  top: -0.1rem;\n  align-self: flex-start;\n  margin-left: 0.5rem;\n  height: 1.375rem;\n  width: 1.375rem;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n}\n.title-and-icon .icon.humidity {\n  margin-left: 0.25rem;\n}\n.title-and-icon .icon.forecast-hours,\n.title-and-icon .icon.forecast-days {\n  top: 0;\n  height: 1.75rem;\n  width: 1.75rem;\n  filter: none;\n}\n.title-and-icon .icon.forecast-days {\n  transform: scaleX(-1);\n}\n\n.title-and-icon.hours {\n  position: absolute;\n  top: 1rem;\n  left: 1rem;\n}\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n}\n.main-feels-like::after,\n.hour-temp::after,\n.day-temp-min::after,\n.day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n}\n\n.nav,\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255);\n  background: linear-gradient(90deg, rgb(155, 221, 255) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%);\n}\n\n.hot {\n  background: rgb(255, 48, 48);\n  background: linear-gradient(90deg, rgb(255, 48, 48) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%, rgb(155, 221, 255) 100%);\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(90deg, rgb(0, 155, 249) 0%, rgb(119, 209, 255) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(86, 232, 169) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(94, 226, 185) 25%, rgb(52, 255, 0) 50%, rgb(223, 245, 0) 75%, rgb(255, 239, 0) 100%);\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(241, 228, 35) 50%, rgb(255, 48, 48) 100%);\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(203, 255, 38) 50%, rgb(255, 235, 0) 100%);\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%, rgb(255, 48, 48) 100%);\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@media screen and (max-width: 480px) {\n  html {\n    font-size: 14px;\n  }\n  .detailed-info .days-container,\n  .detailed-info .technical-container {\n    grid-column: 1/3;\n  }\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss"],"names":[],"mappings":"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","sourcesContent":["@import './reset.css';\n@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap');\n@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');\n@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');\n\n// TAG ELEMENTS\n*,\n*::before,\n*::after {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nhtml {\n  min-height: 100%;\n  font-size: 16px;\n  font-family: 'Catamaran', sans-serif;\n  font-family: 'Didact Gothic', sans-serif;\n  font-family: 'Didact Gothic', sans-serif;\n  font-family: 'Montserrat', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\nhtml,\nbody {\n  -webkit-font-smoothing: subpixel-antialiased !important;\n  -moz-osx-font-smoothing: grayscale !important;\n  font-synthesis: none !important;\n}\n\ninput {\n  font-family: 'Catamaran', sans-serif;\n}\n\n// COMBINED\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  &::after {\n    content: '\\00b0';\n    height: 100%;\n    position: absolute;\n    top: 0;\n    font-size: 1.25rem;\n  }\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n  .background-video {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    filter: brightness(0.8);\n    pointer-events: none;\n  }\n}\n\n.content {\n  padding: 0 2rem 2rem 2rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  text-align: center;\n  // font-weight: bold;\n\n  .nav {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    margin-bottom: 1rem;\n    border-radius: 5px;\n    border: 1px solid #3b3b3b;\n    color: #3b3b3b;\n    font-size: 1rem;\n\n    .units {\n      border-right: 1px solid #3b3b3b;\n    }\n\n    .units,\n    .favorites {\n      padding: 0.25rem;\n    }\n\n    .units-menu {\n      text-align: left;\n    }\n    .favorites-menu {\n      text-align: right;\n    }\n\n    .units-menu,\n    .favorites-menu {\n      grid-column: 1/3;\n      display: none;\n\n      & > li {\n        padding: 0.5rem;\n        border-top: 1px solid #3b3b3b;\n      }\n    }\n\n    .units-menu.active,\n    .favorites-menu.active {\n      grid-column: 1/3;\n      display: block;\n    }\n  }\n\n  .main-info {\n    padding: 1rem;\n    & > * {\n      margin-bottom: 1rem;\n    }\n    .temperature {\n      position: relative;\n      font-size: 7.5rem;\n      font-weight: 200;\n\n      &::after {\n        content: '\\00b0';\n        position: absolute;\n        font-size: 6.5rem;\n      }\n    }\n\n    .description {\n      font-size: 2rem;\n    }\n\n    .main-feels-like {\n      font-size: 2rem;\n    }\n  }\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n\n  .location-input {\n    width: 100%;\n    padding-left: 0.5rem;\n    outline: none;\n    line-height: 2rem;\n    background-color: transparent;\n    color: white;\n    // box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n    &:focus + .search-button > svg {\n      opacity: 75;\n    }\n\n    &::placeholder {\n      color: rgba(255, 255, 255, 0.3);\n    }\n  }\n\n  .search-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    display: flex;\n    align-items: center;\n    height: 100%;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      pointer-events: none;\n      position: relative;\n      z-index: -1;\n      height: 1.25rem;\n      border: none;\n      filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n        brightness(106%) contrast(100%);\n      opacity: 0.25;\n    }\n  }\n}\n\n.error-message.active {\n  display: block;\n}\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 0.85rem;\n  letter-spacing: 1px;\n  color: rgba(248, 248, 255, 0.705);\n}\n\n.autocomplete {\n  overflow: hidden;\n  .suggestion.active {\n    display: block;\n  }\n  .suggestion {\n    display: none;\n    padding: 0.5rem;\n    border-radius: 0 !important;\n    border-bottom: 1px solid rgba(211, 211, 211, 0.5);\n    text-align: left;\n    font-size: 1rem;\n    letter-spacing: 1px;\n    color: rgba(248, 248, 255, 0.705);\n    &:hover,\n    &:focus {\n      background-color: rgba(255, 255, 255, 0.2);\n    }\n  }\n}\n\n.detailed-info {\n  position: relative;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 900px;\n  .hours-container {\n    position: relative;\n    grid-column: 1 / 3;\n    display: flex;\n    gap: 1rem;\n    overflow-y: hidden;\n    overflow-x: auto;\n    padding: 3.6rem 1rem 1.25rem 1rem;\n    .hour-item {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n      min-width: fit-content;\n      .hour-hour,\n      .hour-temp {\n        font-size: 1.25rem;\n      }\n      img {\n        height: 50px;\n        width: 50px;\n      }\n      .hour-temp {\n        position: relative;\n        &::after {\n          content: '\\00b0';\n          position: absolute;\n          font-size: 1.5rem;\n        }\n      }\n    }\n  }\n  .days-container {\n    grid-column: 1 / 2;\n    display: flex;\n    flex-direction: column;\n    padding: 1rem;\n    .day-item:first-child {\n      margin-top: 0;\n    }\n    .day-item:nth-child(2) {\n      margin-top: 0.25rem;\n    }\n    .day-item {\n      width: 100%;\n      flex: 1;\n      display: flex;\n      align-items: center;\n      margin-top: 1rem;\n      font-size: 1.25rem;\n      img {\n        height: 50px;\n        width: 50px;\n      }\n      .week-day {\n        width: 6ch;\n        text-align: start;\n      }\n      .day-temp-min,\n      .day-temp-max {\n        position: relative;\n        width: 3ch;\n        font-size: 1.25rem;\n      }\n      .meter {\n        flex: 1;\n        display: inline-block;\n        height: 0.5rem;\n        margin: 0 1rem;\n        border-radius: 1rem;\n        border: none;\n        outline: none;\n      }\n    }\n  }\n  .technical-container {\n    grid-column: 2 / 3;\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 0.5rem;\n    text-align: left;\n\n    .technical-card {\n      grid-column: 1/3;\n      display: flex;\n      flex-direction: column;\n      gap: 0.25rem;\n      width: 100%;\n      padding: 1rem;\n      .card-value {\n        font-size: 2rem;\n        font-weight: 500;\n      }\n      .card-text {\n        letter-spacing: 1px;\n        font-size: 1rem;\n        opacity: 0.8;\n      }\n    }\n    .technical-card:nth-child(3),\n    .technical-card:nth-child(5) {\n      grid-column: 1/2;\n    }\n    .technical-card:nth-child(4),\n    .technical-card:nth-child(6) {\n      grid-column: 2/3;\n    }\n  }\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  font-size: 1.125rem;\n  opacity: 0.5;\n  .icon {\n    position: relative;\n    top: -0.1rem;\n    align-self: flex-start;\n    margin-left: 0.5rem;\n    height: 1.375rem;\n    width: 1.375rem;\n    filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n      brightness(106%) contrast(100%);\n  }\n  .icon.humidity {\n    margin-left: 0.25rem;\n  }\n  .icon.forecast-hours,\n  .icon.forecast-days {\n    top: 0;\n    height: 1.75rem;\n    width: 1.75rem;\n    filter: none;\n  }\n  .icon.forecast-days {\n    transform: scaleX(-1);\n  }\n}\n.title-and-icon.hours {\n  position: absolute;\n  top: 1rem;\n  left: 1rem;\n}\n\n.main-feels-like,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n  &::after {\n    content: '\\00b0';\n    position: absolute;\n  }\n}\n\n.nav,\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n// METER GRADIENTS FOR DAILY OSCILLATION\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgba(0, 151, 249, 1) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255, 1);\n  background: linear-gradient(90deg, rgba(155, 221, 255, 1) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0, 1);\n  background: linear-gradient(90deg, rgba(52, 255, 0, 1) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgba(241, 228, 35, 1) 0%);\n}\n\n.hot {\n  background: rgba(255, 48, 48, 1);\n  background: linear-gradient(90deg, rgba(255, 48, 48, 1) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 151, 249, 1) 0%,\n    rgba(155, 221, 255, 1) 100%\n  );\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 155, 249, 1) 0%,\n    rgba(119, 209, 255, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(86, 232, 169, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(94, 226, 185, 1) 25%,\n    rgba(52, 255, 0, 1) 50%,\n    rgba(223, 245, 0, 1) 75%,\n    rgba(255, 239, 0, 1) 100%\n  );\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(241, 228, 35, 1) 50%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(203, 255, 38, 1) 50%,\n    rgba(255, 235, 0, 1) 100%\n  );\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(\n    90deg,\n    rgba(241, 228, 35, 1) 0%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n\n@media screen and (max-width: 480px) {\n  html {\n    font-size: 14px;\n  }\n  .detailed-info {\n    .days-container,\n    .technical-container {\n      grid-column: 1/3;\n    }\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n*,\n*::before,\n*::after {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nhtml {\n  min-height: 100%;\n  font-size: 16px;\n  font-family: \"Montserrat\", sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\nhtml,\nbody {\n  -webkit-font-smoothing: subpixel-antialiased !important;\n  -moz-osx-font-smoothing: grayscale !important;\n  font-synthesis: none !important;\n}\n\ninput {\n  font-family: \"Catamaran\", sans-serif;\n}\n\n.main-feels-like.loaded,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n}\n.main-feels-like.loaded::after,\n.hour-temp::after,\n.day-temp-min::after,\n.day-temp-max::after {\n  content: \"°\";\n  position: absolute;\n}\n\n.hour-logo,\n.day-item-logo {\n  height: 3.125rem;\n  width: 3.125rem;\n}\n\n.option,\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n}\n\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.nav,\n.hours-container,\n.days-container {\n  font-weight: 500;\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n.units,\n.favorites,\n.units-menu,\n.favorites-menu,\n.search-button {\n  cursor: pointer;\n}\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n}\n.video-container .background-video {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  filter: brightness(0.8);\n  pointer-events: none;\n}\n\n.nav {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-top: 0.5rem;\n  font-size: 1rem;\n  color: white;\n}\n.nav .options {\n  display: flex;\n  align-items: center;\n  width: 100%;\n}\n.nav .options .author {\n  display: flex;\n  align-items: center;\n}\n.nav .options .author .git-logo {\n  height: 1.5rem;\n  width: 1.5rem;\n  margin: 0 0.25rem 0 1rem;\n}\n.nav .options .units {\n  margin-left: auto;\n}\n.nav .units,\n.nav .favorites {\n  margin-right: 1rem;\n  padding: 0.25rem;\n}\n.nav .units-menu,\n.nav .favorites-menu {\n  position: absolute;\n  top: 2rem;\n  display: none;\n  width: 150px;\n  margin-right: 1rem;\n  padding: 0.5rem 0.5rem;\n  border-radius: 10px;\n  text-align: center;\n  color: white;\n  background-color: #27272a;\n}\n.nav .units-menu,\n.nav .favorites-menu {\n  display: none;\n}\n.nav .units-menu > li,\n.nav .favorites-menu > li {\n  padding: 0.75rem;\n  border-radius: 10px;\n}\n.nav .units-menu > li:hover, .nav .units-menu > li:active,\n.nav .favorites-menu > li:hover,\n.nav .favorites-menu > li:active {\n  color: white;\n  background-color: #2563eb;\n}\n.nav .units-menu.active,\n.nav .favorites-menu.active {\n  display: block;\n}\n\n.content {\n  padding: 0 1rem 3rem 1rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  text-align: center;\n}\n.content .main-info {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  padding: 2rem 0;\n}\n.content .main-info .location {\n  font-size: 2rem;\n}\n.content .main-info .temperature {\n  position: relative;\n  font-size: 6rem;\n  font-weight: 200;\n}\n.content .main-info .temperature.loaded::after {\n  content: \"°\";\n  position: absolute;\n  font-size: 5rem;\n}\n.content .main-info .description,\n.content .main-info .main-feels-like {\n  font-size: 1.5rem;\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n}\n.location-form .location-input {\n  width: 100%;\n  padding-left: 0.5rem;\n  outline: none;\n  font-size: 1rem;\n  line-height: 2rem;\n  background-color: transparent;\n  color: white;\n}\n.location-form .location-input:focus + .search-button > svg {\n  opacity: 75;\n}\n.location-form .location-input::placeholder {\n  color: rgba(255, 255, 255, 0.3);\n}\n.location-form .search-button {\n  position: absolute;\n  right: 0.5rem;\n  z-index: 10;\n  display: flex;\n  align-items: center;\n  height: 100%;\n  outline: none;\n  border: none;\n  background-color: transparent;\n}\n.location-form .search-button svg {\n  position: relative;\n  z-index: 20;\n  height: 1.25rem;\n  border: none;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n  opacity: 0.25;\n}\n\n.error-message.active {\n  display: block;\n}\n\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 1rem;\n  color: lightgrey;\n}\n\n.autocomplete {\n  overflow: hidden;\n}\n.autocomplete .suggestion.active {\n  display: block;\n}\n.autocomplete .suggestion {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0 !important;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.15);\n  text-align: left;\n  font-size: 1rem;\n  color: lightgrey;\n}\n.autocomplete .suggestion:hover, .autocomplete .suggestion:focus {\n  background-color: rgba(255, 255, 255, 0.15);\n}\n\n.detailed-info {\n  position: relative;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 800px;\n}\n.detailed-info .hours-container {\n  position: relative;\n  grid-column: 1/3;\n  display: flex;\n  gap: 1rem;\n  overflow-y: hidden;\n  overflow-x: auto;\n  padding: 3.6rem 1rem 1.25rem 1rem;\n}\n.detailed-info .hours-container .hour-item {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  min-width: fit-content;\n}\n.detailed-info .hours-container .hour-item .hour-hour,\n.detailed-info .hours-container .hour-item .hour-temp {\n  font-size: 1rem;\n}\n.detailed-info .days-container {\n  grid-column: 1/2;\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n}\n.detailed-info .days-container .day-item:first-child {\n  margin-top: 0;\n}\n.detailed-info .days-container .day-item:nth-child(2) {\n  margin-top: 0.25rem;\n}\n.detailed-info .days-container .day-item {\n  width: 100%;\n  flex: 1;\n  display: flex;\n  align-items: center;\n  margin-top: 1rem;\n  font-size: 1rem;\n}\n.detailed-info .days-container .day-item .week-day {\n  width: 6ch;\n  text-align: start;\n}\n.detailed-info .days-container .day-item .day-temp-min,\n.detailed-info .days-container .day-item .day-temp-max {\n  position: relative;\n  width: 3ch;\n  font-size: 1rem;\n}\n.detailed-info .days-container .day-item .meter {\n  flex: 1;\n  display: inline-block;\n  height: 0.375rem;\n  margin: 0 1rem;\n  border-radius: 1rem;\n  border: none;\n  outline: none;\n}\n.detailed-info .technical-container {\n  grid-column: 2/3;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 0.5rem;\n  text-align: left;\n}\n.detailed-info .technical-container .technical-card {\n  grid-column: 1/3;\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n  width: 100%;\n  padding: 1rem;\n}\n.detailed-info .technical-container .technical-card .card-value {\n  font-size: 1.25rem;\n  font-weight: 500;\n}\n.detailed-info .technical-container .technical-card .card-text {\n  font-size: 0.95rem;\n  opacity: 0.8;\n}\n.detailed-info .technical-container .technical-card:nth-child(3),\n.detailed-info .technical-container .technical-card:nth-child(5) {\n  grid-column: 1/2;\n}\n.detailed-info .technical-container .technical-card:nth-child(4),\n.detailed-info .technical-container .technical-card:nth-child(6) {\n  grid-column: 2/3;\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  opacity: 0.5;\n}\n.title-and-icon > :first-child {\n  font-size: 1.125rem;\n  font-weight: 400;\n}\n.title-and-icon .icon {\n  position: relative;\n  top: -0.1rem;\n  align-self: flex-start;\n  margin-left: 0.5rem;\n  height: 1.375rem;\n  width: 1.375rem;\n  filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg) brightness(106%) contrast(100%);\n}\n.title-and-icon .icon.humidity {\n  margin-left: 0.25rem;\n}\n.title-and-icon .icon.forecast-hours,\n.title-and-icon .icon.forecast-days {\n  top: 0;\n  height: 1.75rem;\n  width: 1.75rem;\n  filter: none;\n}\n.title-and-icon .icon.forecast-days {\n  transform: scaleX(-1);\n}\n\n.title-and-icon.hours {\n  position: absolute;\n  top: 1rem;\n  left: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255);\n  background: linear-gradient(90deg, rgb(155, 221, 255) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%);\n}\n\n.hot {\n  background: rgb(255, 48, 48);\n  background: linear-gradient(90deg, rgb(255, 48, 48) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgb(0, 151, 249) 0%, rgb(155, 221, 255) 100%);\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(90deg, rgb(0, 155, 249) 0%, rgb(119, 209, 255) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(86, 232, 169) 50%, rgb(52, 255, 0) 100%);\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(90deg, rgb(119, 209, 255) 0%, rgb(94, 226, 185) 25%, rgb(52, 255, 0) 50%, rgb(223, 245, 0) 75%, rgb(255, 239, 0) 100%);\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(241, 228, 35) 50%, rgb(255, 48, 48) 100%);\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(90deg, rgb(52, 255, 0) 0%, rgb(203, 255, 38) 50%, rgb(255, 235, 0) 100%);\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgb(241, 228, 35) 0%, rgb(255, 48, 48) 100%);\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@media screen and (max-width: 768px) {\n  .detailed-info .days-container,\n  .detailed-info .technical-container {\n    grid-column: 1/3;\n  }\n}\n@media screen and (max-width: 480px) {\n  .nav .options {\n    display: flex;\n    justify-content: space-evenly;\n  }\n  .nav .options > * {\n    margin-left: 0;\n    margin-right: 0;\n  }\n  .content .main-info .location {\n    font-size: 2rem;\n  }\n  .content .detailed-info .days-container .day-item .week-day {\n    width: 5ch;\n  }\n  .content .detailed-info .days-container .day-item .meter {\n    margin: 0 2.5%;\n  }\n}\n@media screen and (max-width: 350px) {\n  .technical-container > * {\n    grid-column: 1/3 !important;\n  }\n}", "",{"version":3,"sources":["webpack://./src/styles/main.scss","webpack://./src/styles/variables.scss"],"names":[],"mappings":"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","sourcesContent":["@import './reset.css';\n@import 'variables';\n@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');\n\n// TAG ELEMENTS\n*,\n*::before,\n*::after {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nhtml {\n  min-height: 100%;\n  font-size: 16px;\n  font-family: 'Montserrat', sans-serif;\n  color: white;\n}\n\nbody {\n  min-height: 100vh;\n  overflow-x: hidden;\n  background-color: black;\n}\n\nhtml,\nbody {\n  -webkit-font-smoothing: subpixel-antialiased !important;\n  -moz-osx-font-smoothing: grayscale !important;\n  font-synthesis: none !important;\n}\n\ninput {\n  font-family: 'Catamaran', sans-serif;\n}\n\n// COMBINED\n\n.main-feels-like.loaded,\n.hour-temp,\n.day-temp-min,\n.day-temp-max {\n  position: relative;\n  &::after {\n    content: '\\00b0';\n    position: absolute;\n  }\n}\n\n.hour-logo,\n.day-item-logo {\n  height: 3.125rem;\n  width: 3.125rem;\n}\n\n.option,\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  overflow: hidden;\n  backdrop-filter: blur(15px);\n  -webkit-backdrop-filter: blur(15px);\n}\n\n.location-input,\n.search-container,\n.hours-container,\n.days-container,\n.technical-card {\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.15);\n}\n\n.nav,\n.hours-container,\n.days-container {\n  font-weight: 500;\n}\n\n.hours-container,\n.days-container,\n.uvi-card {\n  padding: 1rem;\n}\n\n.units,\n.favorites,\n.units-menu,\n.favorites-menu,\n.search-button {\n  cursor: pointer;\n}\n\n// STRUCTURED\n\n.video-container {\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  z-index: -100;\n  min-width: 100%;\n  min-height: 100%;\n  .background-video {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    filter: brightness(0.8);\n    pointer-events: none;\n  }\n}\n\n.nav {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  padding-top: 0.5rem;\n  font-size: 1rem;\n  color: white;\n\n  .options {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    .author {\n      display: flex;\n      align-items: center;\n      .git-logo {\n        height: 1.5rem;\n        width: 1.5rem;\n        margin: 0 0.25rem 0 1rem;\n      }\n    }\n    .units {\n      margin-left: auto;\n    }\n  }\n\n  .units,\n  .favorites {\n    margin-right: 1rem;\n    padding: 0.25rem;\n  }\n  .units-menu,\n  .favorites-menu {\n    position: absolute;\n    top: 2rem;\n    display: none;\n    width: 150px;\n    margin-right: 1rem;\n    padding: 0.5rem 0.5rem;\n    border-radius: 10px;\n    text-align: center;\n    color: $white;\n    background-color: $dark-grey;\n  }\n\n  .units-menu,\n  .favorites-menu {\n    display: none;\n\n    & > li {\n      padding: 0.75rem;\n      border-radius: 10px;\n      &:hover,\n      &:active {\n        color: $white;\n        background-color: $blue;\n      }\n    }\n  }\n\n  .units-menu.active,\n  .favorites-menu.active {\n    display: block;\n  }\n}\n\n.content {\n  padding: 0 1rem 3rem 1rem;\n  max-width: fit-content;\n  margin: 0 auto;\n  font-size: 3rem;\n  text-align: center;\n\n  .main-info {\n    display: flex;\n    flex-direction: column;\n    gap: 1rem;\n    padding: 2rem 0;\n\n    .location {\n      font-size: 2rem;\n    }\n\n    .temperature {\n      position: relative;\n      font-size: 6rem;\n      font-weight: 200;\n    }\n    .temperature.loaded {\n      &::after {\n        content: '\\00b0';\n        position: absolute;\n        font-size: 5rem;\n      }\n    }\n\n    .description,\n    .main-feels-like {\n      font-size: 1.5rem;\n    }\n  }\n}\n\n.main-temp-min-max {\n  display: flex;\n  gap: 2rem;\n  justify-content: center;\n}\n\n.location-form {\n  display: flex;\n  position: relative;\n  font-size: 1rem;\n\n  .location-input {\n    width: 100%;\n    padding-left: 0.5rem;\n    outline: none;\n    font-size: 1rem;\n    line-height: 2rem;\n    background-color: transparent;\n    color: white;\n\n    &:focus + .search-button > svg {\n      opacity: 75;\n    }\n\n    &::placeholder {\n      color: rgba(255, 255, 255, 0.3);\n    }\n  }\n\n  .search-button {\n    position: absolute;\n    right: 0.5rem;\n    z-index: 10;\n    display: flex;\n    align-items: center;\n    height: 100%;\n    outline: none;\n    border: none;\n    background-color: transparent;\n    svg {\n      position: relative;\n      z-index: 20;\n      height: 1.25rem;\n      border: none;\n      filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n        brightness(106%) contrast(100%);\n      opacity: 0.25;\n    }\n  }\n}\n\n.error-message.active {\n  display: block;\n}\n.error-message {\n  display: none;\n  padding: 0.5rem;\n  border-radius: 0;\n  text-align: left;\n  font-size: 1rem;\n  color: $lightgrey;\n}\n\n.autocomplete {\n  overflow: hidden;\n  .suggestion.active {\n    display: block;\n  }\n  .suggestion {\n    display: none;\n    padding: 0.5rem;\n    border-radius: 0 !important;\n    border-bottom: 1px solid $white-transparent;\n    text-align: left;\n    font-size: 1rem;\n    color: $lightgrey;\n    &:hover,\n    &:focus {\n      background-color: $white-transparent;\n    }\n  }\n}\n\n.detailed-info {\n  position: relative;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 1rem;\n  margin-top: 1rem;\n  max-width: 800px;\n  .hours-container {\n    position: relative;\n    grid-column: 1 / 3;\n    display: flex;\n    gap: 1rem;\n    overflow-y: hidden;\n    overflow-x: auto;\n    padding: 3.6rem 1rem 1.25rem 1rem;\n    .hour-item {\n      flex: 1;\n      display: flex;\n      flex-direction: column;\n      min-width: fit-content;\n      .hour-hour,\n      .hour-temp {\n        font-size: 1rem;\n      }\n    }\n  }\n  .days-container {\n    grid-column: 1 / 2;\n    display: flex;\n    flex-direction: column;\n    padding: 1rem;\n    .day-item:first-child {\n      margin-top: 0;\n    }\n    .day-item:nth-child(2) {\n      margin-top: 0.25rem;\n    }\n    .day-item {\n      width: 100%;\n      flex: 1;\n      display: flex;\n      align-items: center;\n      margin-top: 1rem;\n      font-size: 1rem;\n      .week-day {\n        width: 6ch;\n        text-align: start;\n      }\n      .day-temp-min,\n      .day-temp-max {\n        position: relative;\n        width: 3ch;\n        font-size: 1rem;\n      }\n      .meter {\n        flex: 1;\n        display: inline-block;\n        height: 0.375rem;\n        margin: 0 1rem;\n        border-radius: 1rem;\n        border: none;\n        outline: none;\n      }\n    }\n  }\n  .technical-container {\n    grid-column: 2 / 3;\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 0.5rem;\n    text-align: left;\n\n    .technical-card {\n      grid-column: 1/3;\n      display: flex;\n      flex-direction: column;\n      gap: 0.25rem;\n      width: 100%;\n      padding: 1rem;\n      .card-value {\n        font-size: 1.25rem;\n        font-weight: 500;\n      }\n      .card-text {\n        font-size: 0.95rem;\n        opacity: 0.8;\n      }\n    }\n    .technical-card:nth-child(3),\n    .technical-card:nth-child(5) {\n      grid-column: 1/2;\n    }\n    .technical-card:nth-child(4),\n    .technical-card:nth-child(6) {\n      grid-column: 2/3;\n    }\n  }\n}\n\n.title-and-icon {\n  display: flex;\n  justify-content: start;\n  align-items: center;\n  opacity: 0.5;\n  & > :first-child {\n    font-size: 1.125rem;\n    font-weight: 400;\n  }\n  .icon {\n    position: relative;\n    top: -0.1rem;\n    align-self: flex-start;\n    margin-left: 0.5rem;\n    height: 1.375rem;\n    width: 1.375rem;\n    filter: invert(99%) sepia(5%) saturate(2%) hue-rotate(81deg)\n      brightness(106%) contrast(100%);\n  }\n  .icon.humidity {\n    margin-left: 0.25rem;\n  }\n  .icon.forecast-hours,\n  .icon.forecast-days {\n    top: 0;\n    height: 1.75rem;\n    width: 1.75rem;\n    filter: none;\n  }\n  .icon.forecast-days {\n    transform: scaleX(-1);\n  }\n}\n.title-and-icon.hours {\n  position: absolute;\n  top: 1rem;\n  left: 1rem;\n}\n\n::-webkit-scrollbar {\n  width: 17.5px;\n}\n\n::-webkit-scrollbar-track {\n  background-color: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  height: 10px;\n  background-color: rgba(248, 248, 255, 0.5);\n  border-radius: 20px;\n  border: 6px solid transparent;\n  background-clip: content-box;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: ghostwhite;\n}\n\n// METER GRADIENTS FOR DAILY OSCILLATION\n.very-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(90deg, rgba(0, 151, 249, 1) 0%);\n}\n\n.cold {\n  background: rgb(155, 221, 255, 1);\n  background: linear-gradient(90deg, rgba(155, 221, 255, 1) 100%);\n}\n\n.warm {\n  background: rgb(52, 255, 0, 1);\n  background: linear-gradient(90deg, rgba(52, 255, 0, 1) 100%);\n}\n\n.very-warm {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(90deg, rgba(241, 228, 35, 1) 0%);\n}\n\n.hot {\n  background: rgba(255, 48, 48, 1);\n  background: linear-gradient(90deg, rgba(255, 48, 48, 1) 100%);\n}\n\n.very-cold-to-cold {\n  background: rgb(0, 151, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 151, 249, 1) 0%,\n    rgba(155, 221, 255, 1) 100%\n  );\n}\n\n.very-cold-to-warm {\n  background: rgb(0, 155, 249);\n  background: linear-gradient(\n    90deg,\n    rgba(0, 155, 249, 1) 0%,\n    rgba(119, 209, 255, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(86, 232, 169, 1) 50%,\n    rgba(52, 255, 0, 1) 100%\n  );\n}\n\n.cold-to-very-warm {\n  background: rgb(119, 209, 255);\n  background: linear-gradient(\n    90deg,\n    rgba(119, 209, 255, 1) 0%,\n    rgba(94, 226, 185, 1) 25%,\n    rgba(52, 255, 0, 1) 50%,\n    rgba(223, 245, 0, 1) 75%,\n    rgba(255, 239, 0, 1) 100%\n  );\n}\n\n.warm-to-hot {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(241, 228, 35, 1) 50%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.warm-to-very-warm {\n  background: rgb(52, 255, 0);\n  background: linear-gradient(\n    90deg,\n    rgba(52, 255, 0, 1) 0%,\n    rgba(203, 255, 38, 1) 50%,\n    rgba(255, 235, 0, 1) 100%\n  );\n}\n\n.very-warm-to-hot {\n  background: rgb(241, 228, 35);\n  background: linear-gradient(\n    90deg,\n    rgba(241, 228, 35, 1) 0%,\n    rgba(255, 48, 48, 1) 100%\n  );\n}\n\n.loading-screen.active {\n  display: grid;\n  place-items: center;\n}\n\n.loading-screen {\n  background-color: rgba(0, 0, 0, 0.85);\n  height: 100vh;\n  width: 100%;\n  position: fixed;\n  z-index: 100;\n  display: none;\n}\n\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid lightgray;\n  border-radius: 50%;\n  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: lightgray transparent transparent transparent;\n}\n.lds-ring div:nth-child(1) {\n  animation-delay: -0.45s;\n}\n.lds-ring div:nth-child(2) {\n  animation-delay: -0.3s;\n}\n.lds-ring div:nth-child(3) {\n  animation-delay: -0.15s;\n}\n@keyframes lds-ring {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n\n@media screen and (max-width: 768px) {\n  .detailed-info {\n    .days-container,\n    .technical-container {\n      grid-column: 1/3;\n    }\n  }\n}\n\n@media screen and (max-width: 480px) {\n  .nav {\n    .options {\n      display: flex;\n      justify-content: space-evenly;\n\n      & > * {\n        margin-left: 0;\n        margin-right: 0;\n      }\n    }\n  }\n  .content {\n    .main-info {\n      .location {\n        font-size: 2rem;\n      }\n    }\n    .detailed-info {\n      .days-container {\n        .day-item {\n          .week-day {\n            width: 5ch;\n          }\n          .meter {\n            margin: 0 2.5%;\n          }\n        }\n      }\n    }\n  }\n}\n\n@media screen and (max-width: 350px) {\n  .technical-container {\n    & > * {\n      grid-column: 1/3 !important;\n    }\n  }\n}\n","$white: white;\n$white-transparent: rgba(255, 255, 255, 0.15);\n$lightgrey: lightgrey;\n$black: black;\n$blue: #2563eb;\n$dark-grey: #27272a;\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23761,21 +23759,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./weather */ "./src/modules/weather.js");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/modules/storage.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/modules/utils.js");
+/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./weather */ "./src/modules/weather.js");
+/* eslint-disable no-param-reassign */
 
 
-// TODO: add visibility
-// TODO: celsius to kelvin
+
+
 // TODO: google location
-// TODO: mobile optimization
-// TODO: form validation ON SUBMIT
-// TODO: 3600 offset for +-12/11 zones
-// TODO: add FAVORITES
-// TODO: add VIEW
 // TODO: clean code
 const dom = (() => {
   function loadContent() {
     showLoadingScreen()
+    _storage__WEBPACK_IMPORTED_MODULE_1__["default"].setDefaultUnitMetric()
     displayWeatherContentSubmit('Zagreb')
     initLocationSearch()
     initLocationAutocomplete()
@@ -23784,7 +23781,7 @@ const dom = (() => {
 
   function initNav() {
     const units = document.getElementById('units')
-    units.addEventListener('click', showUnitMenu)
+    units.addEventListener('click', toggleUnitMenu)
     initUnitOptions()
   }
 
@@ -23796,9 +23793,14 @@ const dom = (() => {
     metric.addEventListener('click', displayMetricUnits)
   }
 
-  function showUnitMenu() {
+  function toggleUnitMenu() {
     const unitMenu = document.getElementById('units-menu')
     unitMenu.classList.toggle('active')
+  }
+
+  function hideUnitMenu() {
+    const unitMenu = document.getElementById('units-menu')
+    unitMenu.classList.remove('active')
   }
 
   // DEBOUNCE FUNCTIONs FOR AUTOCOMPLETE, IF LOCATION IS LOADED, THIS/AUTOCOMPLETE GETS CANCELED
@@ -23836,14 +23838,21 @@ const dom = (() => {
       hideSearchErrorMessage()
       return
     }
-    const formattedSearch = formatInput(e.target.value)
+    const formattedSearch = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].formatInput(e.target.value)
     console.log(formattedSearch)
     onFinishTyping(formattedSearch)
   }
 
   async function displayAutocomplete(query) {
-    const suggestions = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getAutocompleteData(query)
+    hideSearchErrorMessage()
+
+    const suggestions = await _weather__WEBPACK_IMPORTED_MODULE_3__["default"].getAutocompleteData(query)
     console.log(suggestions)
+
+    if (!suggestions.length) {
+      showSearchErrorMessage('invalid')
+      return
+    }
     loadSuggestions(suggestions)
     initSuggestions(suggestions)
   }
@@ -23921,16 +23930,7 @@ const dom = (() => {
     locationInput.value = location
   }
 
-  // FORM VALIDATION
-  function formatInput(value) {
-    const regex = /[^A-Za-z, -]/g
-    let formattedValue = value.replace(regex, '')
-    if (formattedValue.includes(',')) {
-      formattedValue = formattedValue.substring(0, formattedValue.indexOf(','))
-    }
-    return formattedValue
-  }
-
+  // SEARCH ERROR
   function hideSearchErrorMessage() {
     const errorMessage = document.getElementById('error-message')
     errorMessage.classList.remove('active')
@@ -23950,8 +23950,8 @@ const dom = (() => {
   // DISPLAY ALL WEATHER CONTENT
   async function displayWeatherContentSubmit(location) {
     hideSuggestions()
-    // await new Promise((resolve) => setTimeout(resolve, 950))
-    const closestLocation = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getAutocompleteData(location)
+    await new Promise((resolve) => setTimeout(resolve, 950))
+    const closestLocation = await _weather__WEBPACK_IMPORTED_MODULE_3__["default"].getAutocompleteData(location)
     console.log(closestLocation)
 
     if (!closestLocation.length || closestLocation === 'error') {
@@ -23966,7 +23966,7 @@ const dom = (() => {
 
     const [lon, lat] = closestLocation[0].geometry.coordinates
     const coords = { lat, lon }
-    const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getForecastData(coords)
+    const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_3__["default"].getForecastData(coords)
     const { name, country_code: countryCode } = closestLocation[0].properties
     weatherData.name = `${name}, ${countryCode}`
     // MAKE COUNTRY OPTIONAL FOR NON RECOGNIZED STATES SUCH AS KOSOVO
@@ -23988,7 +23988,7 @@ const dom = (() => {
 
   async function displayWeatherContentSuggestion(coords, cityName) {
     hideSuggestions()
-    const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_1__["default"].getForecastData(coords)
+    const weatherData = await _weather__WEBPACK_IMPORTED_MODULE_3__["default"].getForecastData(coords)
     weatherData.name = cityName
     console.log(weatherData)
     displayBackgroundVideo(weatherData)
@@ -24007,8 +24007,10 @@ const dom = (() => {
 
     locationMain.textContent = getLocationNameMain(weatherData)
     temperatureMain.textContent = getTemperatureMain(weatherData)
+    temperatureMain.classList.add('loaded') // USE SO THAT DEGREE UNICODE DOES NOT LOAD BEFORE
     descriptionMain.textContent = getDescriptionMain(weatherData)
     feelsLikeMain.textContent = getFeelsLikeMain(weatherData)
+    feelsLikeMain.classList.add('loaded') // USE SO THAT DEGREE UNICODE DOES NOT LOAD BEFORE
   }
 
   function getLocationNameMain(weatherData) {
@@ -24049,7 +24051,7 @@ const dom = (() => {
     detailedInfoSection.appendChild(titleAndIcon)
 
     // ADD HOUR ITEMS
-    const hours = getNext24Hours(weatherData)
+    const hours = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].getNext24Hours(weatherData)
     const timezoneOffset = weatherData.timezone_offset
 
     hours.forEach((hour) => {
@@ -24058,7 +24060,7 @@ const dom = (() => {
   }
   function displayHourItem(hour, timezoneOffset, weatherData) {
     const seconds = hour.dt + timezoneOffset
-    const itemHour = secondsToHour(seconds)
+    const itemHour = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].secondsToHour(seconds)
     // GET WEATHER LOGO SRC
     let mainDesc = `${hour.weather[0].main.toLowerCase()}.svg`
     const sunriseNoOffset = hour.dt + 3600
@@ -24101,23 +24103,6 @@ const dom = (() => {
   }
   function clearContent(el) {
     el.replaceChildren('')
-  }
-  function getNext24Hours(weatherData) {
-    return weatherData.hourly.slice(0, 24)
-  }
-  function secondsToHour(seconds) {
-    let date = new Date(null)
-    date.setSeconds(seconds)
-    date = date.toString().slice(16, 18)
-    return date
-  }
-  function secondsToHourAndMinutes(seconds) {
-    const date = new Date(null)
-    date.setSeconds(seconds)
-    const hour = +date.toString().slice(16, 18)
-    const doubleColon = date.toString().slice(18, 19)
-    const minutes = +date.toString().slice(19, 21)
-    return `${hour}${doubleColon}${minutes}`
   }
 
   // DAILY FORECAST CONTENT
@@ -24275,45 +24260,50 @@ const dom = (() => {
 
   // TECHNICAL CONTENT
   function displayTechnicalContent(weatherData) {
-    const technicalContainer = document.getElementById('technical-container')
-    clearContent(technicalContainer)
+    const container = document.getElementById('technical-container')
+    clearContent(container)
     // UVI
     const UVIndex = weatherData.current.uvi
-    displayUVIndex(UVIndex, technicalContainer)
+    displayTechnicalCard('UV index', UVIndex, container)
     // WIND
     // CONVERT FROM METERS PER SECOND TO KILOMETERS PER SECOND
     const windSpeed = Math.round(weatherData.current.wind_speed * 3.6 * 10) / 10
     const wind = `${windSpeed} km/h`
-    displayWind(wind, technicalContainer)
+    displayTechnicalCard('wind', wind, container)
     // HUMIDITY
     const humidity = `${weatherData.current.humidity}%`
-    displayHumidity(humidity, technicalContainer)
+    displayTechnicalCard('humidity', humidity, container)
     // CHANCE OF RAIN
     const chanceOfRain = `${Math.round(weatherData.daily[0].pop * 100)}%`
-    displayChanceOfRain(chanceOfRain, technicalContainer)
+    displayTechnicalCard('chance of rain', chanceOfRain, container)
     // SUNRISE
     const sunriseSeconds =
       weatherData.current.sunrise + weatherData.timezone_offset - 3600
-    const sunrise = secondsToHourAndMinutes(sunriseSeconds)
-    console.log(sunrise)
-    displaySunrise(sunrise, technicalContainer)
+    const sunrise = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].secondsToHourAndMinutes(sunriseSeconds)
+    displayTechnicalCard('sunrise', sunrise, container)
     // SUNSET
     const sunsetSeconds =
       weatherData.current.sunset + weatherData.timezone_offset - 3600
-    const sunset = secondsToHourAndMinutes(sunsetSeconds)
-    displaySunset(sunset, technicalContainer)
+    const sunset = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].secondsToHourAndMinutes(sunsetSeconds)
+    displayTechnicalCard('sunset', sunset, container)
     // PRESSURE
     const pressure = `${weatherData.current.pressure} hPa`
-    displayPressure(pressure, technicalContainer)
+    displayTechnicalCard('pressure', pressure, container)
+    // VISIBILITY
+    const visibility = `${(weatherData.current.visibility / 1000).toFixed(
+      1
+    )} km`
+    displayTechnicalCard('visibility', visibility, container)
+    // DISPLAY IMPERIAL IF SET IN LOCAL STORAGE / METRIC IS MAIN
+    displayImperialIfSaved()
   }
 
-  function displayUVIndex(UVIndex, container) {
+  function displayTechnicalCard(name, value, container) {
     const title = document.createElement('p')
-    title.textContent = 'UV index'
-
     const icon = document.createElement('img')
+    title.textContent = name
     icon.classList.add('icon')
-    icon.src = 'uvSun.svg'
+    icon.src = `${name}.svg`
 
     const titleAndIcon = document.createElement('div')
     titleAndIcon.classList.add('title-and-icon')
@@ -24321,68 +24311,8 @@ const dom = (() => {
     titleAndIcon.appendChild(icon)
 
     const indexEl = document.createElement('p')
-    indexEl.textContent = UVIndex
-    indexEl.classList.add('card-value')
-
-    const messageEl = document.createElement('p')
-    messageEl.textContent = UVIndexMessage(UVIndex)
-    messageEl.classList.add('card-text')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-    card.appendChild(messageEl)
-
-    container.appendChild(card)
-  }
-
-  function displayWind(wind, container) {
-    const title = document.createElement('p')
-    title.textContent = 'wind'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'wind.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = wind
-    indexEl.id = 'wind-value'
-    indexEl.classList.add('card-value')
-
-    const messageEl = document.createElement('p')
-    messageEl.textContent = windMessage(wind)
-    messageEl.classList.add('card-text')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-    card.appendChild(messageEl)
-
-    container.appendChild(card)
-  }
-
-  function displayHumidity(humidity, container) {
-    const title = document.createElement('p')
-    title.textContent = 'humidity'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon', 'humidity')
-    icon.src = 'humidity.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = humidity
+    indexEl.textContent = value
+    indexEl.id = `${name}-value`
     indexEl.classList.add('card-value')
 
     const card = document.createElement('div')
@@ -24390,167 +24320,15 @@ const dom = (() => {
     card.appendChild(titleAndIcon)
     card.appendChild(indexEl)
 
-    container.appendChild(card)
-  }
-
-  function displayChanceOfRain(chanceOfRain, container) {
-    const title = document.createElement('p')
-    title.textContent = 'chance of rain'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'chanceOfRain.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = chanceOfRain
-    indexEl.classList.add('card-value')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-
-    container.appendChild(card)
-  }
-
-  function displaySunrise(sunrise, container) {
-    const title = document.createElement('p')
-    title.textContent = 'sunrise'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'sunrise.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = `${sunrise} h`
-    indexEl.id = 'sunrise-value'
-    indexEl.classList.add('card-value')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-
-    container.appendChild(card)
-  }
-
-  function displaySunset(sunset, container) {
-    const title = document.createElement('p')
-    title.textContent = 'sunset'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'sunset.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = `${sunset} h`
-    indexEl.id = 'sunset-value'
-    indexEl.classList.add('card-value')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-
-    container.appendChild(card)
-  }
-
-  function displayPressure(pressure, container) {
-    const title = document.createElement('p')
-    title.textContent = 'pressure'
-
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    icon.src = 'pressure.svg'
-
-    const titleAndIcon = document.createElement('div')
-    titleAndIcon.classList.add('title-and-icon')
-    titleAndIcon.appendChild(title)
-    titleAndIcon.appendChild(icon)
-
-    const indexEl = document.createElement('p')
-    indexEl.textContent = pressure
-    indexEl.classList.add('card-value')
-
-    const messageEl = document.createElement('p')
-    messageEl.textContent = pressureMessage(pressure)
-    messageEl.classList.add('card-text')
-
-    const card = document.createElement('div')
-    card.classList.add('technical-card')
-    card.appendChild(titleAndIcon)
-    card.appendChild(indexEl)
-    card.appendChild(messageEl)
-
-    container.appendChild(card)
-  }
-
-  function UVIndexMessage(index) {
-    if (index <= 0.99) return 'Very low, damage possibility is negligible'
-    if (index <= 4) return 'Mild, sun protection may or may not be needed.'
-    if (index <= 7) return 'High, sun protection is recommended'
-    if (index > 7) return 'Very high, sun protection is highly recommended'
-    return 'Very low'
-  }
-
-  function windMessage(wind) {
-    let windNumber = wind.substring(0, wind.indexOf(' '))
-    // IF NOT MPH TRANSFORM TO MPH, CHART USES MPH
-    const unit = wind.split(' ').pop()
-    if (unit === 'km/h') windNumber = +windNumber / 1.6
-    console.log(unit)
-    console.log(windNumber)
-
-    if (windNumber < 1) return 'Calm, Smoke rises vertically.'
-    if (windNumber < 4)
-      return 'Light air, smoke drifts with air, weather vanes inactive.'
-    if (windNumber < 8)
-      return 'Light breeze, weather vanes active, wind felt on face, leaves rustle.'
-    if (windNumber < 13)
-      return 'Gentle breeze, leaves & small twigs move, light flags extend.'
-    if (windNumber < 19)
-      return 'Moderate breeze, dust & loose paper blows about.'
-    if (windNumber < 25)
-      return 'Fresh breeze, small trees sway, waves break on inland waters.'
-    if (windNumber < 32)
-      return 'Strong breeze, large branches sway, umbrellas difficult to use.'
-    if (windNumber < 39)
-      return 'Moderate gale, whole trees sway, difficult to walk against wind.'
-    if (windNumber < 47)
-      return 'Fresh gale, twigs broken off trees, walking against wind very difficult.'
-    if (windNumber < 55)
-      return 'Strong gale, slight damage to buildings, shingles blown off roof.'
-    if (windNumber < 64)
-      return 'Whole gale, trees uprooted, considerable damage to buildings.'
-    if (windNumber < 73)
-      return 'Storm, widespread damage, very rare occurrence.'
-    return 'Hurricane, violent destruction.'
-  }
-
-  function pressureMessage(pressure) {
-    const pressureValue = pressure.substring(0, pressure.indexOf(' '))
-    if (+pressureValue > 1022) {
-      return `Atmospheric pressure is high.`
+    const message = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].getMessage(name, value)
+    if (message) {
+      const messageEl = document.createElement('p')
+      messageEl.textContent = message
+      messageEl.classList.add('card-text')
+      card.appendChild(messageEl)
     }
-    if (+pressureValue > 1009 && +pressure <= 1022) {
-      return `Atmospheric pressure is normal.`
-    }
-    return `Atmospheric pressure is low.`
+
+    container.appendChild(card)
   }
 
   // BACKGROUND VIDEO
@@ -24601,69 +24379,244 @@ const dom = (() => {
     loadingScreen.classList.add('active')
   }
 
-  // UNIT SWITCH
-
-  function unitSwitch(bool) {
-    // BOOL IS USED FOR NOT RUNNING THE FUNCTION ON LOAD
-    if (!bool) return
-
-    const wind = document.getElementById('wind-value')
-    // IF METRIC SWITCH TO IMPERIAL, IF NOT METRIC SWITCH TO METRIC
-    if (isMetric()) {
-      wind.textContent = windToImperial(wind)
-      allTimeToAmPm()
-      allTempToFahrenheit()
-    } else {
-      wind.textContent = windToMetric(wind)
-      allTimeToMilitary()
-      allTempToMetric()
-    }
-  }
-
   function displayImperialUnits() {
-    // IF ALREADY IMPERIAL RETURN
-    if (!isMetric()) return
+    hideUnitMenu()
+    // IF SAVED AND SELECTED IN MENU AGAIN, RETURN
+    if (_storage__WEBPACK_IMPORTED_MODULE_1__["default"].getUnit() === 'imperial' && this !== undefined) return
 
     const wind = document.getElementById('wind-value')
-    wind.textContent = windToImperial(wind)
+    wind.textContent = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].windToImperial(wind)
 
-    allTimeToAmPm()
-    allTempToFahrenheit()
+    _utils__WEBPACK_IMPORTED_MODULE_2__["default"].allTimeToAmPm()
+    _utils__WEBPACK_IMPORTED_MODULE_2__["default"].allTempToFahrenheit()
+
+    const visibility = document.getElementById('visibility-value')
+    visibility.textContent = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].visibilityToMi(visibility)
+
+    _storage__WEBPACK_IMPORTED_MODULE_1__["default"].setUnit('imperial')
   }
 
   function displayMetricUnits() {
-    // IF ALREADY IMPERIAL RETURN
-    if (isMetric()) return
+    hideUnitMenu()
+    // IF SAVED AND SELECTED IN MENU AGAIN, RETURN
+    if (_storage__WEBPACK_IMPORTED_MODULE_1__["default"].getUnit() === 'metric' && this !== undefined) return
 
     const wind = document.getElementById('wind-value')
-    wind.textContent = windToMetric(wind)
+    wind.textContent = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].windToMetric(wind)
 
-    allTimeToMilitary()
-    allTempToMetric()
+    _utils__WEBPACK_IMPORTED_MODULE_2__["default"].allTimeToMilitary()
+    _utils__WEBPACK_IMPORTED_MODULE_2__["default"].allTempToMetric()
+
+    const visibility = document.getElementById('visibility-value')
+    visibility.textContent = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].visibilityToKm(visibility)
+
+    _storage__WEBPACK_IMPORTED_MODULE_1__["default"].setUnit('metric')
   }
 
-  function isMetric() {
-    // 2 TESTS INCLUDED IN CASE ONE PART OF WEATHER DATA IS MISSING
-    // HOUR UNIT TEST
-    const hours = document.getElementById('hours-container')
-    const hourTime = hours.children[1].children[0].textContent
-    const hourTimeUnit = hourTime.charAt(hourTime.length - 1)
-    console.log(hourTimeUnit)
-    // WIND UNIT TEST
-    const windSpeed = document.getElementById('wind-value')
-    const windString = windSpeed.textContent
-    const windUnit = windString.split(' ').pop()
-    // TEST
-    if (hourTimeUnit === 'h' || windUnit === 'km/h') return true
+  function displayImperialIfSaved() {
+    if (_storage__WEBPACK_IMPORTED_MODULE_1__["default"].getUnit() === 'imperial') {
+      displayImperialUnits()
+    }
+  }
+
+  return { loadContent }
+})()
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dom);
+
+
+/***/ }),
+
+/***/ "./src/modules/storage.js":
+/*!********************************!*\
+  !*** ./src/modules/storage.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const storage = (() => {
+  function setUnit(unit) {
+    localStorage.setItem('unit', JSON.stringify(unit))
+  }
+
+  function getUnit() {
+    return JSON.parse(localStorage.getItem('unit'))
+  }
+
+  function setDefaultUnitMetric() {
+    if (localStorage.getItem('unit') === null) setUnit('metric')
+  }
+
+  return { getUnit, setUnit, setDefaultUnitMetric }
+})()
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (storage);
+
+
+/***/ }),
+
+/***/ "./src/modules/utils.js":
+/*!******************************!*\
+  !*** ./src/modules/utils.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* eslint-disable no-param-reassign */
+const utils = (() => {
+  // FORM VALIDATION
+  function formatInput(value) {
+    const regex = /[^A-Za-z, -]/g
+    let formattedValue = value.replace(regex, '')
+    if (formattedValue.includes(',')) {
+      formattedValue = formattedValue.substring(0, formattedValue.indexOf(','))
+    }
+    return formattedValue
+  }
+
+  // DESCRIPTION MESSAGES
+
+  function getMessage(name, value) {
+    if (isDescriptive(name)) {
+      let message
+      switch (name) {
+        case 'UV index':
+          message = UVIndexMessage(value)
+          break
+        case 'wind':
+          message = windMessage(value)
+          break
+        case 'pressure':
+          message = pressureMessage(value)
+          break
+        case 'visibility':
+          message = visibilityMessage(value)
+          break
+        default:
+          message = false
+      }
+
+      return message
+    }
     return false
   }
 
-  // IMPERIAL
+  function isDescriptive(name) {
+    if (
+      name === 'UV index' ||
+      name === 'wind' ||
+      name === 'pressure' ||
+      name === 'visibility'
+    )
+      return true
+    return false
+  }
 
+  function UVIndexMessage(index) {
+    if (index <= 0.99) return 'Very low, damage possibility is negligible'
+    if (index <= 4) return 'Mild, sun protection may or may not be needed.'
+    if (index <= 7) return 'High, sun protection is recommended'
+    if (index > 7) return 'Very high, sun protection is highly recommended'
+    return 'Very low'
+  }
+
+  function windMessage(wind) {
+    let windNumber = wind.substring(0, wind.indexOf(' '))
+    // IF NOT MPH TRANSFORM TO MPH, CHART USES MPH
+    const unit = wind.split(' ').pop()
+    if (unit === 'km/h') windNumber = +windNumber / 1.609
+    console.log(unit)
+    console.log(windNumber)
+
+    if (windNumber < 1) return 'Calm, Smoke rises vertically.'
+    if (windNumber < 4)
+      return 'Light air, smoke drifts with air, weather vanes inactive.'
+    if (windNumber < 8)
+      return 'Light breeze, weather vanes active, wind felt on face, leaves rustle.'
+    if (windNumber < 13)
+      return 'Gentle breeze, leaves & small twigs move, light flags extend.'
+    if (windNumber < 19)
+      return 'Moderate breeze, dust & loose paper blows about.'
+    if (windNumber < 25)
+      return 'Fresh breeze, small trees sway, waves break on inland waters.'
+    if (windNumber < 32)
+      return 'Strong breeze, large branches sway, umbrellas difficult to use.'
+    if (windNumber < 39)
+      return 'Moderate gale, whole trees sway, difficult to walk against wind.'
+    if (windNumber < 47)
+      return 'Fresh gale, twigs broken off trees, walking against wind very difficult.'
+    if (windNumber < 55)
+      return 'Strong gale, slight damage to buildings, shingles blown off roof.'
+    if (windNumber < 64)
+      return 'Whole gale, trees uprooted, considerable damage to buildings.'
+    if (windNumber < 73)
+      return 'Storm, widespread damage, very rare occurrence.'
+    return 'Hurricane, violent destruction.'
+  }
+
+  function pressureMessage(pressure) {
+    const pressureValue = pressure.substring(0, pressure.indexOf(' '))
+    if (+pressureValue > 1022) {
+      return `Atmospheric pressure is high.`
+    }
+    if (+pressureValue > 1009 && +pressure <= 1022) {
+      return `Atmospheric pressure is normal.`
+    }
+    return `Atmospheric pressure is low.`
+  }
+
+  function visibilityMessage(visibility) {
+    const visibilityInt = parseInt(removeAlpha(visibility), 10)
+    console.log(visibilityInt)
+    // DATA FOR KM
+    if (visibilityInt < 0.1) {
+      return 'Very low visibility, driving is not advised'
+    }
+    if (visibilityInt < 2.75) {
+      return 'Take caution when driving'
+    }
+    if (visibilityInt < 8) {
+      return 'Quite clear'
+    }
+    return 'Perfectly clear'
+  }
+
+  // TIME CALCULATIONS
+  function getNext24Hours(weatherData) {
+    return weatherData.hourly.slice(0, 24)
+  }
+  function secondsToHour(seconds) {
+    let date = new Date(null)
+    date.setSeconds(seconds)
+    date = date.toString().slice(16, 18)
+    return date
+  }
+  function secondsToHourAndMinutes(seconds) {
+    const date = new Date(null)
+    date.setSeconds(seconds)
+
+    const hour = date.toString().slice(16, 18)
+    const doubleColon = date.toString().slice(18, 19)
+    const minutes = date.toString().slice(19, 21)
+
+    return `${hour}${doubleColon}${minutes} h`
+  }
+
+  // UNITS
+
+  // IMPERIAL
   function windToImperial(windEl) {
     const windText = windEl.textContent
     const windValue = windText.substring(0, windText.indexOf(' '))
-    let windImperial = Math.round((+windValue / 1.6) * 10) / 10
+    let windImperial = Math.round((+windValue / 1.60934) * 10) / 10
     windImperial = `${windImperial} mph`
     return windImperial
   }
@@ -24722,12 +24675,19 @@ const dom = (() => {
     return Math.round(+value * 1.8 + 32)
   }
 
-  // METRIC
+  function visibilityToMi(visibility) {
+    const visibilityString = removeAlpha(visibility.textContent)
+    const visibilityFloat = parseFloat(visibilityString, 10)
+    console.log(visibilityFloat)
+    const visibilityMi = Math.round((visibilityFloat / 1.60934) * 10) / 10
+    return `${visibilityMi} mi`
+  }
 
+  // METRIC
   function windToMetric(windEl) {
     const windText = windEl.textContent
     const windValue = windText.substring(0, windText.indexOf(' '))
-    let windMetric = Math.round(+windValue * 1.6 * 10) / 10
+    let windMetric = Math.round(+windValue * 1.60934 * 10) / 10
     windMetric = `${windMetric} km/h`
     return windMetric
   }
@@ -24799,15 +24759,40 @@ const dom = (() => {
     return Math.round(((tempInt - 32) * 0.5556 * 10) / 10).toString()
   }
 
+  function visibilityToKm(visibility) {
+    const visibilityString = removeAlpha(visibility.textContent)
+    const visibilityFloat = parseFloat(visibilityString, 10)
+    console.log(visibilityFloat)
+    const visibilityKm = Math.round(visibilityFloat * 1.60934 * 10) / 10
+    return `${visibilityKm} km`
+  }
+
   function removeAlpha(string) {
-    const regex = /[^0-9:]/g
+    const regex = /[^0-9:]\./g
     return string.replace(regex, '')
   }
 
-  return { loadContent }
+  return {
+    formatInput,
+    windToImperial,
+    allTimeToAmPm,
+    allTempToFahrenheit,
+    visibilityToMi,
+    windToMetric,
+    allTimeToMilitary,
+    allTempToMetric,
+    visibilityToKm,
+    getMessage,
+    UVIndexMessage,
+    windMessage,
+    pressureMessage,
+    getNext24Hours,
+    secondsToHour,
+    secondsToHourAndMinutes,
+  }
 })()
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dom);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (utils);
 
 
 /***/ }),
@@ -24837,6 +24822,9 @@ const weather = (() => {
     const weatherData = await weatherResponse.json()
     // ADD LOCATION NAME TO WEATHER DATA
     weatherData.name = main.name
+    // ADD UNIT TYPE TO WEATHER DATA
+    weatherData.unit = unit
+
     return weatherData
   }
 
@@ -24893,14 +24881,25 @@ module.exports = __webpack_require__.p + "fog.mp4";
 
 /***/ }),
 
-/***/ "./src/assets/images/chanceOfRain.svg":
-/*!********************************************!*\
-  !*** ./src/assets/images/chanceOfRain.svg ***!
-  \********************************************/
+/***/ "./src/assets/images/UV index.svg":
+/*!****************************************!*\
+  !*** ./src/assets/images/UV index.svg ***!
+  \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "chanceOfRain.svg";
+module.exports = __webpack_require__.p + "UV index.svg";
+
+/***/ }),
+
+/***/ "./src/assets/images/chance of rain.svg":
+/*!**********************************************!*\
+  !*** ./src/assets/images/chance of rain.svg ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "chance of rain.svg";
 
 /***/ }),
 
@@ -24934,6 +24933,17 @@ module.exports = __webpack_require__.p + "clouds.svg";
 
 "use strict";
 module.exports = __webpack_require__.p + "forecast.svg";
+
+/***/ }),
+
+/***/ "./src/assets/images/github.svg":
+/*!**************************************!*\
+  !*** ./src/assets/images/github.svg ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "github.svg";
 
 /***/ }),
 
@@ -25036,14 +25046,14 @@ module.exports = __webpack_require__.p + "thunder.svg";
 
 /***/ }),
 
-/***/ "./src/assets/images/uvSun.svg":
-/*!*************************************!*\
-  !*** ./src/assets/images/uvSun.svg ***!
-  \*************************************/
+/***/ "./src/assets/images/visibility.svg":
+/*!******************************************!*\
+  !*** ./src/assets/images/visibility.svg ***!
+  \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "uvSun.svg";
+module.exports = __webpack_require__.p + "visibility.svg";
 
 /***/ }),
 
@@ -25251,14 +25261,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_images_rain_svg__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./assets/images/rain.svg */ "./src/assets/images/rain.svg");
 /* harmony import */ var _assets_images_snow_svg__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/images/snow.svg */ "./src/assets/images/snow.svg");
 /* harmony import */ var _assets_images_thunder_svg__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./assets/images/thunder.svg */ "./src/assets/images/thunder.svg");
-/* harmony import */ var _assets_images_uvSun_svg__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./assets/images/uvSun.svg */ "./src/assets/images/uvSun.svg");
+/* harmony import */ var _assets_images_UV_index_svg__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./assets/images/UV index.svg */ "./src/assets/images/UV index.svg");
 /* harmony import */ var _assets_images_sunrise_svg__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./assets/images/sunrise.svg */ "./src/assets/images/sunrise.svg");
 /* harmony import */ var _assets_images_sunset_svg__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./assets/images/sunset.svg */ "./src/assets/images/sunset.svg");
 /* harmony import */ var _assets_images_humidity_svg__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./assets/images/humidity.svg */ "./src/assets/images/humidity.svg");
-/* harmony import */ var _assets_images_chanceOfRain_svg__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./assets/images/chanceOfRain.svg */ "./src/assets/images/chanceOfRain.svg");
+/* harmony import */ var _assets_images_chance_of_rain_svg__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./assets/images/chance of rain.svg */ "./src/assets/images/chance of rain.svg");
 /* harmony import */ var _assets_images_forecast_svg__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./assets/images/forecast.svg */ "./src/assets/images/forecast.svg");
 /* harmony import */ var _assets_images_wind_svg__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./assets/images/wind.svg */ "./src/assets/images/wind.svg");
 /* harmony import */ var _assets_images_pressure_svg__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./assets/images/pressure.svg */ "./src/assets/images/pressure.svg");
+/* harmony import */ var _assets_images_visibility_svg__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./assets/images/visibility.svg */ "./src/assets/images/visibility.svg");
+/* harmony import */ var _assets_images_github_svg__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./assets/images/github.svg */ "./src/assets/images/github.svg");
+
+
 
 
 
@@ -25296,4 +25310,4 @@ _modules_dom__WEBPACK_IMPORTED_MODULE_4__["default"].loadContent()
 
 /******/ })()
 ;
-//# sourceMappingURL=bundlee8e7c7d2deb21df9089b.js.map
+//# sourceMappingURL=bundled8198528a62ba9ceb583.js.map

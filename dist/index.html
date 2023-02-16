@@ -8,7 +8,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
     <title>Document</title>
-  <script defer src="bundlee8e7c7d2deb21df9089b.js"></script></head>
+  <script defer src="bundled8198528a62ba9ceb583.js"></script></head>
   <body>
     <div id="loading-screen" class="loading-screen">
       <div class="lds-ring">
@@ -30,21 +30,27 @@
         <source src="" type="video/mp4" />
       </video>
     </div>
-    <div id="content" class="content">
-      <nav id="nav" class="nav">
+    <nav id="nav" class="nav">
+      <div class="options">
+        <div class="author">
+          <img class="git-logo" src="github.svg" alt="github logo" />
+          <p>@lovrozagar</p>
+        </div>
         <div id="units" class="units">units</div>
         <div id="favorites" class="favorites">favorites</div>
-        <ul id="units-menu" class="units-menu">
-          <li id="metric">metric</li>
-          <li id="imperial">imperial</li>
-        </ul>
-        <ul id="favorites-menu" class="favorites-menu">
-          <li>Zagreb</li>
-          <li>Dubrovnik</li>
-        </ul>
-      </nav>
+      </div>
+      <ul id="units-menu" class="units-menu">
+        <li id="metric">metric</li>
+        <li id="imperial">imperial</li>
+      </ul>
+      <ul id="favorites-menu" class="favorites-menu">
+        <li>Zagreb</li>
+        <li>Dubrovnik</li>
+      </ul>
+    </nav>
+    <div id="content" class="content">
       <section id="main-info" class="main-info">
-        <h1 id="location"></h1>
+        <h1 id="location" class="location"></h1>
         <h2 id="temperature" class="temperature"></h2>
         <p id="description" class="description"></p>
         <p id="main-feels-like" class="main-feels-like"></p>
@@ -79,7 +85,6 @@
         <div id="days-container" class="days-container"></div>
         <div id="technical-container" class="technical-container"></div>
       </section>
-      <!-- <div class="meter very-cold-to-cold" type="text"></div> -->
     </div>
   </body>
 </html>
