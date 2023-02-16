@@ -77,7 +77,6 @@ const dom = (() => {
       return
     }
     const formattedSearch = utils.formatInput(e.target.value)
-    console.log(formattedSearch)
     showAutocompleteLoader()
     onFinishTyping(formattedSearch)
   }
@@ -189,12 +188,30 @@ const dom = (() => {
     errorMessage.classList.add('active')
   }
 
+  // KEEP TRACK OF IF CURRENT LOAD IS FIRST AND OF WEATHER LOCATION SO IT DOES NOT HAVE TO BE LOADED MULTIPLE TIMES
+  const current = {
+    isFirstLoad: true,
+    label: '',
+  }
+
   // DISPLAY ALL WEATHER CONTENT
   async function displayWeatherContentSubmit(location) {
     hideSuggestions()
-    await new Promise((resolve) => setTimeout(resolve, 950))
+
+    // IF NOT FIRST LOAD, WAIT FOR SUGGESTIONS TIMEOUT TO NOT BREAK THE API WITH TOO FREQUENT REQUEST
+    if (!current.isFirstLoad)
+      await new Promise((resolve) => setTimeout(resolve, 950))
+
+    current.isFirstLoad = false
+
     const closestLocation = await weather.getAutocompleteData(location)
-    console.log(closestLocation)
+    const { label } = closestLocation[0].properties
+
+    if (current.label === label) {
+      hideLoadingScreen()
+      return
+    }
+    current.label = label
 
     if (!closestLocation.length || closestLocation === 'error') {
       if (!closestLocation.length && location === '')
@@ -273,9 +290,9 @@ const dom = (() => {
 
   // HOURLY FORECAST CONTENT
   function displayHourlyContent(weatherData) {
-    const hoursContainer = document.getElementById('hours-container')
+    const hoursWrapper = document.getElementById('hours-wrapper')
     const detailedInfoSection = document.getElementById('detailed-info')
-    clearContent(hoursContainer)
+    clearContent(hoursWrapper)
 
     // ADD TITLE AND ICON
     const title = document.createElement('p')
@@ -329,6 +346,10 @@ const dom = (() => {
     logoEl.src = mainDesc
     logoEl.classList.add('hour-logo')
 
+    const logoContainer = document.createElement('div')
+    logoContainer.classList.add('logo-container')
+    logoContainer.appendChild(logoEl)
+
     const tempEl = document.createElement('p')
     tempEl.textContent = temp
     tempEl.dataset.hourTemp = ''
@@ -337,10 +358,10 @@ const dom = (() => {
     const hourItemEl = document.createElement('div')
     hourItemEl.classList.add('hour-item')
     hourItemEl.appendChild(hourEl)
-    hourItemEl.appendChild(logoEl)
+    hourItemEl.appendChild(logoContainer)
     hourItemEl.appendChild(tempEl)
 
-    const cardContainer = document.getElementById('hours-container')
+    const cardContainer = document.getElementById('hours-wrapper')
     cardContainer.appendChild(hourItemEl)
   }
   function clearContent(el) {
@@ -384,6 +405,10 @@ const dom = (() => {
     logoEl.src = `${day.weather[0].main.toLowerCase()}.svg`
     logoEl.classList.add('day-item-logo')
 
+    const logoContainer = document.createElement('div')
+    logoContainer.classList.add('logo-container')
+    logoContainer.appendChild(logoEl)
+
     const tempMinEl = document.createElement('p')
     tempMinEl.textContent = Math.round(day.temp.min)
     tempMinEl.dataset.dayMinTemp = ''
@@ -401,7 +426,7 @@ const dom = (() => {
     const dayItem = document.createElement('div')
     dayItem.classList.add('day-item')
     dayItem.appendChild(weekDayEl)
-    dayItem.appendChild(logoEl)
+    dayItem.appendChild(logoContainer)
     dayItem.appendChild(tempMinEl)
     dayItem.appendChild(meterEl)
     dayItem.appendChild(tempMaxEl)
@@ -577,7 +602,6 @@ const dom = (() => {
   function displayBackgroundVideo(weatherData) {
     const video = document.getElementById('background-video')
     const source = video.src.split('/').pop()
-    console.log(source)
 
     let state = getWeatherState(weatherData).toLowerCase()
     // HAZE, MIST AND FOG PLAY THE SAME VIDEO = FOG
