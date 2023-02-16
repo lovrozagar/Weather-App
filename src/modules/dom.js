@@ -3,7 +3,7 @@ import { debounce } from 'lodash'
 import storage from './storage'
 import utils from './utils'
 import weather from './weather'
-// TODO: loading input autocomplete
+// TODO: IF SUGGESTION ALREADY DISPLAYED AND THEN LOCATION NOT FOUND SUGGESTINOSs STAY
 // TODO: google location
 // TODO: clean code
 const dom = (() => {

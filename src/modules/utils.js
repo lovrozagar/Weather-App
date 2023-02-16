@@ -102,7 +102,7 @@ const utils = (() => {
   }
 
   function visibilityMessage(visibility) {
-    const visibilityInt = parseInt(removeAlpha(visibility), 10)
+    const visibilityInt = parseInt(removeNonNumeric(visibility), 10)
     console.log(visibilityInt)
     // DATA FOR KM
     if (visibilityInt < 0.1) {
@@ -162,7 +162,8 @@ const utils = (() => {
   }
 
   function fullTimeToAmPm(time) {
-    const fullTime = removeAlpha(time)
+    const fullTime = removeNonNumeric(time)
+    console.log(fullTime)
     const [hours, minutes] = fullTime.split(':')
 
     const hoursInt = parseInt(hours, 10)
@@ -173,7 +174,7 @@ const utils = (() => {
   }
 
   function hourToAmPm(time) {
-    const hour = removeAlpha(time)
+    const hour = removeNonNumeric(time)
     const hoursInt = parseInt(hour, 10)
 
     if (hoursInt === 12) return `${hoursInt} pm`
@@ -204,7 +205,7 @@ const utils = (() => {
   }
 
   function visibilityToMi(visibility) {
-    const visibilityString = removeAlpha(visibility.textContent)
+    const visibilityString = removeNonNumeric(visibility.textContent)
     const visibilityFloat = parseFloat(visibilityString, 10)
     console.log(visibilityFloat)
     const visibilityMi = Math.round((visibilityFloat / 1.60934) * 10) / 10
@@ -288,16 +289,18 @@ const utils = (() => {
   }
 
   function visibilityToKm(visibility) {
-    const visibilityString = removeAlpha(visibility.textContent)
+    const visibilityString = removeNonNumeric(visibility.textContent)
     const visibilityFloat = parseFloat(visibilityString, 10)
     console.log(visibilityFloat)
     const visibilityKm = Math.round(visibilityFloat * 1.60934 * 10) / 10
     return `${visibilityKm} km`
   }
 
-  function removeAlpha(string) {
-    const regex = /[^0-9:]\./g
-    return string.replace(regex, '')
+  function removeNonNumeric(string) {
+    // Use a regular expression to remove all non-numeric characters except full stops and double colons
+    const regex = /[^\d.:]/g
+    const numericString = string.replace(regex, '')
+    return numericString
   }
 
   return {
