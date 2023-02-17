@@ -30,7 +30,16 @@ const weather = (() => {
     return data.features
   }
 
-  return { getForecastData, getAutocompleteData }
+  async function getSuggestions(query) {
+    const response = await fetch(
+      `https://api.openweathermap.org/geo/1.0/direct?q={${query}}&limit=5&appid=20f7632ffc2c022654e4093c6947b4f4`,
+      { mode: 'cors' }
+    )
+    const suggestions = await response.json()
+    console.log(suggestions)
+  }
+
+  return { getForecastData, getAutocompleteData, getSuggestions }
 })()
 
 export default weather
